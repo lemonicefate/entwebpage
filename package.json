@@ -1,0 +1,13 @@
+{
+  "name": "enrtwebpage",
+  "version": "1.0.0",
+  "private": true,
+  "description": "誠心醫療體系工學診所衛教專區",
+  "scripts": {
+    "dev": "serve . -l 3000 --no-clipboard",
+    "dev:open": "serve . -l 3000 -o"
+  },
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}
