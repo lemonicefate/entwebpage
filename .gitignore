@@ -1,0 +1,28 @@
+# OS 系統檔案
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE / 編輯器
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Node（未來若加入建置工具）
+node_modules/
+package-lock.json
+
+# 暫存與日誌
+*.log
+*.tmp
+*.bak
+
+# 環境變數（預防性，目前不使用）
+.env
+.env.*
+
+# 設計參考圖片（僅本地使用，不上傳至 repo）
+design-refs/*
+!design-refs/.gitkeep

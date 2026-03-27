@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="font-normal">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>誠心醫療體系工學診所衛教專區</title>
+  <meta name="description" content="誠心醫療體系工學診所衛教專區 — 提供耳鼻喉科、內科、外科等專業衛教資訊，協助您了解疾病與健康照護知識。">
+  <meta name="keywords" content="衛教,耳鼻喉科,診所,健康教育,鼻竇炎,中耳炎,過敏性鼻炎,工學診所,誠心醫療">
+  <meta name="author" content="誠心醫療體系工學診所">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="誠心醫療體系工學診所衛教專區">
+  <meta property="og:description" content="專業醫療衛教資訊，涵蓋耳鼻喉科、內科、外科等多科別健康知識。">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_TW">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
+
+  <!-- Fonts: Noto Serif TC (headings), Noto Sans TC (body), IBM Plex Mono (labels) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="./css/style.css">
+
+  <!-- Schema.org 結構化資料 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "name": "誠心醫療體系工學診所衛教專區",
+    "description": "提供耳鼻喉科、內科、外科等專業衛教資訊，協助您了解疾病與健康照護知識。",
+    "publisher": {
+      "@type": "MedicalOrganization",
+      "name": "誠心醫療體系工學診所",
+      "medicalSpecialty": "Otolaryngology"
+    },
+    "about": {
+      "@type": "MedicalSpecialty",
+      "name": "耳鼻喉科"
+    },
+    "inLanguage": "zh-TW",
+    "audience": {
+      "@type": "PatientAudience",
+      "audienceType": "患者與一般民眾"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ===== 頂部列 (Top Bar) ===== -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="開啟選單">☰</button>
+      <img src="./assets/logo.jpg" alt="誠心醫療體系 ALL HEART MEDICAL GROUP" class="topbar-logo">
+      <span class="topbar-logo-divider" aria-hidden="true"></span>
+      <span class="topbar-title">工學診所衛教專區</span>
+      <span class="topbar-title-short">衛教專區</span>
+    </div>
+    <div class="topbar-right">
+      <div class="font-controls">
+        <button class="topbar-btn" id="font-dec" title="縮小字體">A-</button>
+        <span class="font-size-label" id="font-label">標準</span>
+        <button class="topbar-btn" id="font-inc" title="放大字體">A+</button>
+      </div>
+      <button class="topbar-btn" id="theme-toggle" title="切換深色模式">🌙</button>
+    </div>
+  </header>
+
+  <!-- ===== 側邊欄遮罩 (手機版) ===== -->
+  <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+  <!-- ===== 側邊欄 (Sidebar) ===== -->
+  <nav class="sidebar" id="sidebar" aria-label="衛教主題導航">
+    <div class="sidebar-nav" id="sidebar-nav">
+      <!-- 由 JS 動態生成 -->
+    </div>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-contact">
+      <a class="sidebar-contact-link" id="sidebar-contact-link" href="#/contact">
+        <span class="sidebar-contact-icon">📞</span>
+        <span class="sidebar-contact-name">聯絡我們</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ===== 主內容區 (Main Content) ===== -->
+  <main class="main-content" id="main-content">
+    <!-- 由 JS 動態渲染 -->
+  </main>
+
+  <!-- Scripts -->
+  <script src="./js/content.js"></script>
+  <script src="./js/app.js"></script>
+
+</body>
+</html>
