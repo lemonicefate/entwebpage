@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://your-domain.github.io/enrtwebpage/sitemap.xml
+Sitemap: https://lemonicefate.github.io/enrtwebpage/sitemap.xml

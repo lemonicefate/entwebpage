@@ -2,41 +2,43 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- 首頁 -->
   <url>
-    <loc>https://your-domain.github.io/enrtwebpage/</loc>
+    <loc>https://lemonicefate.github.io/enrtwebpage/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <!-- 耳鼻喉科 -->
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/ent/ent-sinusitis</loc><priority>0.8</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/ent/ent-otitis</loc><priority>0.8</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/ent/ent-tonsillitis</loc><priority>0.8</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/ent/ent-allergic-rhinitis</loc><priority>0.8</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/ent/ent-hearing</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/ent/ent-vertigo</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/ent/ent-snoring</loc><priority>0.8</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/ent/ent-sinusitis</loc><priority>0.8</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/ent/ent-otitis</loc><priority>0.8</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/ent/ent-tonsillitis</loc><priority>0.8</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/ent/ent-allergic-rhinitis</loc><priority>0.8</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/ent/ent-hearing</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/ent/ent-vertigo</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/ent/ent-snoring</loc><priority>0.8</priority></url>
 
   <!-- 內科 -->
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/internal/internal-hypertension</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/internal/internal-diabetes</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/internal/internal-cold</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/internal/internal-flu</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/internal/internal-asthma</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/internal/internal-hypertension</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/internal/internal-diabetes</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/internal/internal-cold</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/internal/internal-flu</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/internal/internal-asthma</loc><priority>0.7</priority></url>
 
   <!-- 手術 -->
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/surgery/surgery-tonsil</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/surgery/surgery-septum</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/surgery/surgery-preop</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/surgery/surgery-postop</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/surgery/surgery-tonsil</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/surgery/surgery-septum</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/surgery/surgery-preop</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/surgery/surgery-postop</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/surgery/surgery-turbinate-rfa</loc><priority>0.8</priority></url>
 
   <!-- 用藥衛教 -->
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/medication/med-antibiotics</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/medication/med-nasal-spray</loc><priority>0.7</priority></url>
-  <url><loc>https://your-domain.github.io/enrtwebpage/#/medication/med-ear-drops</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/medication/med-antibiotics</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/medication/med-nasal-spray</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/medication/med-ear-drops</loc><priority>0.7</priority></url>
+  <url><loc>https://lemonicefate.github.io/enrtwebpage/#/medication/med-steroid-nasal-spray</loc><priority>0.8</priority></url>
 
   <!-- 聯絡我們 -->
   <url>
-    <loc>https://your-domain.github.io/enrtwebpage/#/contact</loc>
+    <loc>https://lemonicefate.github.io/enrtwebpage/#/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
