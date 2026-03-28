@@ -96,6 +96,7 @@ const CATEGORIES = [
       { id: 'surgery-septum', title: '鼻中隔手術', summary: '鼻中隔矯正手術可改善因鼻中隔彎曲造成的鼻塞和相關症狀。' },
       { id: 'surgery-preop', title: '術前準備', summary: '充分的術前準備是手術順利進行和術後良好恢復的基礎。' },
       { id: 'surgery-postop', title: '術後照護', summary: '正確的術後照護有助於傷口癒合和身體恢復，減少併發症風險。' },
+      { id: 'surgery-turbinate-rfa', title: '下鼻甲射頻消融術', summary: '下鼻甲射頻消融術（RFA）是治療慢性鼻塞的微創門診手術，局部麻醉、15–20 分鐘、當天可正常生活，適合藥物治療效果不佳的下鼻甲肥大患者。' },
     ]
   },
   {
@@ -106,6 +107,7 @@ const CATEGORIES = [
       { id: 'med-antibiotics', title: '抗生素使用', summary: '正確使用抗生素是治療細菌感染的關鍵，濫用會導致抗藥性。' },
       { id: 'med-nasal-spray', title: '鼻噴劑使用', summary: '鼻噴劑是治療鼻炎和鼻塞的常用藥物，正確的使用方法可提升療效。' },
       { id: 'med-ear-drops', title: '耳滴劑使用', summary: '耳滴劑是治療外耳道疾病的常用藥物，正確的使用方法非常重要。' },
+      { id: 'med-steroid-nasal-spray', title: '鼻用類固醇噴劑', summary: '類固醇鼻噴劑是治療過敏性鼻炎最安全有效的第一線藥物，全身吸收量極少，與口服類固醇截然不同。本頁說明正確噴藥方向、兩類鼻噴劑差異、孕婦兒童注意事項及常見問題。' },
     ]
   },
   {
