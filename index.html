@@ -26,6 +26,14 @@
   <!-- Stylesheet -->
   <link rel="stylesheet" href="./css/style.css">
 
+  <!-- Google Analytics 4（條件式載入：僅在 CONFIG.gaId 非空時啟用） -->
+  <script>
+    // GA 腳本由 content.js 載入後，在 app.js 中條件式初始化
+    // 此處僅定義 dataLayer，實際 gtag.js 在 app.js 中動態插入
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+  </script>
+
   <!-- Schema.org 結構化資料 -->
   <script type="application/ld+json">
   {
@@ -62,12 +70,27 @@
       <span class="topbar-title-short">衛教專區</span>
     </div>
     <div class="topbar-right">
+      <div class="search-wrapper" id="search-wrapper">
+        <button class="topbar-btn search-toggle-btn" id="search-toggle" title="搜尋" aria-label="搜尋">🔍</button>
+        <div class="search-box" id="search-box">
+          <input type="text" class="search-input" id="search-input" placeholder="搜尋衛教主題…" autocomplete="off">
+          <div class="search-results" id="search-results"></div>
+        </div>
+      </div>
       <div class="font-controls">
         <button class="topbar-btn" id="font-dec" title="縮小字體">A-</button>
         <span class="font-size-label" id="font-label">標準</span>
         <button class="topbar-btn" id="font-inc" title="放大字體">A+</button>
       </div>
       <button class="topbar-btn" id="theme-toggle" title="切換深色模式">🌙</button>
+      <div class="lang-switcher" id="lang-switcher">
+        <button class="topbar-btn lang-toggle-btn" id="lang-toggle" title="語言切換" aria-label="語言切換">🌐</button>
+        <div class="lang-dropdown" id="lang-dropdown">
+          <button class="lang-option" data-lang="zh-TW">中文</button>
+          <button class="lang-option" data-lang="en">English</button>
+          <button class="lang-option" data-lang="vi">Tiếng Việt</button>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -76,6 +99,29 @@
 
   <!-- ===== 側邊欄 (Sidebar) ===== -->
   <nav class="sidebar" id="sidebar" aria-label="衛教主題導航">
+    <!-- 收藏區塊 -->
+    <div class="sidebar-section" id="sidebar-favorites">
+      <div class="sidebar-section-header" id="favorites-header">
+        <span class="sidebar-section-icon">⭐</span>
+        <span class="sidebar-section-name">我的收藏</span>
+        <span class="sidebar-category-arrow">▸</span>
+      </div>
+      <div class="sidebar-section-body" id="favorites-list">
+        <p class="sidebar-section-empty">尚未收藏任何主題</p>
+      </div>
+    </div>
+    <!-- 最近瀏覽區塊 -->
+    <div class="sidebar-section" id="sidebar-recent">
+      <div class="sidebar-section-header" id="recent-header">
+        <span class="sidebar-section-icon">🕐</span>
+        <span class="sidebar-section-name">最近瀏覽</span>
+        <span class="sidebar-category-arrow">▸</span>
+      </div>
+      <div class="sidebar-section-body" id="recent-list">
+        <p class="sidebar-section-empty">尚未瀏覽任何主題</p>
+      </div>
+    </div>
+    <div class="sidebar-divider"></div>
     <div class="sidebar-nav" id="sidebar-nav">
       <!-- 由 JS 動態生成 -->
     </div>
