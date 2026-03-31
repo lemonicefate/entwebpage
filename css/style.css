@@ -58,7 +58,8 @@
 
   /* ── 排版 ── */
   --font-serif:   'Noto Serif TC', Georgia, serif;
-  --font-body:    'Noto Sans TC', -apple-system, sans-serif;
+  --font-body:    'LXGW WenKai', 'Noto Sans TC', -apple-system, sans-serif;
+  --font-ui:      'Noto Sans TC', -apple-system, sans-serif;
   --font-mono:    'IBM Plex Mono', 'Noto Sans TC', monospace;
   --font-heading: var(--font-serif);
   --font-size-body:  17px;
@@ -278,7 +279,7 @@ body::before {
 
 /* ── 副標題：診所 + 頁面名 ── */
 .topbar-title {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.88em;
   font-weight: 500;
   letter-spacing: 0.04em;
@@ -290,7 +291,7 @@ body::before {
 
 .topbar-title-short {
   display: none;
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.85em;
   font-weight: 500;
   color: var(--navy);
@@ -338,7 +339,7 @@ body::before {
   border-radius: var(--radius-sm);
   cursor: pointer;
   font-size: var(--font-size-small);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   transition: all var(--transition-fast);
   white-space: nowrap;
   min-height: 44px;
@@ -680,7 +681,7 @@ body::before {
 
 /* 區段標題 — 品牌藍→青 漸層左色條 */
 .home-section-title {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: var(--font-size-h2);
   font-weight: 700;
   color: var(--navy);
@@ -765,7 +766,7 @@ body::before {
 .category-card:hover .category-card-icon { transform: scale(1.1); }
 
 .category-card-title {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 1.02em;
   font-weight: 600;
   color: var(--text-primary);
@@ -856,7 +857,10 @@ body::before {
   letter-spacing: 0.05em;
 }
 
-.topic-content { max-width: 760px; }
+.topic-content {
+  max-width: 760px;
+  font-family: var(--font-body);
+}
 
 .topic-content h2 {
   font-family: var(--font-serif);
@@ -921,7 +925,7 @@ body::before {
   margin-top: 0 !important;
   color: var(--navy) !important;
   font-size: 1.02em !important;
-  font-family: var(--font-body) !important;
+  font-family: var(--font-ui) !important;
   font-weight: 600 !important;
   display: flex;
   align-items: center;
@@ -1014,7 +1018,7 @@ body::before {
 }
 
 .contact-card h2 {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: var(--font-size-h3);
   font-weight: 600;
   color: var(--navy);
@@ -1082,7 +1086,7 @@ body::before {
   padding: 10px 14px;
   border: 1.5px solid var(--border-light);
   border-radius: var(--radius-sm);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.92em;
   color: var(--text-primary);
   background: var(--bg-primary);
@@ -1115,7 +1119,7 @@ body::before {
   color: #FFFFFF;
   border: none;
   border-radius: var(--radius-sm);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.92em;
   font-weight: 600;
   cursor: pointer;
@@ -1457,7 +1461,7 @@ body::before {
   color: var(--text-secondary);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.86em;
   font-weight: 500;
   cursor: pointer;
@@ -1556,7 +1560,7 @@ body::before {
 }
 
 .modal-content h3 {
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 1.1em;
   font-weight: 600;
   color: var(--navy);
@@ -1600,7 +1604,7 @@ body::before {
   color: #fff;
   border: none;
   border-radius: var(--radius-sm);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 0.88em;
   font-weight: 600;
   cursor: pointer;
@@ -1828,7 +1832,7 @@ body::before {
   min-height: 44px;
   border: 1px solid var(--border-light);
   border-radius: var(--radius-sm);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: 16px;
   color: var(--text-primary);
   background: var(--bg-primary);
@@ -2081,7 +2085,7 @@ body::before {
   border: none;
   background: none;
   color: var(--text-primary);
-  font-family: var(--font-body);
+  font-family: var(--font-ui);
   font-size: var(--font-size-small);
   text-align: left;
   cursor: pointer;
