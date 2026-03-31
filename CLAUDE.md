@@ -30,12 +30,21 @@
 
 ## 設計系統
 
-CSS 變數定義於 `style.css` 的 `:root` 和 `[data-theme="dark"]`。色彩精準對應官方 Logo（`assets/logo.jpg`）三色系統：
+**Always read `DESIGN.md` before making any visual or UI decisions.** 所有字型、色彩、間距、美學方向均定義於該文件，不可未經使用者同意擅自偏離。QA 時應標記任何不符合 DESIGN.md 的程式碼。
+
+設計方向：**Warm Editorial（溫暖編輯風）**。暖色中性色取代冷灰，LXGW WenKai 楷書風格內文，NHS 風格 callout 色塊。
+
+CSS 變數定義於 `style.css` 的 `:root` 和 `[data-theme="dark"]`。色彩精準對應官方 Logo（`assets/logo.jpg`）四色系統：
 - `--navy #1D3B72`：品牌海軍藍（Logo「誠心醫療體系」文字色）— 用於頁面標題
 - `--blue #3080C4`：Logo 房屋外框藍 — 用於漸層色帶
 - `--teal #2BAD9D`：Logo 醫療十字青綠 — 互動主色（連結、active 狀態、按鈕）
-- `--orange #EF6028`：Logo 圓點橙紅 — 同官網「快速掛號」CTA 色
-頂部列展示完整 Logo 圖片（`assets/logo.jpg`）+ 副標題「工學診所衛教專區」。字型：Noto Serif TC（標題）、Noto Sans TC（內文）、IBM Plex Mono（標籤）。
+- `--orange #EF6028`：Logo 圓點橙紅 — CTA 主色、注意提示
+
+頂部列展示完整 Logo 圖片（`assets/logo.jpg`）+ 副標題「工學診所衛教專區」。
+
+字型：Noto Serif TC（標題）、LXGW WenKai（內文）、Noto Sans TC（UI/標籤）、JetBrains Mono（數據）。
+
+背景使用暖白 #FDFBF7 取代純白，所有中性色為暖色調。
 
 三段式字體大小由 `<html>` 上的 CSS class 控制：`font-normal`、`font-large`、`font-xlarge` — 各自覆寫 `--font-size-*` 變數。
 

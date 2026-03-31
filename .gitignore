@@ -26,3 +26,4 @@ package-lock.json
 # 設計參考圖片（僅本地使用，不上傳至 repo）
 design-refs/*
 !design-refs/.gitkeep
+.gstack/
