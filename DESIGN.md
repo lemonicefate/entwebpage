@@ -1,20 +1,21 @@
 # Design System — 誠心醫療體系工學診所衛教專區
 
 ## Product Context
-- **What this is:** 病人衛教 SPA 網站，供醫師在診間向病人展示衛教內容
-- **Who it's for:** 醫師（展示端）與病人（閱讀端），診間大螢幕使用
+- **What this is:** 病人衛教 SPA 網站，供病患自行瀏覽了解疾病衛教，同時透過 SEO 曝光吸引不認識診所的民眾
+- **Who it's for:** 一般民眾與病患（主要在手機上自行閱讀），不需要醫師在旁解釋
 - **Space/industry:** 醫療衛教，台灣地區耳鼻喉科 / 內科 / 婦科 / 小兒科診所
 - **Project type:** 單頁應用（SPA），純靜態，hash routing
+- **Key priority:** 行動裝置體驗優先（Mobile-first），SEO 曝光，內容自解釋性
 
 ## Aesthetic Direction
 - **Direction:** Warm Editorial（溫暖編輯風）
 - **Decoration level:** Intentional — 微妙的紋理感，淡淡的紙質底色，有溫度但不花俏
-- **Mood:** 像一本精心排版的健康雜誌，在溫暖的候診室裡翻閱。專業但不冰冷，有人情味但不隨便。「被照顧」的感覺而不是「在醫院」的感覺。
+- **Mood:** 像一本精心排版的健康雜誌，在手機上隨時翻閱。專業但不冰冷，有人情味但不隨便。「被照顧」的感覺而不是「在醫院」的感覺。行動裝置上的閱讀體驗是第一優先。
 - **Reference sites:** Mayo Clinic（結構參考）、NHS UK（callout 色塊模式）、Cleveland Clinic（分類導航）
 
 ## Typography
 - **Display/Hero:** Noto Serif TC — 宋體傳達權威感與可信度，中文醫療語境的標準選擇
-- **Body:** LXGW WenKai（霞鶩文楷）— 開源楷書風格字型，比黑體溫暖、比傳統楷書更現代。螢幕可讀性高，適合「醫師在旁邊向你解釋」的場景
+- **Body:** LXGW WenKai（霞鶩文楷）— 開源楷書風格字型，比黑體溫暖、比傳統楷書更現代。注意：中文字型檔較大，需使用子集化或分片載入策略以確保行動裝置上的 LCP 表現。備用字型 Noto Sans TC 確保快速渲染。
 - **UI/Labels:** Noto Sans TC（思源黑體）— 乾淨精確的 UI 字型，用於導航、按鈕、標籤、breadcrumb
 - **Data/Tables:** JetBrains Mono — 等寬字型，用於劑量、體溫、血壓等數據展示，支援 tabular-nums
 - **Code:** JetBrains Mono
@@ -80,7 +81,7 @@
 
 ## Spacing
 - **Base unit:** 8px
-- **Density:** Comfortable — 比一般醫療網站更寬鬆，適合診間大螢幕展示
+- **Density:** Comfortable on desktop, Compact on mobile — 桌面版寬鬆閱讀，行動版適當緊湊以減少捲動
 - **Scale:**
   - 2xs: 2px
   - xs: 4px
