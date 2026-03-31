@@ -25,36 +25,36 @@
   --orange-light:#F07A44;
   --orange-pale: rgba(239, 96, 40, 0.08);
 
-  /* ── 背景 ── */
-  --bg-primary:    #FFFFFF;
-  --bg-secondary:  #F4FAF9;
-  --bg-sidebar:    #FAFEFE;
+  /* ── 背景（暖色中性色系 per DESIGN.md） ── */
+  --bg-primary:    #FDFBF7;
+  --bg-secondary:  #F8F5EF;
+  --bg-sidebar:    #FAF8F3;
   --bg-topbar:     #FFFFFF;
-  --bg-card:       #FFFFFF;
-  --bg-card-hover: #F6FDFB;
+  --bg-card:       #FBF9F4;
+  --bg-card-hover: #F5F2EB;
   --bg-overlay:    rgba(29, 59, 114, 0.35);
 
-  /* ── 文字 ── */
-  --text-primary:   #2B3835;
-  --text-secondary: #567068;
-  --text-muted:     #90A8A2;
-  --text-on-dark:   #FFFFFF;
+  /* ── 文字（暖灰色系） ── */
+  --text-primary:   #2D2A26;
+  --text-secondary: #6B6560;
+  --text-muted:     #9E9690;
+  --text-on-dark:   #FDFBF7;
   --text-link:      var(--teal);
 
-  /* ── 邊框 ── */
-  --border-light:  #DFF0EC;
-  --border-medium: #C2DDD8;
-  --border-hover:  #A8CDC7;
+  /* ── 邊框（暖米色系） ── */
+  --border-light:  #E8E2DA;
+  --border-medium: #D6CFC6;
+  --border-hover:  #C4BCB2;
   --border-focus:  var(--teal);
 
-  /* ── 陰影 ── */
-  --shadow-xs:         0 1px 2px rgba(29, 59, 114, 0.04);
-  --shadow-sm:         0 1px 3px rgba(29, 59, 114, 0.05), 0 1px 2px rgba(0,0,0,0.03);
-  --shadow-md:         0 4px 12px rgba(29, 59, 114, 0.08), 0 1px 4px rgba(0,0,0,0.04);
-  --shadow-lg:         0 8px 28px rgba(29, 59, 114, 0.10), 0 2px 8px rgba(0,0,0,0.05);
-  --shadow-card:       0 1px 3px rgba(29, 59, 114, 0.05);
-  --shadow-card-hover: 0 6px 20px rgba(43, 173, 157, 0.12), 0 1px 4px rgba(0,0,0,0.04);
-  --shadow-topbar:     0 1px 3px rgba(29, 59, 114, 0.06);
+  /* ── 陰影（暖色調） ── */
+  --shadow-xs:         0 1px 2px rgba(45, 42, 38, 0.04);
+  --shadow-sm:         0 1px 3px rgba(45, 42, 38, 0.06), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md:         0 4px 12px rgba(45, 42, 38, 0.08), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-lg:         0 8px 28px rgba(45, 42, 38, 0.10), 0 2px 8px rgba(0,0,0,0.05);
+  --shadow-card:       0 1px 4px rgba(45, 42, 38, 0.05);
+  --shadow-card-hover: 0 6px 20px rgba(43, 173, 157, 0.10), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-topbar:     0 1px 3px rgba(45, 42, 38, 0.06);
 
   /* ── 排版 ── */
   --font-serif:   'Noto Serif TC', Georgia, serif;
@@ -107,23 +107,23 @@
   --orange-light: #F09060;
   --orange-pale:  rgba(240, 120, 72, 0.10);
 
-  --bg-primary:    #111918;
-  --bg-secondary:  #181F1E;
-  --bg-sidebar:    #151C1B;
-  --bg-topbar:     #161E1D;
-  --bg-card:       #1C2524;
-  --bg-card-hover: #1F2B29;
+  --bg-primary:    #1A1714;
+  --bg-secondary:  #211E1A;
+  --bg-sidebar:    #1E1B17;
+  --bg-topbar:     #1E1B17;
+  --bg-card:       #252119;
+  --bg-card-hover: #2D2820;
   --bg-overlay:    rgba(0,0,0,0.55);
 
-  --text-primary:   #D8ECEA;
-  --text-secondary: #8AAFAA;
-  --text-muted:     #557470;
-  --text-on-dark:   #FFFFFF;
+  --text-primary:   #E8E2DA;
+  --text-secondary: #A89E94;
+  --text-muted:     #756B62;
+  --text-on-dark:   #E8E2DA;
   --text-link:      var(--teal);
 
-  --border-light:  rgba(62, 196, 181, 0.10);
-  --border-medium: rgba(62, 196, 181, 0.18);
-  --border-hover:  rgba(62, 196, 181, 0.28);
+  --border-light:  #3A342C;
+  --border-medium: #4A433A;
+  --border-hover:  #5A524A;
 
   --shadow-xs:         0 1px 2px rgba(0,0,0,0.3);
   --shadow-sm:         0 1px 3px rgba(0,0,0,0.35);
