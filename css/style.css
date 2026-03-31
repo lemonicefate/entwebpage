@@ -1311,15 +1311,28 @@ body::before {
   }
 
   .category-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .category-card {
+    padding: 16px 14px;
+  }
+
+  .category-card-icon {
+    font-size: 1.6em;
+    margin-bottom: 6px;
+  }
+
+  .category-card-title {
+    font-size: 0.95em;
   }
 
   .contact-grid { grid-template-columns: 1fr; }
 
-  .home-welcome { padding: 28px 12px 36px; }
+  .home-welcome { padding: 20px 12px 24px; }
 
-  .home-welcome h1 { font-size: 1.45em; }
+  .home-welcome h1 { font-size: 1.35em; }
 
   .home-welcome::before {
     width: 200px;
