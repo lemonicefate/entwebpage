@@ -912,6 +912,80 @@ body::before {
 
 [data-theme="dark"] .topic-content strong { color: var(--teal-light); }
 
+/* --- Callout System (NHS-inspired, per DESIGN.md) --- */
+.callout {
+  border-radius: 0 var(--radius-sm, 6px) var(--radius-sm, 6px) 0;
+  padding: 1rem 1.25rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid;
+}
+
+.callout-title {
+  font-weight: 700;
+  font-family: var(--font-ui, 'Noto Sans TC', sans-serif);
+  margin-bottom: 0.4rem;
+  font-size: 0.95rem;
+}
+
+.callout-body {
+  font-size: 0.95rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+.callout-body p:last-child { margin-bottom: 0; }
+
+/* Recommend — teal */
+.callout-recommend {
+  background: var(--teal-pale, #E6F6F3);
+  border-left-color: var(--teal);
+}
+.callout-recommend .callout-title { color: var(--teal-deep, #1B7568); }
+
+/* Caution — orange */
+.callout-caution {
+  background: var(--orange-pale, rgba(239, 96, 40, 0.08));
+  border-left-color: var(--orange);
+}
+.callout-caution .callout-title { color: var(--orange, #EF6028); }
+
+/* Danger — red */
+.callout-danger {
+  background: #FDF2F3;
+  border-left-color: #D94452;
+}
+.callout-danger .callout-title { color: #D94452; }
+
+/* Info — blue */
+.callout-info {
+  background: #F0F6FC;
+  border-left-color: var(--blue, #3080C4);
+}
+.callout-info .callout-title { color: var(--blue, #3080C4); }
+
+/* Dark mode callouts */
+[data-theme="dark"] .callout-recommend {
+  background: rgba(43, 173, 157, 0.1);
+}
+[data-theme="dark"] .callout-caution {
+  background: rgba(239, 96, 40, 0.1);
+}
+[data-theme="dark"] .callout-danger {
+  background: rgba(217, 68, 82, 0.1);
+}
+[data-theme="dark"] .callout-info {
+  background: rgba(48, 128, 196, 0.1);
+}
+[data-theme="dark"] .callout-body {
+  color: var(--text-secondary);
+}
+
+/* Mermaid diagrams */
+.mermaid {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
 /* FAQ 區塊 */
 .faq-section {
   margin-top: 32px;
