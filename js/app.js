@@ -342,6 +342,11 @@
     const body = $('#topic-body');
     if (body) body.innerHTML = content;
 
+    // 後處理：Mermaid 圖表渲染
+    if (typeof window.mermaidRender === 'function') {
+      window.mermaidRender();
+    }
+
     // 後處理：YouTube 嵌入
     processVideoEmbeds();
 
