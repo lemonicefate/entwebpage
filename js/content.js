@@ -189,6 +189,7 @@ const CATEGORIES = [
     id: 'ent',
     name: '耳鼻喉科',
     icon: '👂',
+    description: '耳、鼻、喉疾病診斷與照護衛教',
     topics: [
       { id: 'ent-sinusitis', title: '鼻竇炎', summary: '鼻竇炎是鼻竇黏膜的發炎反應，常見症狀包括鼻塞、流鼻涕、臉部脹痛及嗅覺減退。', lastUpdated: '2026-03-28' },
       { id: 'ent-otitis', title: '中耳炎', summary: '中耳炎是中耳腔的發炎反應，好發於兒童，常見症狀為耳痛、聽力下降及發燒。', lastUpdated: '2026-03-28' },
@@ -204,6 +205,7 @@ const CATEGORIES = [
     id: 'internal',
     name: '內科',
     icon: '🏥',
+    description: '內科常見疾病與慢性病管理',
     topics: [
       { id: 'internal-hypertension', title: '高血壓', summary: '高血壓是血壓持續偏高的慢性疾病，是心血管疾病的主要危險因子。', lastUpdated: '2026-03-28' },
       { id: 'internal-diabetes', title: '糖尿病', summary: '糖尿病是血糖調控異常的代謝性疾病，需要長期管理以預防併發症。', lastUpdated: '2026-03-28' },
@@ -216,6 +218,7 @@ const CATEGORIES = [
     id: 'surgical',
     name: '外科',
     icon: '🔪',
+    description: '外科傷口處置與術後照護',
     topics: [
       { id: 'surgical-wound', title: '傷口照護', summary: '正確的傷口照護是預防感染、促進癒合的關鍵。', lastUpdated: '2026-03-28' },
       { id: 'surgical-postop', title: '術後注意事項', summary: '手術後的照護與注意事項對於順利恢復至關重要。', lastUpdated: '2026-03-28' },
@@ -225,6 +228,7 @@ const CATEGORIES = [
     id: 'pediatric',
     name: '兒科',
     icon: '👶',
+    description: '嬰幼兒及兒童健康照護指引',
     topics: [
       { id: 'pediatric-fever', title: '小兒發燒', summary: '發燒是兒童常見的症狀，瞭解正確的處理方式有助於家長安心照護。', lastUpdated: '2026-03-28' },
       { id: 'pediatric-otitis', title: '小兒中耳炎', summary: '中耳炎是兒童最常見的細菌感染之一，及早治療可避免聽力影響。', lastUpdated: '2026-03-28' },
@@ -235,6 +239,7 @@ const CATEGORIES = [
     id: 'gynecology',
     name: '婦科',
     icon: '👩',
+    description: '婦科常見問題與健康照護',
     topics: [
       { id: 'gyn-pregnancy-med', title: '孕期用藥注意', summary: '懷孕期間用藥需格外謹慎，某些藥物可能影響胎兒發育。', lastUpdated: '2026-03-28' },
       { id: 'gyn-menopause', title: '更年期保健', summary: '更年期是女性自然的生理過程，了解相關知識有助於順利度過這個階段。', lastUpdated: '2026-03-28' },
@@ -244,6 +249,7 @@ const CATEGORIES = [
     id: 'examination',
     name: '檢驗',
     icon: '🔬',
+    description: '各項檢驗項目說明與解讀',
     topics: [
       { id: 'exam-hearing', title: '聽力檢查', summary: '聽力檢查是評估聽覺功能的重要工具，有助於早期發現聽力問題。', lastUpdated: '2026-03-28' },
       { id: 'exam-blood', title: '血液檢查', summary: '血液檢查是最基本也最重要的健康篩檢工具，可反映多種身體狀況。', lastUpdated: '2026-03-28' },
@@ -254,6 +260,7 @@ const CATEGORIES = [
     id: 'surgery',
     name: '手術',
     icon: '🏥',
+    description: '手術前後照護與注意事項',
     topics: [
       { id: 'surgery-tonsil', title: '扁桃腺手術', summary: '扁桃腺手術是治療反覆性扁桃腺炎和扁桃腺肥大的有效方式。', lastUpdated: '2026-03-28' },
       { id: 'surgery-septum', title: '鼻中隔手術', summary: '鼻中隔矯正手術可改善因鼻中隔彎曲造成的鼻塞和相關症狀。', lastUpdated: '2026-03-28' },
@@ -266,6 +273,7 @@ const CATEGORIES = [
     id: 'medication',
     name: '用藥衛教',
     icon: '💊',
+    description: '常見藥物使用說明與注意事項',
     topics: [
       { id: 'med-antibiotics', title: '抗生素使用', summary: '正確使用抗生素是治療細菌感染的關鍵，濫用會導致抗藥性。', lastUpdated: '2026-03-28' },
       { id: 'med-nasal-spray', title: '鼻噴劑使用', summary: '鼻噴劑是治療鼻炎和鼻塞的常用藥物，正確的使用方法可提升療效。', lastUpdated: '2026-03-28' },
@@ -277,6 +285,7 @@ const CATEGORIES = [
     id: 'lifestyle',
     name: '生活衛教',
     icon: '🌿',
+    description: '日常生活保健與預防醫學',
     topics: [
       { id: 'life-noise', title: '噪音防護', summary: '長期暴露於高分貝噪音環境會造成不可逆的聽力損害，正確防護至關重要。', lastUpdated: '2026-03-28' },
       { id: 'life-nasal-irrigation', title: '鼻腔沖洗', summary: '鼻腔沖洗是安全有效的鼻部保健方法，有助於緩解鼻塞和預防鼻竇炎。', lastUpdated: '2026-03-28' },

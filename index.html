@@ -63,36 +63,70 @@
 <body>
 
   <!-- ===== 頂部列 (Top Bar) ===== -->
-  <header class="topbar">
-    <div class="topbar-left">
-      <button class="hamburger-btn" id="hamburger-btn" aria-label="開啟選單">☰</button>
-      <img src="./assets/logo.jpg" alt="誠心醫療體系 ALL HEART MEDICAL GROUP" class="topbar-logo">
-      <span class="topbar-logo-divider" aria-hidden="true"></span>
-      <span class="topbar-title">工學診所衛教專區</span>
-      <span class="topbar-title-short">衛教專區</span>
+  <header class="topbar" id="topbar">
+
+    <!-- 品牌區 -->
+    <div class="topbar-brand">
+      <a class="topbar-logo-link" href="#/" aria-label="回到首頁">
+        <img src="./assets/logo.jpg" alt="誠心醫療體系 ALL HEART MEDICAL GROUP" class="topbar-logo">
+      </a>
+      <span class="topbar-name">工學診所</span>
     </div>
-    <div class="topbar-right">
+
+    <!-- 水平導覽（桌面版） -->
+    <nav class="topbar-nav" id="topbar-nav" aria-label="主要導覽">
+      <a class="topbar-nav-link" href="#/" data-nav="home">首頁</a>
+      <a class="topbar-nav-link" href="#/ent/sinusitis" data-nav="ent">耳鼻喉科</a>
+      <a class="topbar-nav-link" href="#/internal/hypertension" data-nav="internal">內科</a>
+      <a class="topbar-nav-link" href="#/medication/antibiotics" data-nav="medication">用藥衛教</a>
+      <a class="topbar-nav-link" href="#/contact" data-nav="contact">聯絡我們</a>
+    </nav>
+
+    <!-- 工具區 + CTA -->
+    <div class="topbar-actions">
+
+      <!-- 搜尋 -->
       <div class="search-wrapper" id="search-wrapper">
-        <button class="topbar-btn search-toggle-btn" id="search-toggle" title="搜尋" aria-label="搜尋">🔍</button>
+        <button class="topbar-btn search-toggle-btn" id="search-toggle" title="搜尋" aria-label="搜尋">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+        </button>
         <div class="search-box" id="search-box">
           <input type="text" class="search-input" id="search-input" placeholder="搜尋衛教主題…" autocomplete="off">
           <div class="search-results" id="search-results"></div>
         </div>
       </div>
-      <div class="font-controls">
-        <button class="topbar-btn" id="font-dec" title="縮小字體">A-</button>
-        <span class="font-size-label" id="font-label">標準</span>
-        <button class="topbar-btn" id="font-inc" title="放大字體">A+</button>
-      </div>
-      <button class="topbar-btn" id="theme-toggle" title="切換深色模式">🌙</button>
-      <div class="lang-switcher" id="lang-switcher">
-        <button class="topbar-btn lang-toggle-btn" id="lang-toggle" title="語言切換" aria-label="語言切換">🌐</button>
-        <div class="lang-dropdown" id="lang-dropdown">
-          <button class="lang-option" data-lang="zh-TW">中文</button>
-          <button class="lang-option" data-lang="en">English</button>
-          <button class="lang-option" data-lang="vi">Tiếng Việt</button>
+
+      <!-- 設定下拉（字體 / 主題 / 語言） -->
+      <div class="settings-dropdown" id="settings-dropdown">
+        <button class="topbar-btn settings-toggle" id="settings-toggle" title="設定" aria-label="設定" aria-expanded="false" aria-controls="settings-panel">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+        </button>
+        <div class="settings-panel" id="settings-panel" role="menu">
+          <div class="font-controls">
+            <button class="topbar-btn" id="font-dec" title="縮小字體">A-</button>
+            <span class="font-size-label" id="font-label">標準</span>
+            <button class="topbar-btn" id="font-inc" title="放大字體">A+</button>
+          </div>
+          <button class="topbar-btn" id="theme-toggle" title="切換深色模式">🌙</button>
+          <div class="lang-switcher" id="lang-switcher">
+            <button class="topbar-btn lang-toggle-btn" id="lang-toggle" title="語言切換" aria-label="語言切換">🌐</button>
+            <div class="lang-dropdown" id="lang-dropdown">
+              <button class="lang-option" data-lang="zh-TW">中文</button>
+              <button class="lang-option" data-lang="en">English</button>
+              <button class="lang-option" data-lang="vi">Tiếng Việt</button>
+            </div>
+          </div>
         </div>
       </div>
+
+      <!-- CTA 按鈕 -->
+      <a class="topbar-cta-btn" href="#/contact" id="topbar-cta">線上諮詢</a>
+
+      <!-- 漢堡選單（手機版） -->
+      <button class="hamburger-btn" id="hamburger-btn" aria-label="開啟側邊選單" aria-expanded="false">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+      </button>
+
     </div>
   </header>
 

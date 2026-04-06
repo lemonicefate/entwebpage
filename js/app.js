@@ -26,6 +26,17 @@
      ============================================ */
   const FONT_SIZES = ['font-normal', 'font-large', 'font-xlarge'];
   const FONT_LABELS = ['標準', '大', '特大'];
+  const CATEGORY_ICONS = {
+    ent:         `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>`,
+    internal:    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>`,
+    surgical:    `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m7.848 8.25 1.536.887M7.848 8.25a3 3 0 1 1-5.196-3 3 3 0 0 1 5.196 3Zm1.536.887a2.165 2.165 0 0 1 1.083 1.839c.005.351.054.695.14 1.024M9.384 9.137l2.077 1.199M7.848 15.75l1.536-.887m-1.536.887a3 3 0 1 1-5.196 3 3 0 0 1 5.196-3Zm1.536-.887a2.165 2.165 0 0 1 1.083-1.838c.5-.243.98-.524 1.435-.845M9.384 14.863l7.079-4.084m0 0a3 3 0 1 1 5.196-3 3 0 0 1-5.196 3Zm0 0-7.079-4.084"/></svg>`,
+    pediatric:   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z"/></svg>`,
+    gynecology:  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/></svg>`,
+    examination: `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"/></svg>`,
+    surgery:     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.05 4.575a1.575 1.575 0 1 0-3.15 0v3m3.15-3v-1.5a1.575 1.575 0 0 1 3.15 0v1.5m-3.15 0 .075 5.925m3.075.75V4.575m0 0a1.575 1.575 0 0 1 3.15 0V15M6.9 7.575a1.575 1.575 0 1 0-3.15 0v8.175a6.75 6.75 0 0 0 6.75 6.75h2.018a5.25 5.25 0 0 0 3.712-1.538l1.732-1.732a5.25 5.25 0 0 0 1.538-3.712l.003-2.024a.668.668 0 0 1 .198-.471 1.575 1.575 0 1 0-2.228-2.228 3.818 3.818 0 0 0-1.12 2.687M6.9 7.575V12m6.27 4.318A4.49 4.49 0 0 1 16.35 15m.002 0h-.002"/></svg>`,
+    medication:  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.75 3.104v5.714a2.25 2.25 0 0 1-.659 1.591L5 14.5M9.75 3.104c-.251.023-.501.05-.75.082m.75-.082a24.301 24.301 0 0 1 4.5 0m0 0v5.714c0 .597.237 1.17.659 1.591L19.8 15.3M14.25 3.104c.251.023.501.05.75.082M19.8 15.3l-1.57.393A9.065 9.065 0 0 1 12 15a9.065 9.065 0 0 0-6.23-.693L5 14.5m14.8.8 1.402 1.402c1.232 1.232.65 3.318-1.067 3.611A48.309 48.309 0 0 1 12 21c-2.773 0-5.491-.235-8.135-.687-1.718-.293-2.3-2.379-1.067-3.61L5 14.5"/></svg>`,
+    lifestyle:   `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"/></svg>`,
+  };
   let currentFontIndex = 0;
   let currentLang = localStorage.getItem('lang') || CONFIG.defaultLang || 'zh-TW';
 
@@ -134,12 +145,21 @@
     fontIncBtn.addEventListener('click', () => changeFontSize(1));
     fontDecBtn.addEventListener('click', () => changeFontSize(-1));
 
-    // 首頁 logo 點擊
-    const topbarLeft = $('.topbar-left');
-    if (topbarLeft) {
-      topbarLeft.style.cursor = 'pointer';
-      topbarLeft.addEventListener('click', () => {
-        window.location.hash = '';
+    // 設定下拉選單
+    const settingsToggle = $('#settings-toggle');
+    const settingsPanel = $('#settings-panel');
+    if (settingsToggle && settingsPanel) {
+      settingsToggle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = settingsPanel.classList.toggle('open');
+        settingsToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+      // 點擊外部關閉
+      document.addEventListener('click', (e) => {
+        if (!settingsToggle.contains(e.target) && !settingsPanel.contains(e.target)) {
+          settingsPanel.classList.remove('open');
+          settingsToggle.setAttribute('aria-expanded', 'false');
+        }
       });
     }
   }
@@ -150,11 +170,14 @@
   function handleHashChange() {
     const hash = window.location.hash.replace('#/', '').replace('#', '');
 
-    // 停止語音朗讀（切換頁面時）
+    // 切換頁面時移除首頁全寬模式
+    document.body.classList.remove('home-mode');
+
+    // 停止語音朗讀
     stopTTS();
 
     if (!hash || hash === '/') {
-      renderHome();
+      renderHome();  // renderHome() calls updateTopbarNav('home') internally
       updateActiveSidebar(null, null);
       updateMeta(CONFIG.siteName, CONFIG.description);
       trackPageView();
@@ -164,6 +187,7 @@
     if (hash === 'contact') {
       renderContact();
       updateActiveSidebar(null, 'contact');
+      updateTopbarNav('contact');
       updateMeta('聯絡我們 — ' + CONFIG.siteName, '聯絡' + CONFIG.clinicName + '，歡迎來信或加入LINE官方帳號。');
       trackPageView();
       return;
@@ -178,6 +202,7 @@
         if (topic) {
           renderTopic(category, topic);
           updateActiveSidebar(catId, topicId);
+          updateTopbarNav(catId);
           updateMeta(
             topic.title + ' — ' + CONFIG.siteName,
             topic.summary
@@ -208,53 +233,182 @@
   }
 
   /* ============================================
-     渲染：首頁
+     渲染：首頁 Landing Page
      ============================================ */
   function renderHome() {
+    document.body.classList.add('home-mode');
+
     const announcementsHtml = renderAnnouncements();
 
-    let html = `
+    // Build service cards (show all 9 categories)
+    const serviceCardsHtml = CATEGORIES.map((cat) => `
+      <a class="service-card" href="#/${cat.id}/${cat.topics[0] ? cat.topics[0].id : ''}" data-category="${cat.id}" tabindex="0">
+        <div class="service-icon-wrap">
+          ${CATEGORY_ICONS[cat.id] || CATEGORY_ICONS['lifestyle']}
+        </div>
+        <h3 class="service-card-title">${cat.name}</h3>
+        <p class="service-card-desc">${cat.description || ''}</p>
+        <span class="service-card-count">${cat.topics.length} 篇衛教資訊</span>
+      </a>
+    `).join('');
+
+    // Build contact info for footer
+    const phone    = CONFIG.contact && CONFIG.contact.phone   ? CONFIG.contact.phone   : null;
+    const email    = CONFIG.contact && CONFIG.contact.email   ? CONFIG.contact.email   : null;
+    const address  = CONFIG.contact && CONFIG.contact.address ? CONFIG.contact.address : null;
+    const hours    = CONFIG.contact && CONFIG.contact.hours   ? CONFIG.contact.hours   : null;
+    const lineUrl  = CONFIG.contact && CONFIG.contact.lineUrl ? CONFIG.contact.lineUrl : null;
+
+    const html = `
       <div class="home-view">
         ${announcementsHtml}
-        <div class="home-welcome">
-          <span class="home-welcome-icon">🏥</span>
-          <h1>${CONFIG.siteName}</h1>
-          <p>歡迎使用衛教資訊系統。請從左側選單選擇衛教主題，或點選以下分類快速瀏覽。</p>
-        </div>
 
-        <h2 class="home-section-title">衛教分類</h2>
-        <div class="category-grid">
-          ${CATEGORIES.map((cat) => `
-            <a class="category-card" href="#/${cat.id}" data-category="${cat.id}">
-              <span class="category-card-icon">${cat.icon}</span>
-              <div class="category-card-title">${cat.name}</div>
-              <div class="category-card-count">${cat.topics.length} 篇衛教資訊</div>
-            </a>
-          `).join('')}
-        </div>
+        <!-- ① Hero -->
+        <section class="home-hero">
+          <div class="home-hero-content">
+            <p class="home-hero-eyebrow">${CONFIG.clinicName}</p>
+            <h1 class="home-hero-heading">誠心服務，守護健康</h1>
+            <p class="home-hero-subtitle">
+              專業醫療團隊提供全方位衛教資訊，<br>
+              協助您認識疾病、掌握健康知識。
+            </p>
+            <div class="home-hero-btns">
+              <a class="btn-primary" href="#/contact">預約諮詢</a>
+              <a class="btn-secondary" href="#/" id="scroll-to-services">瀏覽衛教</a>
+            </div>
+          </div>
+          <div class="home-hero-image" id="hero-image-wrap">
+            <img src="./assets/hero.jpg" alt="醫師與病人諮詢" loading="lazy"
+                 onerror="this.closest('.home-hero-image').classList.add('hero-image-placeholder'); this.style.display='none';">
+          </div>
+        </section>
 
-        <footer class="footer">
-          <p class="medical-review">本衛教內容由專業醫療團隊審閱</p>
-          <p>&copy; ${new Date().getFullYear()} ${CONFIG.clinicName} 版權所有</p>
+        <!-- ② 醫療服務分類 -->
+        <section class="home-services" id="services">
+          <h2 class="home-section-title">醫療服務</h2>
+          <div class="service-grid">
+            ${serviceCardsHtml}
+          </div>
+        </section>
+
+        <!-- ③ 價值主張 -->
+        <section class="home-values" aria-label="診所特色">
+          <div class="value-item value--teal">
+            <div class="value-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"/></svg>
+            </div>
+            <div>
+              <h3 class="value-title">專業醫療</h3>
+              <p class="value-subtitle">經驗豐富的耳鼻喉科醫療團隊</p>
+            </div>
+          </div>
+          <div class="value-item value--blue">
+            <div class="value-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/></svg>
+            </div>
+            <div>
+              <h3 class="value-title">舒適環境</h3>
+              <p class="value-subtitle">溫馨友善的診間空間</p>
+            </div>
+          </div>
+          <div class="value-item value--orange">
+            <div class="value-icon" aria-hidden="true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z"/></svg>
+            </div>
+            <div>
+              <h3 class="value-title">用心關懷</h3>
+              <p class="value-subtitle">以病人為中心的照護理念</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- ④ Footer -->
+        <footer class="home-footer" role="contentinfo">
+          <div class="home-footer-grid">
+            <div class="footer-col">
+              <h4>聯絡我們</h4>
+              ${phone ? `<p>📞 ${phone}</p>` : '<p><span class="footer-pending">（電話待更新）</span></p>'}
+              ${email ? `<a href="mailto:${email}">${email}</a>` : '<p><span class="footer-pending">（信箱待更新）</span></p>'}
+            </div>
+            <div class="footer-col">
+              <h4>診所地址</h4>
+              ${address ? `<p>${address}</p>` : '<p><span class="footer-pending">（地址待更新）</span></p>'}
+            </div>
+            <div class="footer-col">
+              <h4>門診時間</h4>
+              ${hours ? `<p>${hours}</p>` : '<p><span class="footer-pending">（門診時間待更新）</span></p>'}
+            </div>
+            <div class="footer-col">
+              <h4>社群連結</h4>
+              ${lineUrl
+                ? `<a href="${lineUrl}" target="_blank" rel="noopener noreferrer">LINE 官方帳號</a>`
+                : '<p><span class="footer-pending">（社群連結待更新）</span></p>'
+              }
+              <a href="#/contact">線上諮詢表單</a>
+            </div>
+          </div>
+          <hr class="footer-divider">
+          <div class="footer-bottom">
+            <span class="medical-review">本衛教內容由專業醫療團隊審閱</span>
+            <span>&copy; ${new Date().getFullYear()} ${CONFIG.clinicName} 版權所有</span>
+          </div>
         </footer>
       </div>
     `;
 
     mainContent.innerHTML = html;
 
-    // 公告事件綁定
-    bindAnnouncementEvents();
+    // 平滑捲動到服務分類
+    const scrollBtn = mainContent.querySelector('#scroll-to-services');
+    if (scrollBtn) {
+      scrollBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const servicesSection = mainContent.querySelector('#services');
+        if (servicesSection) {
+          servicesSection.scrollIntoView({ behavior: 'smooth' });
+        }
+      });
+    }
 
-    // 分類卡片點擊
-    mainContent.querySelectorAll('.category-card').forEach((card) => {
+    // 服務卡片點擊（使用 expandAndShowCategory）
+    mainContent.querySelectorAll('.service-card').forEach((card) => {
       card.addEventListener('click', (e) => {
         e.preventDefault();
         const catId = card.dataset.category;
         const cat = CATEGORIES.find((c) => c.id === catId);
         if (cat) {
+          document.body.classList.remove('home-mode');
           expandAndShowCategory(cat);
         }
       });
+      // Keyboard enter
+      card.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          card.click();
+        }
+      });
+    });
+
+    // 公告事件綁定
+    bindAnnouncementEvents();
+
+    // 更新 topbar nav active state
+    updateTopbarNav('home');
+  }
+
+  /* ============================================
+     導覽列：更新 active 狀態
+     ============================================ */
+  function updateTopbarNav(activeKey) {
+    const navLinks = document.querySelectorAll('.topbar-nav-link');
+    navLinks.forEach((link) => {
+      const navKey = link.dataset.nav;
+      if (navKey === activeKey) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
     });
   }
 
