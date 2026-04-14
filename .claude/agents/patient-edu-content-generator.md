@@ -80,31 +80,32 @@ Not all sections are required — adapt based on the content provided.
 
 **Flowcharts / process diagrams:**
 ```html
-<div style="display:flex;align-items:flex-start;gap:1rem;margin-bottom:1.5rem;">
-  <div style="min-width:2.5rem;height:2.5rem;border-radius:50%;background:var(--primary,#2BAD9D);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:bold;font-size:1.1rem;">1</div>
-  <div><h4 style="margin:0 0 0.3rem 0;">步驟標題</h4><p style="margin:0;color:var(--text-secondary);">步驟說明文字</p></div>
+<div class="mermaid">
+flowchart TD
+    A[開始] --> B[步驟一]
+    B --> C[步驟二]
+    C --> D[結束]
 </div>
 ```
+（說明：流程圖一律改用 Mermaid，由 app.js 的 mermaid.js 自動渲染）
 
 **Image placeholder:**
 ```html
-<div style="background:var(--bg-secondary,#f0f4f8);border:2px dashed var(--border-color,#ccc);border-radius:12px;padding:2rem;text-align:center;margin:1.5rem 0;color:var(--text-secondary,#666);">
-  <div style="font-size:2.5rem;margin-bottom:0.5rem;">🖼️</div>
-  <p style="margin:0;font-size:0.95rem;">【圖片預留位置】描述這裡應放什麼圖片</p>
+<div class="image-placeholder">
+  <div class="image-placeholder-icon">🖼️</div>
+  <p>【圖片準備中】描述這裡應放什麼圖片</p>
 </div>
 ```
 
 **QR Code section (always include at bottom):**
 ```html
-<div style="margin-top:3rem;padding:2rem;background:var(--bg-secondary,#f0f4f8);border-radius:16px;text-align:center;">
-  <h4 style="margin-bottom:0.5rem;">📱 隨時查閱本頁內容</h4>
-  <p style="color:var(--text-secondary,#666);margin-bottom:1rem;">掃描下方 QR Code，即可在手機上隨時查看本頁衛教資訊</p>
-  <div style="background:#fff;display:inline-block;padding:1rem;border-radius:12px;box-shadow:0 2px 8px rgba(0,0,0,0.1);">
-    <div style="width:150px;height:150px;background:#f9f9f9;border:2px dashed #ccc;display:flex;align-items:center;justify-content:center;border-radius:8px;">
-      <span style="color:#999;font-size:0.85rem;">QR Code<br>預留位置</span>
-    </div>
+<div class="qrcode-section">
+  <h4>📱 隨時查閱本頁內容</h4>
+  <p>掃描下方 QR Code，即可在手機上隨時查看本頁衛教資訊</p>
+  <div class="qrcode-placeholder">
+    <span>QR Code<br>預留位置</span>
   </div>
-  <p style="margin-top:1rem;font-size:0.85rem;color:var(--text-secondary,#888);">💡 小提示：您也可以將此頁加入書籤，方便日後查閱</p>
+  <p class="qrcode-hint">💡 小提示：你也可以將此頁加入書籤，方便日後查閱</p>
 </div>
 ```
 
