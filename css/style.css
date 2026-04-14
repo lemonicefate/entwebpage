@@ -1804,6 +1804,100 @@ body.home-mode .main-content {
 }
 
 /* ============================================
+   Image Placeholder
+   ============================================ */
+.image-placeholder {
+  background: var(--bg-secondary);
+  border: 2px dashed var(--border-medium);
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  margin: 1.5rem 0;
+  color: var(--text-secondary);
+}
+
+.image-placeholder-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.image-placeholder p {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+[data-theme="dark"] .image-placeholder {
+  background: var(--bg-secondary);
+  border-color: var(--border-medium);
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   QR Code Section
+   ============================================ */
+.qrcode-section {
+  margin-top: 3rem;
+  padding: 2rem;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  text-align: center;
+}
+
+.qrcode-section h4 {
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.qrcode-section > p {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.qrcode-placeholder {
+  background: #fff;
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.qrcode-placeholder span {
+  display: flex;
+  width: 150px;
+  height: 150px;
+  background: #f9f9f9;
+  border: 2px dashed #ccc;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  color: #999;
+  font-size: 0.85rem;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.qrcode-hint {
+  margin-top: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+[data-theme="dark"] .qrcode-section {
+  background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .qrcode-placeholder {
+  background: var(--bg-secondary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .qrcode-placeholder span {
+  background: var(--bg-secondary);
+  border-color: var(--border-medium);
+  color: var(--text-secondary);
+}
+
+/* ============================================
    列印樣式
    ============================================ */
 @media print {

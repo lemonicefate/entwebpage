@@ -19,6 +19,16 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 
 
+QR_CODE_HTML = """\n<div class="qrcode-section">
+  <h4>📱 隨時查閱本頁內容</h4>
+  <p>掃描下方 QR Code，即可在手機上隨時查看本頁衛教資訊</p>
+  <div class="qrcode-placeholder">
+    <span>QR Code<br>預留位置</span>
+  </div>
+  <p class="qrcode-hint">💡 小提示：你也可以將此頁加入書籤，方便日後查閱</p>
+</div>"""
+
+
 # Obsidian callout type → (CSS class suffix, icon, default title)
 CALLOUT_MAP = {
     'recommend': ('recommend', '✓', '建議'),
@@ -97,6 +107,28 @@ class MermaidPreprocessor(Preprocessor):
         return new_lines
 
 
+class ImagePlaceholderPreprocessor(Preprocessor):
+    """Convert <!-- IMAGE_PLACEHOLDER: desc --> to .image-placeholder div."""
+
+    PLACEHOLDER_RE = re.compile(r'<!--\s*IMAGE_PLACEHOLDER:\s*(.+?)\s*-->')
+
+    def run(self, lines):
+        new_lines = []
+        for line in lines:
+            m = self.PLACEHOLDER_RE.search(line)
+            if m:
+                desc = m.group(1).strip()
+                new_lines.append(
+                    f'<div class="image-placeholder">'
+                    f'<div class="image-placeholder-icon">🖼️</div>'
+                    f'<p>【圖片準備中】{desc}</p>'
+                    f'</div>'
+                )
+            else:
+                new_lines.append(line)
+        return new_lines
+
+
 class ClinicExtensions(Extension):
     def extendMarkdown(self, md):
         md.preprocessors.register(
@@ -104,6 +136,9 @@ class ClinicExtensions(Extension):
         )
         md.preprocessors.register(
             MermaidPreprocessor(md), 'mermaid', 29
+        )
+        md.preprocessors.register(
+            ImagePlaceholderPreprocessor(md), 'image_placeholder', 28
         )
 
 
@@ -155,7 +190,76 @@ def build_title_html(fm):
     return '\n'.join(parts)
 
 
-def convert_file(md_path, output_dir=None, preview=False, dry_run=False):
+def update_content_js(topic_id, title, summary, last_updated, category,
+                      content_js_path=None):
+    """Insert topic entry into js/content.js if not already present.
+
+    Returns True if inserted, False if skipped (duplicate).
+    """
+    if content_js_path is None:
+        content_js_path = Path(__file__).parent / 'js' / 'content.js'
+    content_js_path = Path(content_js_path)
+
+    content = content_js_path.read_text(encoding='utf-8')
+
+    # Check if already exists
+    if f"id: '{topic_id}'" in content:
+        print(f'⚠ {topic_id} already exists in content.js — skipping')
+        return False
+
+    lines = content.split('\n')
+
+    # Find the line with this category's id
+    cat_line = None
+    for i, line in enumerate(lines):
+        if f"id: '{category}'" in line:
+            cat_line = i
+            break
+
+    if cat_line is None:
+        print(f'✕ Category "{category}" not found in content.js')
+        return False
+
+    # Find "topics: [" within this category (search next 20 lines)
+    topics_line = None
+    for i in range(cat_line, min(cat_line + 20, len(lines))):
+        if 'topics: [' in lines[i] or 'topics:[' in lines[i]:
+            topics_line = i
+            break
+
+    if topics_line is None:
+        print(f'✕ topics[] not found for category "{category}"')
+        return False
+
+    # Find closing ] by bracket depth counting
+    depth = 1
+    close_line = None
+    for i in range(topics_line + 1, len(lines)):
+        depth += lines[i].count('[') - lines[i].count(']')
+        if depth <= 0:
+            close_line = i
+            break
+
+    if close_line is None:
+        print(f'✕ Could not find closing ] for topics in "{category}"')
+        return False
+
+    # Escape single quotes
+    safe_title = title.replace("'", "\\'")
+    safe_summary = summary.replace("'", "\\'")
+
+    entry = (
+        f"      {{ id: '{topic_id}', title: '{safe_title}', "
+        f"summary: '{safe_summary}', lastUpdated: '{last_updated}' }},"
+    )
+    lines.insert(close_line, entry)
+    content_js_path.write_text('\n'.join(lines), encoding='utf-8')
+    print(f'✓ Added {topic_id} to content.js [{category}]')
+    return True
+
+
+def convert_file(md_path, output_dir=None, preview=False, dry_run=False,
+                 update_js=False):
     """Convert one .md file to an HTML fragment."""
     md_path = Path(md_path)
     text = md_path.read_text(encoding='utf-8')
@@ -177,7 +281,8 @@ def convert_file(md_path, output_dir=None, preview=False, dry_run=False):
     out_path = out_dir / f'{topic_id}.html'
 
     if dry_run:
-        print(f'  {md_path} → {out_path}')
+        js_note = ' (+content.js)' if update_js else ''
+        print(f'  {md_path} → {out_path}{js_note}')
         return out_path
 
     # Convert markdown → HTML
@@ -192,6 +297,8 @@ def convert_file(md_path, output_dir=None, preview=False, dry_run=False):
     # Prepend title block
     title_html = build_title_html(fm)
     html = title_html + '\n\n' + html
+    # Append QR code section
+    html = html + QR_CODE_HTML
 
     if preview:
         print(html)
@@ -202,13 +309,17 @@ def convert_file(md_path, output_dir=None, preview=False, dry_run=False):
     out_path.write_text(html, encoding='utf-8')
     print(f'✓ {out_path}')
 
-    # Print content.js registration hint
     title = fm.get('title', slug)
     summary = fm.get('summary') or fm.get('seo_description', '')
-    date = fm.get('date_generated', '')
-    print(f"\n📝 請在 content.js 的 '{category}' 分類中加入：")
-    print(f"  {{ id: '{topic_id}', title: '{title}', "
-          f"summary: '{summary}', lastUpdated: '{date}' }}")
+    date = str(fm.get('date_generated', ''))
+
+    if update_js:
+        update_content_js(topic_id, title, summary, date, category)
+    else:
+        # Print manual hint when --update-content-js not used
+        print(f"\n📝 請在 content.js 的 '{category}' 分類中加入：")
+        print(f"  {{ id: '{topic_id}', title: '{title}', "
+              f"summary: '{summary}', lastUpdated: '{date}' }}")
     return out_path
 
 
@@ -223,6 +334,8 @@ def main():
                         help='Show what would be generated')
     parser.add_argument('-o', '--output-dir',
                         help='Override output directory')
+    parser.add_argument('--update-content-js', action='store_true',
+                        help='Auto-insert topic entry into js/content.js')
     args = parser.parse_args()
 
     path = Path(args.path)
@@ -237,10 +350,12 @@ def main():
             print('Would generate:')
         for f in files:
             convert_file(f, output_dir=args.output_dir,
-                         preview=args.preview, dry_run=args.dry_run)
+                         preview=args.preview, dry_run=args.dry_run,
+                         update_js=args.update_content_js)
     elif path.is_file():
         convert_file(path, output_dir=args.output_dir,
-                     preview=args.preview, dry_run=args.dry_run)
+                     preview=args.preview, dry_run=args.dry_run,
+                     update_js=args.update_content_js)
     else:
         print(f'Error: {path} not found')
         sys.exit(1)
