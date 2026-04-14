@@ -200,6 +200,10 @@ const CATEGORIES = [
       { id: 'ent-snoring', title: '打呼看診流程', summary: '打呼不只是噪音問題，可能是睡眠呼吸中止症的警訊。了解完整的看診評估流程，從初診理學檢查到居家睡眠檢測，幫助您找到最適合的治療方案。', lastUpdated: '2026-03-28' },
       { id: 'ent-bppv', title: '良性陣發性姿勢性眩暈（耳石症）', summary: '翻身或起床時突然天旋地轉？耳石脫落是最常見原因。了解耳石症的症狀、Epley 等復位術治療方式，以及復位後的居家注意事項。', lastUpdated: '2026-03-31' },
       { id: 'ent-tinnitus', title: '耳鳴 (Tinnitus)', summary: '耳鳴是在沒有外部聲源的情況下聽到嗡嗡聲、蟬鳴或鈴聲的症狀，盛行率高達 10–25%。本文說明常見原因、診斷方式、聲音療法與認知行為療法等治療選項，以及何時需要立即就醫。', lastUpdated: '2026-04-06' },
+      { id: 'ent-lpr-chronic-pharyngitis', title: '逆流性咽喉炎 (Laryngopharyngeal Reflux, LPR)', summary: '喉嚨有異物感、常常需要清喉嚨、聲音沙啞——這些症狀合稱「慢性咽喉炎」，很多時候是胃酸逆流到咽喉（LPR）引起的。了解成因、調整生活習慣，多數人都能有效改善。', lastUpdated: '2026-04-06' },
+      { id: 'ent-menieres-disease', title: '梅尼爾氏症 (Meniere\'s Disease)', summary: '梅尼爾氏症是一種內耳疾病，以反覆發作的劇烈眩暈、耳鳴、耳悶脹感與聽力起伏為四大核心症狀。發作無法預測，嚴重影響日常生活。本文說明成因、診斷方式、分階段治療選項，以及日常生活如何降低發作頻率。', lastUpdated: '2026-04-06' },
+      { id: 'ent-obstructive-sleep-apnea', title: '阻塞性睡眠呼吸中止症 (Obstructive Sleep Apnea)', summary: '打呼不是睡得好的象徵，可能是上呼吸道在夜間反覆塌陷的警訊。阻塞性睡眠呼吸中止症悄悄剝奪你的睡眠品質，增加高血壓、心臟病、腦中風風險。台灣估計有 230 萬人患病，但確診率僅一成——看完這篇，帶著清單去評估自己的風險。', lastUpdated: '2026-04-06' },
+      { id: 'ent-otitis-media', title: '急性中耳炎 (Acute Otitis Media, AOM)', summary: '急性中耳炎是兒童最常見的細菌感染之一，好發於 2 歲以下嬰幼兒。孩子因無法表達耳痛，常以半夜哭鬧、拒食、發燒等行為表現，讓父母不知所措。了解症狀辨識、就醫時機與照護原則，有助於減少不必要的抗生素使用，讓孩子更快康復。', lastUpdated: '2026-04-06' },
     ]
   },
   {
@@ -213,6 +217,7 @@ const CATEGORIES = [
       { id: 'internal-cold', title: '感冒', summary: '感冒是上呼吸道的病毒感染，通常症狀輕微，可自行緩解。', lastUpdated: '2026-03-28' },
       { id: 'internal-flu', title: '流感', summary: '流行性感冒是由流感病毒引起的急性呼吸道感染，症狀比普通感冒嚴重。', lastUpdated: '2026-03-28' },
       { id: 'internal-asthma', title: '氣喘', summary: '氣喘是慢性氣道發炎疾病，會造成反覆的喘鳴、呼吸困難、胸悶及咳嗽。', lastUpdated: '2026-03-28' },
+      { id: 'internal-hypertension-dash-diet', title: '高血壓 (Hypertension) 與得舒飲食 (DASH Diet)', summary: '高血壓常年無症狀，卻是心臟病、腦中風、腎臟病的頭號推手。了解血壓分級、認識得舒飲食 (DASH Diet) 的核心原則，搭配生活型態調整，讓血壓重回正常範圍。', lastUpdated: '2026-04-13' },
     ]
   },
   {
@@ -234,6 +239,13 @@ const CATEGORIES = [
       { id: 'pediatric-fever', title: '小兒發燒', summary: '發燒是兒童常見的症狀，瞭解正確的處理方式有助於家長安心照護。', lastUpdated: '2026-03-28' },
       { id: 'pediatric-otitis', title: '小兒中耳炎', summary: '中耳炎是兒童最常見的細菌感染之一，及早治療可避免聽力影響。', lastUpdated: '2026-03-28' },
       { id: 'pediatric-medication', title: '兒童用藥', summary: '兒童用藥需特別注意劑量計算和給藥方式，確保用藥安全。', lastUpdated: '2026-03-28' },
+      { id: 'pediatric-adenovirus-fever-children', title: '腺病毒感染 (Adenovirus Infection)', summary: '腺病毒是兒童高燒最常見的元兇之一，體溫常超過 39°C 且可持續 5–10 天，俗稱「燒久姬」。除了高燒，還常合併眼睛紅、喉嚨痛、腸胃不適等多重症狀。目前無特效藥，了解正確的居家照護與就醫時機，是陪孩子安全度過病程的關鍵。', lastUpdated: '2026-04-07' },
+      { id: 'pediatric-atopic-dermatitis-infant', title: '嬰幼兒異位性皮膚炎 (Atopic Dermatitis / Infantile Eczema)', summary: '異位性皮膚炎是台灣最常見的嬰幼兒慢性皮膚病，影響約一成兒童，60% 在一歲前發病。文章說明症狀辨識、居家照護重點（正確泡澡與保濕技巧）、用藥原則，以及何時需要到診所進一步評估與治療。', lastUpdated: '2026-04-08' },
+      { id: 'pediatric-croup', title: '哮吼 (Croup / Laryngotracheobronchitis)', summary: '哮吼是好發於嬰幼兒的病毒性上呼吸道感染，最典型的症狀是像海豹叫聲的犬吠咳嗽。大多數孩子屬輕症，可在家照護；但出現安靜時喘鳴或呼吸費力，就需要立即就醫。', lastUpdated: '2026-04-07' },
+      { id: 'pediatric-enterovirus', title: '腸病毒感染 (Enterovirus Infection)', summary: '腸病毒是台灣每年春末夏初的兒童公敵，多數孩子 7-10 天可自行恢復，但少數會演變成腦炎等重症。這篇文章教你辨識重症前兆、做好居家隔離，以及何時該直奔急診。', lastUpdated: '2026-04-07' },
+      { id: 'pediatric-growth-chart-guide', title: '兒童生長曲線解讀 (Child Growth Chart Interpretation)', summary: '生長曲線圖是追蹤孩子發育最重要的工具，但百分位數字常讓爸媽誤解。本文帶你看懂第3到97百分位的意義、生長速率警示、以及什麼情況真的需要帶孩子去看醫師。', lastUpdated: '2026-04-12' },
+      { id: 'pediatric-norovirus-rotavirus-hydration', title: '諾羅病毒與輪狀病毒腸胃炎 (Norovirus & Rotavirus Gastroenteritis)', summary: '孩子突然上吐下瀉，是諾羅還是輪狀？兩種病毒都沒有特效藥，關鍵在於「補水」。本文帶你認識兩種病毒的差異、脫水的警示徵兆，以及正確的補水與飲食策略，讓孩子早日恢復。', lastUpdated: '2026-04-11' },
+      { id: 'pediatric-roseola-infantum', title: '玫瑰疹 (Roseola Infantum / Exanthem Subitum)', summary: '玫瑰疹是嬰幼兒最常見的病毒感染之一，特徵是高燒 3-4 天、退燒後全身出現粉紅色皮疹。了解其病程、熱性痙攣的處理方式，以及何時需要立即就醫，幫助爸媽冷靜應對這個常見但讓人心驚的疾病。', lastUpdated: '2026-04-09' },
     ]
   },
   {
