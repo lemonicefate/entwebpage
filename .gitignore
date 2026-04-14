@@ -27,3 +27,6 @@ package-lock.json
 design-refs/*
 !design-refs/.gitkeep
 .gstack/
+
+# Git worktrees（本地工作區，不追蹤）
+.worktrees/
