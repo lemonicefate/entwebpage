@@ -281,7 +281,8 @@ def convert_file(md_path, output_dir=None, preview=False, dry_run=False,
     out_path = out_dir / f'{topic_id}.html'
 
     if dry_run:
-        print(f'  {md_path} → {out_path}')
+        js_note = ' (+content.js)' if update_js else ''
+        print(f'  {md_path} → {out_path}{js_note}')
         return out_path
 
     # Convert markdown → HTML

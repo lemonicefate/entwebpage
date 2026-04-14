@@ -86,7 +86,7 @@ git commit -m "content: 新增 {主題名稱} 衛教頁面"
 git push
 ```
 
-Cloudflare Pages 自動部署（推送後約 1 分鐘上線）。
+GitHub Pages 自動部署（推送後約 1-2 分鐘上線）。
 
 ## 部署
 

@@ -99,7 +99,7 @@ PYEOF
     echo "🔄 批次轉換所有草稿..."
     python3 md_to_html.py drafts/ --update-content-js
     echo ""
-    git diff --stat
+    git diff --stat || true
     echo ""
     echo "✅ 批次轉換完成。執行 git add . && git commit 發布。"
     ;;

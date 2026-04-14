@@ -1887,7 +1887,7 @@ body.home-mode .main-content {
 }
 
 [data-theme="dark"] .qrcode-placeholder {
-  background: var(--bg-elevated, #2a2a2a);
+  background: var(--bg-secondary);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
