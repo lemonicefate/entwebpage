@@ -277,6 +277,33 @@ function DoctorsPage() {
                 <div style={{ fontSize: 13, color: d.hue, fontWeight: 600, marginTop: 4 }}>{d.title}</div>
               </div>
 
+              {/* Photo area */}
+              <div style={{
+                background: `linear-gradient(160deg, ${d.hue}22 0%, ${d.hue}06 100%)`,
+                display: 'flex', justifyContent: 'center', alignItems: 'center',
+                padding: '24px 0',
+                borderBottom: '1px solid var(--border-soft)',
+              }}>
+                {d.photo
+                  ? <img src={d.photo} alt={`${d.name} 醫師`} style={{
+                      width: 120, height: 120, borderRadius: '50%',
+                      objectFit: 'cover', objectPosition: 'top',
+                      border: `3px solid ${d.hue}44`,
+                      boxShadow: `0 8px 24px -8px ${d.hue}66`,
+                    }}/>
+                  : <div style={{
+                      width: 120, height: 120, borderRadius: '50%',
+                      background: `linear-gradient(160deg, ${d.hue} 0%, ${d.hue}bb 100%)`,
+                      display: 'grid', placeItems: 'center',
+                      boxShadow: `0 8px 24px -8px ${d.hue}66`,
+                    }}>
+                      <div style={{ width: 64, height: 64 }}>
+                        {window.Illo && <window.Illo.Doctor tone="rgba(255,255,255,0.85)"/>}
+                      </div>
+                    </div>
+                }
+              </div>
+
               {/* Card body */}
               <div style={{ padding: '16px 24px 24px', flex: 1 }}>
                 <Section label="醫師經歷" items={d.experience} hue={d.hue} />
