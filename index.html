@@ -1,188 +1,22 @@
-<!DOCTYPE html>
-<html lang="zh-TW" class="font-normal">
+<!doctype html>
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>誠心醫療體系工學診所衛教專區</title>
-  <meta name="description" content="誠心醫療體系工學診所衛教專區 — 提供耳鼻喉科、內科、外科等專業衛教資訊，協助您了解疾病與健康照護知識。">
-  <meta name="keywords" content="衛教,耳鼻喉科,診所,健康教育,鼻竇炎,中耳炎,過敏性鼻炎,工學診所,誠心醫療">
-  <meta name="author" content="誠心醫療體系工學診所">
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="誠心醫療體系工學診所衛教專區">
-  <meta property="og:description" content="專業醫療衛教資訊，涵蓋耳鼻喉科、內科、外科等多科別健康知識。">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="zh_TW">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/svg+xml" href="./assets/favicon.svg">
-
-  <!-- Fonts: Noto Serif TC (headings), LXGW WenKai (body), Noto Sans TC (UI), IBM Plex Mono (data) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@300;400;500;600;700&family=Noto+Serif+TC:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-webfont@1.7.0/style.css" rel="stylesheet">
-
-  <!-- Stylesheet -->
-  <link rel="stylesheet" href="./css/style.css">
-
-  <!-- Google Analytics 4（條件式載入：僅在 CONFIG.gaId 非空時啟用） -->
-  <script>
-    // GA 腳本由 content.js 載入後，在 app.js 中條件式初始化
-    // 此處僅定義 dataLayer，實際 gtag.js 在 app.js 中動態插入
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-  </script>
-
-  <!-- Schema.org 結構化資料 -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalWebPage",
-    "name": "誠心醫療體系工學診所衛教專區",
-    "description": "提供耳鼻喉科、內科、外科等專業衛教資訊，協助您了解疾病與健康照護知識。",
-    "publisher": {
-      "@type": "MedicalOrganization",
-      "name": "誠心醫療體系工學診所",
-      "medicalSpecialty": "Otolaryngology"
-    },
-    "about": {
-      "@type": "MedicalSpecialty",
-      "name": "耳鼻喉科"
-    },
-    "inLanguage": "zh-TW",
-    "audience": {
-      "@type": "PatientAudience",
-      "audienceType": "患者與一般民眾"
-    }
-  }
-  </script>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>工學誠心診所 · 衛教專區</title>
+<meta name="description" content="家醫科衛教資訊平台，提供慢性病、呼吸道、腸胃、兒童、長者等健康照護知識。"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous"/>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="./src/styles/main.css"/>
+<link rel="icon" href="./assets/logo.jpg" type="image/jpeg"/>
 </head>
 <body>
-
-  <!-- ===== 頂部列 (Top Bar) ===== -->
-  <header class="topbar" id="topbar">
-
-    <!-- 品牌區 -->
-    <div class="topbar-brand">
-      <a class="topbar-logo-link" href="#/" aria-label="回到首頁">
-        <img src="./assets/logo.jpg" alt="誠心醫療體系 ALL HEART MEDICAL GROUP" class="topbar-logo">
-      </a>
-      <span class="topbar-name">工學診所</span>
-    </div>
-
-    <!-- 水平導覽（桌面版） -->
-    <nav class="topbar-nav" id="topbar-nav" aria-label="主要導覽">
-      <a class="topbar-nav-link" href="#/" data-nav="home">首頁</a>
-      <a class="topbar-nav-link" href="#/ent/sinusitis" data-nav="ent">耳鼻喉科</a>
-      <a class="topbar-nav-link" href="#/internal/hypertension" data-nav="internal">內科</a>
-      <a class="topbar-nav-link" href="#/medication/antibiotics" data-nav="medication">用藥衛教</a>
-      <a class="topbar-nav-link" href="#/contact" data-nav="contact">聯絡我們</a>
-    </nav>
-
-    <!-- 工具區 + CTA -->
-    <div class="topbar-actions">
-
-      <!-- 搜尋 -->
-      <div class="search-wrapper" id="search-wrapper">
-        <button class="topbar-btn search-toggle-btn" id="search-toggle" title="搜尋" aria-label="搜尋">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        </button>
-        <div class="search-box" id="search-box">
-          <input type="text" class="search-input" id="search-input" placeholder="搜尋衛教主題…" autocomplete="off">
-          <div class="search-results" id="search-results"></div>
-        </div>
-      </div>
-
-      <!-- 設定下拉（字體 / 主題 / 語言） -->
-      <div class="settings-dropdown" id="settings-dropdown">
-        <button class="topbar-btn settings-toggle" id="settings-toggle" title="設定" aria-label="設定" aria-expanded="false" aria-controls="settings-panel">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.09a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
-        </button>
-        <div class="settings-panel" id="settings-panel" role="menu">
-          <div class="font-controls">
-            <button class="topbar-btn" id="font-dec" title="縮小字體">A-</button>
-            <span class="font-size-label" id="font-label">標準</span>
-            <button class="topbar-btn" id="font-inc" title="放大字體">A+</button>
-          </div>
-          <button class="topbar-btn" id="theme-toggle" title="切換深色模式">🌙</button>
-          <div class="lang-switcher" id="lang-switcher">
-            <button class="topbar-btn lang-toggle-btn" id="lang-toggle" title="語言切換" aria-label="語言切換">🌐</button>
-            <div class="lang-dropdown" id="lang-dropdown">
-              <button class="lang-option" data-lang="zh-TW">中文</button>
-              <button class="lang-option" data-lang="en">English</button>
-              <button class="lang-option" data-lang="vi">Tiếng Việt</button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- CTA 按鈕 -->
-      <a class="topbar-cta-btn" href="#/contact" id="topbar-cta">線上諮詢</a>
-
-      <!-- 漢堡選單（手機版） -->
-      <button class="hamburger-btn" id="hamburger-btn" aria-label="開啟側邊選單" aria-expanded="false">
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
-      </button>
-
-    </div>
-  </header>
-
-  <!-- ===== 側邊欄遮罩 (手機版) ===== -->
-  <div class="sidebar-overlay" id="sidebar-overlay"></div>
-
-  <!-- ===== 側邊欄 (Sidebar) ===== -->
-  <nav class="sidebar" id="sidebar" aria-label="衛教主題導航">
-    <!-- 收藏區塊 -->
-    <div class="sidebar-section" id="sidebar-favorites">
-      <div class="sidebar-section-header" id="favorites-header">
-        <span class="sidebar-section-icon">⭐</span>
-        <span class="sidebar-section-name">我的收藏</span>
-        <span class="sidebar-category-arrow">▸</span>
-      </div>
-      <div class="sidebar-section-body" id="favorites-list">
-        <p class="sidebar-section-empty">尚未收藏任何主題</p>
-      </div>
-    </div>
-    <!-- 最近瀏覽區塊 -->
-    <div class="sidebar-section" id="sidebar-recent">
-      <div class="sidebar-section-header" id="recent-header">
-        <span class="sidebar-section-icon">🕐</span>
-        <span class="sidebar-section-name">最近瀏覽</span>
-        <span class="sidebar-category-arrow">▸</span>
-      </div>
-      <div class="sidebar-section-body" id="recent-list">
-        <p class="sidebar-section-empty">尚未瀏覽任何主題</p>
-      </div>
-    </div>
-    <div class="sidebar-divider"></div>
-    <div class="sidebar-nav" id="sidebar-nav">
-      <!-- 由 JS 動態生成 -->
-    </div>
-    <div class="sidebar-divider"></div>
-    <div class="sidebar-contact">
-      <a class="sidebar-contact-link" id="sidebar-contact-link" href="#/contact">
-        <span class="sidebar-contact-icon">📞</span>
-        <span class="sidebar-contact-name">聯絡我們</span>
-      </a>
-    </div>
-  </nav>
-
-  <!-- ===== 主內容區 (Main Content) ===== -->
-  <main class="main-content" id="main-content">
-    <!-- 由 JS 動態渲染 -->
-  </main>
-
-  <!-- Scripts -->
-  <script src="./js/content.js"></script>
-  <script src="./js/app.js"></script>
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: false, theme: 'neutral' });
-    window.mermaidRender = () => mermaid.run();
-  </script>
-
+<div id="root">Loading…</div>
+<script src="./js/content.js"></script>
+<script crossorigin src="https://unpkg.com/react@18.3.1/umd/react.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+<script crossorigin src="https://unpkg.com/dompurify@3.1.6/dist/purify.min.js"></script>
+<script src="./dist/app.js"></script>
 </body>
 </html>
