@@ -3,6 +3,7 @@ title: "過敏性鼻炎 (Allergic Rhinitis)"
 display_title: "告別黑眼圈！搞懂過敏性鼻炎"
 slug: allergic-rhinitis
 category: ent
+logical_category: respir
 summary: "過敏性鼻炎是鼻黏膜接觸過敏原後產生的免疫反應，主要症狀為打噴嚏、流鼻水、鼻塞及鼻癢。"
 tags: [過敏, 鼻炎, 鼻塞, 噴嚏, 塵螨]
 date_generated: 2026-04-05
