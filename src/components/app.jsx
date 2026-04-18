@@ -1,4 +1,11 @@
-// Smoke test
+// Smoke test — imports the other bundled files so esbuild pulls them in
+import './shared.jsx';
+import './data.jsx';
+import './navbar.jsx';
+import './heroes.jsx';
+import './sections.jsx';
+import './pages.jsx';
+
 const { createElement: h } = React;
 const { createRoot } = ReactDOM;
 
