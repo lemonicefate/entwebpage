@@ -10,6 +10,7 @@ Usage:
 
 import sys
 import re
+import re as _re_contentjs
 import argparse
 from pathlib import Path
 
@@ -190,72 +191,43 @@ def build_title_html(fm):
     return '\n'.join(parts)
 
 
-def update_content_js(topic_id, title, summary, last_updated, category,
-                      content_js_path=None):
-    """Insert topic entry into js/content.js if not already present.
+def update_content_js(logical_category: str, slug: str, title: str,
+                      summary: str, last_updated: str, content_path: str,
+                      content_js_path: str = 'js/content.js') -> None:
+    """Insert or replace a topic entry in CATEGORIES_BASE[logical_category].topics."""
+    with open(content_js_path, 'r', encoding='utf-8') as f:
+        src = f.read()
 
-    Returns True if inserted, False if skipped (duplicate).
-    """
-    if content_js_path is None:
-        content_js_path = Path(__file__).parent / 'js' / 'content.js'
-    content_js_path = Path(content_js_path)
-
-    content = content_js_path.read_text(encoding='utf-8')
-
-    # Check if already exists
-    if f"id: '{topic_id}'" in content:
-        print(f'⚠ {topic_id} already exists in content.js — skipping')
-        return False
-
-    lines = content.split('\n')
-
-    # Find the line with this category's id
-    cat_line = None
-    for i, line in enumerate(lines):
-        if f"id: '{category}'" in line:
-            cat_line = i
-            break
-
-    if cat_line is None:
-        print(f'✕ Category "{category}" not found in content.js')
-        return False
-
-    # Find "topics: [" within this category (search next 20 lines)
-    topics_line = None
-    for i in range(cat_line, min(cat_line + 20, len(lines))):
-        if 'topics: [' in lines[i] or 'topics:[' in lines[i]:
-            topics_line = i
-            break
-
-    if topics_line is None:
-        print(f'✕ topics[] not found for category "{category}"')
-        return False
-
-    # Find closing ] by bracket depth counting
-    depth = 1
-    close_line = None
-    for i in range(topics_line + 1, len(lines)):
-        depth += lines[i].count('[') - lines[i].count(']')
-        if depth <= 0:
-            close_line = i
-            break
-
-    if close_line is None:
-        print(f'✕ Could not find closing ] for topics in "{category}"')
-        return False
-
-    # Escape single quotes
-    safe_title = title.replace("'", "\\'")
-    safe_summary = summary.replace("'", "\\'")
-
-    entry = (
-        f"      {{ id: '{topic_id}', title: '{safe_title}', "
-        f"summary: '{safe_summary}', lastUpdated: '{last_updated}' }},"
+    cat_pattern = _re_contentjs.compile(
+        r"(\{\s*id:\s*'" + _re_contentjs.escape(logical_category) + r"'[^}]*topics:\s*\[)([^\]]*)(\])",
+        _re_contentjs.DOTALL,
     )
-    lines.insert(close_line, entry)
-    content_js_path.write_text('\n'.join(lines), encoding='utf-8')
-    print(f'✓ Added {topic_id} to content.js [{category}]')
-    return True
+    m = cat_pattern.search(src)
+    if not m:
+        raise RuntimeError(f"Category '{logical_category}' not found in {content_js_path}")
+
+    topic_id = f"{logical_category}-{slug}"
+    esc = lambda s: (s or '').replace("\\", "\\\\").replace("'", "\\'")
+    entry = (
+        f"\n      {{ id: '{topic_id}', title: '{esc(title)}', "
+        f"summary: '{esc(summary)}', "
+        f"lastUpdated: '{esc(last_updated)}', "
+        f"contentPath: '{esc(content_path)}' }},"
+    )
+
+    # Remove any existing entry with same id in this category's topics list
+    topics_body = m.group(2)
+    topics_body = _re_contentjs.sub(
+        r"\s*\{\s*id:\s*'" + _re_contentjs.escape(topic_id) + r"'[^}]*\},?",
+        '',
+        topics_body,
+    )
+    new_body = topics_body.rstrip() + entry + "\n    "
+    new_src = src[:m.start()] + m.group(1) + new_body + m.group(3) + src[m.end():]
+
+    with open(content_js_path, 'w', encoding='utf-8') as f:
+        f.write(new_src)
+    print(f'✓ Updated content.js: {topic_id} → [{logical_category}]')
 
 
 def convert_file(md_path, output_dir=None, preview=False, dry_run=False,
@@ -312,9 +284,17 @@ def convert_file(md_path, output_dir=None, preview=False, dry_run=False,
     title = fm.get('title', slug)
     summary = fm.get('summary') or fm.get('seo_description', '')
     date = str(fm.get('date_generated', ''))
+    logical_cat = fm.get('logical_category', fm.get('category', ''))
 
     if update_js:
-        update_content_js(topic_id, title, summary, date, category)
+        update_content_js(
+            logical_category=logical_cat,
+            slug=fm.get('slug', ''),
+            title=title,
+            summary=summary,
+            last_updated=date,
+            content_path=str(out_path).replace('\\', '/'),
+        )
     else:
         # Print manual hint when --update-content-js not used
         print(f"\n📝 請在 content.js 的 '{category}' 分類中加入：")
