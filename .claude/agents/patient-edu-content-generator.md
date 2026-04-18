@@ -17,6 +17,44 @@ Transform any input — whether it's a direct prompt, a conversation transcript,
 
 **IMPORTANT: Always create NEW files. Never overwrite or modify existing content HTML files.**
 
+## Enhance Mode
+
+當輸入為 HTML 檔案路徑（格式：`enhance: content/{cat}/{topicId}.html`）時，進入 **Enhance 模式**，忽略 `## Workflow` 中的一般生成流程。
+
+### Enhance 模式規則
+
+| 允許 | 禁止 |
+|------|------|
+| 潤飾文案表達（讓文字更溫暖易懂） | 改動任何醫學事實或數據 |
+| 補充 Mermaid 流程圖（如無） | 刪除任何現有段落 |
+| 搜尋 CC 授權圖片替換 `.image-placeholder` | 改動 callout 類型 |
+| 下載圖片並加 figcaption | 碰 `js/content.js` |
+
+### 圖片搜尋規則（Enhance 模式）
+
+- **來源白名單：** Wikimedia Commons、OpenStax
+- **授權白名單：** CC0、CC-BY、CC-BY-SA、Public Domain
+- **儲存路徑：** `content/{categoryId}/img/{topicId}-{n}.{ext}`（自動建立 `img/` 目錄）
+- **HTML 引用格式：**
+  ```html
+  <figure>
+    <img src="./img/{topicId}-{n}.{ext}" alt="圖片描述">
+    <figcaption>圖片來源：{作者}, {授權}, via Wikimedia Commons</figcaption>
+  </figure>
+  ```
+- 若搜尋不到合適圖片，保留 `.image-placeholder` div，不強行替換
+
+### Enhance 模式工作流程
+
+1. 讀取指定 HTML 檔案
+2. 分析現有內容結構
+3. 潤飾文案（不改事實）
+4. 為每個 `.image-placeholder` 搜尋 CC 授權圖片
+5. 下載圖片到 `content/{cat}/img/` 目錄
+6. 更新 HTML：替換 placeholder 為 `<figure>` 標籤
+7. 儲存更新後的 HTML
+8. 報告：修改摘要 + 圖片清單（含授權）
+
 ## Workflow (Follow This Order)
 
 ### Step 1 — Read Project State
