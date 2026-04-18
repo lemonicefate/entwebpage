@@ -218,4 +218,77 @@ function ContactPage({ ctx }) {
   );
 }
 
-Object.assign(window, { ListPage, ArticlePage, ContactPage });
+function DoctorsPage() {
+  const doctors = window.DOCTORS || [];
+  const { h: _h } = { h: React.createElement };
+
+  function Section({ label, items, hue }) {
+    if (!items || items.length === 0) return null;
+    return (
+      <div style={{ marginTop: 18 }}>
+        <div style={{
+          fontSize: 11, fontWeight: 700, letterSpacing: '0.08em',
+          color: hue, textTransform: 'uppercase', marginBottom: 6,
+        }}>{label}</div>
+        <ul style={{ margin: 0, padding: '0 0 0 16px', listStyle: 'disc' }}>
+          {items.map((item, i) => (
+            <li key={i} style={{ fontSize: 13, color: 'var(--fg)', lineHeight: 1.7 }}>{item}</li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
+
+  return (
+    <main style={{ background: 'var(--cream-1)', minHeight: '100vh', padding: '64px 0 80px' }}>
+      <div className="container" style={{ padding: '0 24px' }}>
+        <div style={{ marginBottom: 48 }}>
+          <div style={{ fontSize: 12, fontWeight: 700, letterSpacing: '0.1em', color: 'var(--teal)', marginBottom: 8 }}>
+            DOCTORS · 醫師團隊
+          </div>
+          <h1 style={{ fontSize: 36, fontWeight: 700, color: 'var(--fg-heading)', margin: 0 }}>
+            認識您的醫師
+          </h1>
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))',
+          gap: 24,
+        }}>
+          {doctors.map(d => (
+            <div key={d.id} style={{
+              background: '#fff',
+              borderRadius: 18,
+              overflow: 'hidden',
+              border: '1px solid var(--border-soft)',
+              display: 'flex',
+              flexDirection: 'column',
+            }}>
+              {/* Card header */}
+              <div style={{
+                background: `linear-gradient(135deg, ${d.hue}18 0%, ${d.hue}08 100%)`,
+                borderBottom: `3px solid ${d.hue}`,
+                padding: '20px 24px 16px',
+              }}>
+                <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-heading)' }}>
+                  {d.name} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--muted)' }}>醫師</span>
+                </div>
+                <div style={{ fontSize: 13, color: d.hue, fontWeight: 600, marginTop: 4 }}>{d.title}</div>
+              </div>
+
+              {/* Card body */}
+              <div style={{ padding: '16px 24px 24px', flex: 1 }}>
+                <Section label="醫師經歷" items={d.experience} hue={d.hue} />
+                <Section label="專科資格" items={d.certification} hue={d.hue} />
+                <Section label="專長" items={d.specialty} hue={d.hue} />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </main>
+  );
+}
+
+Object.assign(window, { ListPage, ArticlePage, ContactPage, DoctorsPage });

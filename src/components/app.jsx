@@ -19,6 +19,7 @@ function parseHash() {
   if (parts[0] === 'favorites') return { route: 'list', view: 'favorites' };
   if (parts[0] === 'recent')    return { route: 'list', view: 'recent' };
   if (parts[0] === 'contact')   return { route: 'contact' };
+  if (parts[0] === 'doctors')   return { route: 'doctors' };
   if (parts.length === 1)       return { route: 'list', categoryId: parts[0] };
   return { route: 'article', categoryId: parts[0], topicId: parts[1] };
 }
@@ -59,7 +60,7 @@ function App() {
   const ctx = { theme, setTheme, fontScale, setFontScale, cvdMode, setCvdMode, favorites, toggleFavorite, recent, addRecent, hashState };
 
   // Late-bind: each other JSX file assigns its component to window via Object.assign
-  const { Navbar, HomePage, ListPage, ArticlePage, ContactPage, Footer } = window;
+  const { Navbar, HomePage, ListPage, ArticlePage, ContactPage, DoctorsPage, Footer } = window;
 
   return h(Fragment, null,
     Navbar && h(Navbar, { ctx }),
@@ -67,6 +68,7 @@ function App() {
     hashState.route === 'list'    && ListPage    && h(ListPage,    { ctx }),
     hashState.route === 'article' && ArticlePage && h(ArticlePage, { ctx }),
     hashState.route === 'contact' && ContactPage && h(ContactPage, { ctx }),
+    hashState.route === 'doctors' && DoctorsPage && h(DoctorsPage, { ctx }),
     Footer && h(Footer, { ctx }),
     h('button', {
       className: `a11y-fab ${cvdMode ? 'on' : ''}`,

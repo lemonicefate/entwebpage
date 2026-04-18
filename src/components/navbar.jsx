@@ -40,7 +40,7 @@ const linkStyle = { color: '#5a7370', textDecoration: 'none', opacity: 0.9 };
 
 const NAV = [
   { key: 'edu',     label: '衛教專區', mega: true, target: '#/' },
-  { key: 'doctors', label: '醫師團隊', target: '#/#doctors' },
+  { key: 'doctors', label: '醫師團隊', target: '#/doctors' },
   { key: 'info',    label: '門診資訊', target: '#/#info' },
   { key: 'faq',     label: '常見問答', target: '#/#faq' },
   { key: 'contact', label: '聯絡我們', target: '#/contact' },
