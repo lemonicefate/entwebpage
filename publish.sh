@@ -87,8 +87,98 @@ case "${1:-}" in
     ;;
 
   --serve)
-    echo "🌐 啟動預覽伺服器：http://localhost:8000"
-    python3 -m http.server 8000
+    PORT="${2:-9000}"
+    echo "🌐 啟動預覽伺服器：http://localhost:${PORT}"
+    python3 -m http.server "$PORT"
+    ;;
+
+  --dev)
+    PORT="${2:-9000}"
+    ensure_esbuild
+    echo "🔨 esbuild watching src/components/*.jsx → dist/app.js"
+    echo "🌐 Dev server with live-reload: http://localhost:${PORT}"
+    ./tools/esbuild src/components/app.jsx \
+      --bundle --outfile=dist/app.js \
+      --loader:.jsx=jsx --format=iife --target=es2020 --sourcemap=inline \
+      --external:react --external:react-dom --external:dompurify \
+      --define:process.env.NODE_ENV=\"development\" \
+      --watch=forever </dev/null &
+    ESBUILD_PID=$!
+    trap "kill $ESBUILD_PID 2>/dev/null; exit" INT TERM EXIT
+    sleep 0.8
+    python3 - "$PORT" <<'PYEOF'
+import sys, os, http.server, threading, time
+
+PORT = int(sys.argv[1]) if len(sys.argv) > 1 else 9000
+WATCH = ['dist/app.js', 'src/styles/main.css', 'js/content.js']
+
+def get_stamp():
+    t = 0
+    for f in WATCH:
+        try: t = max(t, os.path.getmtime(f))
+        except: pass
+    return t
+
+_stamp = [get_stamp()]
+_lock  = threading.Lock()
+
+INJECT = b'\n<script>!function(){var s=new EventSource("/__live");s.onmessage=function(e){e.data==="reload"&&location.reload()}}();</script>\n'
+
+class Handler(http.server.SimpleHTTPRequestHandler):
+    def do_GET(self):
+        if self.path.split('?')[0] == '/__live':
+            self._sse(); return
+        path = self.translate_path(self.path)
+        if os.path.isdir(path):
+            path = os.path.join(path, 'index.html')
+        if os.path.isfile(path) and path.endswith('.html'):
+            with open(path, 'rb') as f:
+                body = f.read()
+            body = body.replace(b'</body>', INJECT + b'</body>', 1)
+            self.send_response(200)
+            self.send_header('Content-Type', 'text/html; charset=utf-8')
+            self.send_header('Content-Length', str(len(body)))
+            self.send_header('Cache-Control', 'no-cache')
+            self.end_headers()
+            self.wfile.write(body)
+            return
+        super().do_GET()
+
+    def _sse(self):
+        self.send_response(200)
+        self.send_header('Content-Type',  'text/event-stream')
+        self.send_header('Cache-Control', 'no-cache')
+        self.send_header('Connection',    'keep-alive')
+        self.end_headers()
+        try:
+            last = _stamp[0]
+            while True:
+                time.sleep(0.25)
+                with _lock:
+                    cur = _stamp[0]
+                if cur != last:
+                    last = cur
+                    self.wfile.write(b'data: reload\n\n')
+                    self.wfile.flush()
+        except (BrokenPipeError, ConnectionResetError):
+            pass
+
+    def log_message(self, fmt, *args):
+        if '/__live' not in (args[0] if args else ''):
+            print(f'  {args[1] if len(args)>1 else ""} {args[0]}')
+
+def _watch():
+    while True:
+        time.sleep(0.25)
+        s = get_stamp()
+        with _lock:
+            if s != _stamp[0]:
+                _stamp[0] = s
+                print('  ↺ 偵測到變更，通知瀏覽器重載')
+
+threading.Thread(target=_watch, daemon=True).start()
+http.server.ThreadingHTTPServer(('', PORT), Handler).serve_forever()
+PYEOF
     ;;
 
   --status)
