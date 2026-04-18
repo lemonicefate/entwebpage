@@ -1,0 +1,1 @@
+(()=>{var{createElement:e}=React,{createRoot:n}=ReactDOM;function o(){return e("div",{style:{padding:40,fontFamily:"sans-serif"}},"B2 build: OK")}var t=document.getElementById("root");t&&n(t).render(e(o));})();
