@@ -1,308 +1,239 @@
-/**
- * 誠心醫療體系工學診所衛教專區 — 設定與內容索引
- *
- * 文章 HTML 內容已移至 content/{categoryId}/{topicId}.html
- * 本檔案只保留 metadata（id, title, summary），由 app.js 按需載入內容。
- */
+// =============================================================
+// content.js — site data for 誠心醫療體系工學診所衛教專區
+// Block 1: CONFIG
+// Block 2: CATEGORIES_BASE (9 categories)
+// Block 3: CATEGORIES Proxy wrapper (CVD-safe tone)
+// Block 4: DOCTORS / FAQS / HOURS placeholders
+// Block 5: window export
+// =============================================================
+
+// ── Block 1: CONFIG ──────────────────────────────────────────
 
 const CONFIG = {
   siteName: '誠心醫療體系工學診所衛教專區',
   siteNameShort: '工學診所衛教專區',
   clinicName: '誠心醫療體系工學診所',
-  description: '提供耳鼻喉科、內科、外科等專業衛教資訊，協助您了解疾病與健康照護知識。',
-
-  // Google Analytics 4 — 填入 Measurement ID 後自動啟用
-  // 取得方式：Google Analytics → 管理 → 資料串流 → 評估 ID（格式：G-XXXXXXXXXX）
-  gaId: '', // TODO: 填入 Google Analytics Measurement ID (G-XXXXXXXXXX)
-
-  // 多語系預設語言
+  clinicNameEn: 'GONGXUE FAMILY CLINIC',
+  description: '家醫科衛教資訊平台，提供慢性病、呼吸道、腸胃、兒童、長者等健康照護知識。',
+  gaId: '',
   defaultLang: 'zh-TW',
-
-  // TODO: 子帳號管理 - 不同醫師可有不同的常用衛教設定
-  // 未來可在此新增 profiles 物件
-
-  // UI 介面翻譯字串
-  i18n: {
-    'zh-TW': {
-      siteName: '誠心醫療體系工學診所衛教專區',
-      siteNameShort: '工學診所衛教專區',
-      subtitle: '工學診所衛教專區',
-      search: '搜尋衛教主題...',
-      favorites: '我的收藏',
-      recentViews: '最近瀏覽',
-      print: '列印此頁',
-      contact: '聯絡我們',
-      home: '首頁',
-      welcomeTitle: '歡迎使用衛教資訊系統。請從左側選單選擇衛教主題，或點選以下分類快速瀏覽。',
-      categoryTitle: '衛教分類',
-      topicCount: '篇衛教資訊',
-      loading: '載入中…',
-      loadError: '內容載入失敗，請重新整理頁面。',
-      reviewedBy: '由專業醫療團隊審閱',
-      copyright: '版權所有',
-      medicalReview: '本衛教內容由專業醫療團隊審閱',
-      contactUs: '聯絡我們',
-      contactSubtitle: '歡迎透過以下方式與我們聯繫',
-      clinicInfo: '診所資訊',
-      onlineMessage: '線上留言',
-      name: '姓名',
-      phone: '電話',
-      email: 'Email',
-      message: '留言內容',
-      submit: '送出留言',
-      location: '交通位置',
-      lineOA: 'LINE 官方帳號',
-      lineScanHint: '掃描 QR Code 或點擊下方按鈕加入好友',
-      lineAdd: '加入 LINE 好友',
-      openMenu: '開啟選單',
-      fontNormal: '標準',
-      fontLarge: '大',
-      fontXLarge: '特大',
-      ttsPlay: '🔊 語音朗讀',
-      ttsStop: '⏹ 停止朗讀',
-      quizTitle: '衛教理解確認',
-      quizQ1: '我已經閱讀完本頁衛教內容',
-      quizQ2: '我了解本頁說明的注意事項',
-      quizQ3: '如有不清楚的地方，我會詢問醫師',
-      quizComplete: '感謝您的確認！如有任何疑問歡迎隨時詢問醫師。',
-      ratingTitle: '滿意度評分',
-      ratingHint: '您的回饋對我們很重要',
-      ratingDone: '您已評分',
-      offlineNotice: '您目前處於離線狀態，部分內容可能無法載入。',
-      langLabel: '語言',
-    },
-    'en': {
-      siteName: 'Allheart Medical ENT Clinic Health Education',
-      siteNameShort: 'Health Education',
-      subtitle: 'Health Education Center',
-      search: 'Search topics...',
-      favorites: 'My Favorites',
-      recentViews: 'Recent Views',
-      print: 'Print This Page',
-      contact: 'Contact Us',
-      home: 'Home',
-      welcomeTitle: 'Welcome to our Health Education System. Please select a topic from the menu or browse categories below.',
-      categoryTitle: 'Categories',
-      topicCount: 'articles',
-      loading: 'Loading…',
-      loadError: 'Failed to load content. Please refresh the page.',
-      reviewedBy: 'Reviewed by medical professionals',
-      copyright: 'All rights reserved',
-      medicalReview: 'Content reviewed by professional medical team',
-      contactUs: 'Contact Us',
-      contactSubtitle: 'Feel free to reach out through the following channels',
-      clinicInfo: 'Clinic Information',
-      onlineMessage: 'Online Message',
-      name: 'Name',
-      phone: 'Phone',
-      email: 'Email',
-      message: 'Message',
-      submit: 'Submit',
-      location: 'Location',
-      lineOA: 'LINE Official Account',
-      lineScanHint: 'Scan QR Code or click button below to add friend',
-      lineAdd: 'Add LINE Friend',
-      openMenu: 'Open Menu',
-      fontNormal: 'Normal',
-      fontLarge: 'Large',
-      fontXLarge: 'X-Large',
-      ttsPlay: '🔊 Read Aloud',
-      ttsStop: '⏹ Stop Reading',
-      quizTitle: 'Comprehension Check',
-      quizQ1: 'I have finished reading this page',
-      quizQ2: 'I understand the precautions described',
-      quizQ3: 'I will consult my doctor if anything is unclear',
-      quizComplete: 'Thank you for confirming! Please feel free to ask your doctor if you have any questions.',
-      ratingTitle: 'Satisfaction Rating',
-      ratingHint: 'Your feedback is important to us',
-      ratingDone: 'You rated',
-      offlineNotice: 'You are currently offline. Some content may not be available.',
-      langLabel: 'Language',
-    },
-    'vi': {
-      siteName: 'Giáo dục sức khỏe - Phòng khám Tai Mũi Họng Allheart',
-      siteNameShort: 'Giáo dục sức khỏe',
-      subtitle: 'Trung tâm giáo dục sức khỏe',
-      search: 'Tìm kiếm chủ đề...',
-      favorites: 'Yêu thích',
-      recentViews: 'Xem gần đây',
-      print: 'In trang này',
-      contact: 'Liên hệ',
-      home: 'Trang chủ',
-      welcomeTitle: 'Chào mừng đến với hệ thống giáo dục sức khỏe. Vui lòng chọn chủ đề từ menu hoặc duyệt danh mục bên dưới.',
-      categoryTitle: 'Danh mục',
-      topicCount: 'bài viết',
-      loading: 'Đang tải…',
-      loadError: 'Không thể tải nội dung. Vui lòng tải lại trang.',
-      reviewedBy: 'Được đánh giá bởi đội ngũ y tế chuyên nghiệp',
-      copyright: 'Bảo lưu mọi quyền',
-      medicalReview: 'Nội dung được đội ngũ y tế chuyên nghiệp đánh giá',
-      contactUs: 'Liên hệ chúng tôi',
-      contactSubtitle: 'Hãy liên hệ qua các kênh sau',
-      clinicInfo: 'Thông tin phòng khám',
-      onlineMessage: 'Nhắn tin trực tuyến',
-      name: 'Họ tên',
-      phone: 'Điện thoại',
-      email: 'Email',
-      message: 'Nội dung',
-      submit: 'Gửi',
-      location: 'Vị trí',
-      lineOA: 'Tài khoản LINE chính thức',
-      lineScanHint: 'Quét mã QR hoặc nhấn nút bên dưới để thêm bạn',
-      lineAdd: 'Thêm bạn LINE',
-      openMenu: 'Mở menu',
-      fontNormal: 'Bình thường',
-      fontLarge: 'Lớn',
-      fontXLarge: 'Rất lớn',
-      ttsPlay: '🔊 Đọc to',
-      ttsStop: '⏹ Dừng đọc',
-      quizTitle: 'Xác nhận hiểu biết',
-      quizQ1: 'Tôi đã đọc xong nội dung trang này',
-      quizQ2: 'Tôi hiểu các lưu ý được mô tả',
-      quizQ3: 'Tôi sẽ hỏi bác sĩ nếu có điều gì chưa rõ',
-      quizComplete: 'Cảm ơn bạn đã xác nhận! Hãy hỏi bác sĩ nếu bạn có bất kỳ câu hỏi nào.',
-      ratingTitle: 'Đánh giá hài lòng',
-      ratingHint: 'Phản hồi của bạn rất quan trọng',
-      ratingDone: 'Bạn đã đánh giá',
-      offlineNotice: 'Bạn đang ngoại tuyến. Một số nội dung có thể không khả dụng.',
-      langLabel: 'Ngôn ngữ',
-    }
-  },
-
   contact: {
-    address: '',                // TODO: 填入診所地址
-    phone: '',                  // TODO: 填入診所電話
-    email: '',                  // TODO: 填入官方信箱
-    hours: '',                  // TODO: 填入門診時間
-    mapEmbedUrl: '',            // TODO: 填入 Google Maps 嵌入 URL
-    lineUrl: '',                // TODO: 填入 LINE 官方帳號連結
+    address: '',
+    phone: '',
+    email: '',
+    hours: '',
+    mapEmbedUrl: '',
+    lineUrl: '',
     lineQrCode: './assets/images/line-qrcode.png',
-    formEndpoint: '',           // TODO: 填入 Formspree endpoint (例: https://formspree.io/f/xxxxxxxx)
+    formEndpoint: '',
   },
-  announcements: [
-    { id: 'ann-1', title: '門診時間異動', content: '農曆春節期間（2/8-2/12）休診，2/13 恢復正常門診。', type: 'info', active: true, date: '2026-03-28' },
-  ]
+  announcements: [],
 };
 
-const CATEGORIES = [
+// ── Block 2: CATEGORIES_BASE ──────────────────────────────────
+
+const CATEGORIES_BASE = [
+  {
+    id: 'chronic',
+    name: '慢性病照護',
+    icon: 'Heartbeat',
+    desc: '高血壓、糖尿病、高血脂、痛風、代謝症候群',
+    tone: '#e89661',
+    toneCvd: '#E69F00',
+    topics: [
+      { id: 'chronic-gout-diet-medication-principles', title: '痛風 (Gout)', summary: '痛風是尿酸結晶沉積在關節引起的劇烈發炎反應，常在夜間突然發作，以大腳趾根部最為典型。本文說明痛風的成因、飲食原則、急性發作處置，以及長期降尿酸藥物的使用時機。', lastUpdated: '2026-04-18', contentPath: 'content/internal/internal-gout-diet-medication-principles.html' },
+      { id: 'chronic-hypertension-dash-diet', title: '高血壓 (Hypertension) 與得舒飲食 (DASH Diet)', summary: '高血壓常年無症狀，卻是心臟病、腦中風、腎臟病的頭號推手。了解血壓分級、認識得舒飲食 (DASH Diet) 的核心原則，搭配生活型態調整，讓血壓重回正常範圍。', lastUpdated: '2026-04-13', contentPath: 'content/internal/internal-hypertension-dash-diet.html' },
+      { id: 'chronic-insulin-resistance-type2-diabetes-prevention', title: '胰島素阻抗與第2型糖尿病預防 (Insulin Resistance & Type 2 Diabetes Prevention)', summary: '台灣每4位成人就有1位是糖尿病前期，但多數人毫無感覺。了解胰島素阻抗如何悄悄演變成糖尿病，以及如何在「黃金期」採取行動逆轉風險，是每個成年人都應該知道的健康知識。', lastUpdated: '2026-04-15', contentPath: 'content/internal/internal-insulin-resistance-type2-diabetes-prevention.html' },
+      { id: 'chronic-lipid-panel-interpretation', title: '脂質異常血症 (Dyslipidemia)', summary: '健檢報告上的膽固醇、LDL、HDL、三酸甘油酯，你真的看懂了嗎？很多人總膽固醇「剛剛好」，卻忽略更危險的組合：高三酸甘油酯 + 低好膽固醇。本文帶你一次看懂血脂報告的隱藏細節，以及什麼時候該進一步評估。', lastUpdated: '2026-04-16', contentPath: 'content/internal/internal-lipid-panel-interpretation.html' },
+    ],
+  },
+  {
+    id: 'respir',
+    name: '感冒與呼吸道',
+    icon: 'Lungs',
+    desc: '流感、咳嗽、過敏性鼻炎、鼻竇炎、哮吼',
+    tone: '#1f8e84',
+    toneCvd: '#009E73',
+    topics: [
+      { id: 'respir-allergic-rhinitis', title: '過敏性鼻炎 (Allergic Rhinitis)', summary: '過敏性鼻炎是鼻黏膜接觸過敏原後產生的免疫反應，主要症狀為打噴嚏、流鼻水、鼻塞及鼻癢。', lastUpdated: '2026-04-05', contentPath: 'content/ent/ent-allergic-rhinitis.html' },
+      { id: 'respir-croup', title: '哮吼 (Croup / Laryngotracheobronchitis)', summary: '哮吼是好發於嬰幼兒的病毒性上呼吸道感染，最典型的症狀是像海豹叫聲的犬吠咳嗽。大多數孩子屬輕症，可在家照護；但出現安靜時喘鳴或呼吸費力，就需要立即就醫。', lastUpdated: '2026-04-07', contentPath: 'content/pediatric/pediatric-croup.html' },
+      { id: 'respir-lpr-chronic-pharyngitis', title: '逆流性咽喉炎 (Laryngopharyngeal Reflux, LPR)', summary: '喉嚨有異物感、常常需要清喉嚨、聲音沙啞——這些症狀合稱「慢性咽喉炎」，很多時候是胃酸逆流到咽喉（LPR）引起的。了解成因、調整生活習慣，多數人都能有效改善。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-lpr-chronic-pharyngitis.html' },
+      { id: 'respir-sinusitis', title: '鼻竇炎 (Sinusitis / Rhinosinusitis)', summary: '鼻塞、頭痛加上黃綠色鼻涕，你可能以為只是感冒，但這些症狀持續超過一週，小心可能是鼻竇炎！本文帶你認識急性與慢性鼻竇炎的差異、正確治療方式，以及什麼時候需要做進一步檢查。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-sinusitis.html' },
+    ],
+  },
+  {
+    id: 'ortho',
+    name: '骨骼關節',
+    icon: 'Bone',
+    desc: '肩頸痠痛、五十肩、膝蓋保養',
+    tone: '#d4a82e',
+    toneCvd: '#B8860B',
+    topics: [],
+  },
+  {
+    id: 'gi',
+    name: '腸胃保健',
+    icon: 'Apple',
+    desc: '胃食道逆流、腸病毒、諾羅、腺病毒',
+    tone: '#d96757',
+    toneCvd: '#D55E00',
+    topics: [
+      { id: 'gi-adenovirus-fever-children', title: '腺病毒感染 (Adenovirus Infection)', summary: '腺病毒是兒童高燒最常見的元兇之一，體溫常超過 39°C 且可持續 5–10 天，俗稱「燒久姬」。除了高燒，還常合併眼睛紅、喉嚨痛、腸胃不適等多重症狀。目前無特效藥，了解正確的居家照護與就醫時機，是陪孩子安全度過病程的關鍵。', lastUpdated: '2026-04-07', contentPath: 'content/pediatric/pediatric-adenovirus-fever-children.html' },
+      { id: 'gi-enterovirus', title: '腸病毒感染 (Enterovirus Infection)', summary: '腸病毒是台灣每年春末夏初的兒童公敵，多數孩子 7-10 天可自行恢復，但少數會演變成腦炎等重症。這篇文章教你辨識重症前兆、做好居家隔離，以及何時該直奔急診。', lastUpdated: '2026-04-07', contentPath: 'content/pediatric/pediatric-enterovirus.html' },
+      { id: 'gi-norovirus-rotavirus-hydration', title: '諾羅病毒與輪狀病毒腸胃炎 (Norovirus & Rotavirus Gastroenteritis)', summary: '孩子突然上吐下瀉，是諾羅還是輪狀？兩種病毒都沒有特效藥，關鍵在於「補水」。本文帶你認識兩種病毒的差異、脫水的警示徵兆，以及正確的補水與飲食策略，讓孩子早日恢復。', lastUpdated: '2026-04-11', contentPath: 'content/pediatric/pediatric-norovirus-rotavirus-hydration.html' },
+    ],
+  },
+  {
+    id: 'kids',
+    name: '兒童健康',
+    icon: 'Baby',
+    desc: '生長發育、疫苗、發燒、玫瑰疹、異位性皮膚炎',
+    tone: '#4a9e94',
+    toneCvd: '#56B4E9',
+    topics: [
+      { id: 'kids-atopic-dermatitis-infant', title: '嬰幼兒異位性皮膚炎 (Atopic Dermatitis / Infantile Eczema)', summary: '異位性皮膚炎是台灣最常見的嬰幼兒慢性皮膚病，影響約一成兒童，60% 在一歲前發病。文章說明症狀辨識、居家照護重點（正確泡澡與保濕技巧）、用藥原則，以及何時需要到診所進一步評估與治療。', lastUpdated: '2026-04-08', contentPath: 'content/pediatric/pediatric-atopic-dermatitis-infant.html' },
+      { id: 'kids-growth-chart-guide', title: '兒童生長曲線解讀 (Child Growth Chart Interpretation)', summary: '生長曲線圖是追蹤孩子發育最重要的工具，但百分位數字常讓爸媽誤解。本文帶你看懂第3到97百分位的意義、生長速率警示、以及什麼情況真的需要帶孩子去看醫師。', lastUpdated: '2026-04-12', contentPath: 'content/pediatric/pediatric-growth-chart-guide.html' },
+      { id: 'kids-roseola-infantum', title: '玫瑰疹 (Roseola Infantum / Exanthem Subitum)', summary: '玫瑰疹是嬰幼兒最常見的病毒感染之一，特徵是高燒 3-4 天、退燒後全身出現粉紅色皮疹。了解其病程、熱性痙攣的處理方式，以及何時需要立即就醫，幫助爸媽冷靜應對這個常見但讓人心驚的疾病。', lastUpdated: '2026-04-09', contentPath: 'content/pediatric/pediatric-roseola-infantum.html' },
+    ],
+  },
+  {
+    id: 'senior',
+    name: '長者照護',
+    icon: 'Family',
+    desc: '跌倒預防、失智、多重用藥',
+    tone: '#7aa83b',
+    toneCvd: '#CC79A7',
+    topics: [],
+  },
+  {
+    id: 'preventiv',
+    name: '預防保健',
+    icon: 'Shield',
+    desc: '成人健檢、疫苗、癌症篩檢、代謝症候群預防',
+    tone: '#0e7c7b',
+    toneCvd: '#0072B2',
+    topics: [
+      { id: 'preventiv-metabolic-syndrome', title: '代謝症候群 (Metabolic Syndrome)', summary: '腰圍超標只是外觀問題嗎？代謝症候群是五個指標同時出問題的組合，悄悄提高心臟病、腦中風和糖尿病風險。了解診斷標準、成因，以及如何透過生活改變逆轉它。', lastUpdated: '2026-04-17', contentPath: 'content/internal/internal-metabolic-syndrome.html' },
+    ],
+  },
+  {
+    id: 'nutri',
+    name: '營養飲食',
+    icon: 'Leaf',
+    desc: 'DASH 飲食、痛風飲食、血脂解讀、均衡餐盤',
+    tone: '#7aa83b',
+    toneCvd: '#8E7CC3',
+    topics: [],
+  },
   {
     id: 'ent',
-    name: '耳鼻喉科',
-    icon: '👂',
-    description: '耳、鼻、喉疾病診斷與照護衛教',
+    name: '耳鼻喉專科',
+    icon: 'Stethoscope',
+    desc: '中耳炎、眩暈、耳鳴、睡眠呼吸中止症、鼻出血',
+    tone: '#0e7c7b',
+    toneCvd: '#0e7c7b',
     topics: [
-      { id: 'ent-sinusitis', title: '鼻竇炎', summary: '鼻竇炎是鼻竇黏膜的發炎反應，常見症狀包括鼻塞、流鼻涕、臉部脹痛及嗅覺減退。', lastUpdated: '2026-03-28' },
-      { id: 'ent-otitis', title: '中耳炎', summary: '中耳炎是中耳腔的發炎反應，好發於兒童，常見症狀為耳痛、聽力下降及發燒。', lastUpdated: '2026-03-28' },
-      { id: 'ent-tonsillitis', title: '扁桃腺炎', summary: '扁桃腺炎是扁桃腺的急性或慢性發炎，主要症狀為喉嚨痛、吞嚥困難及發燒。', lastUpdated: '2026-03-28' },
-      { id: 'ent-allergic-rhinitis', title: '過敏性鼻炎', summary: '過敏性鼻炎是鼻黏膜接觸過敏原後產生的免疫反應，主要症狀為打噴嚏、流鼻水、鼻塞及鼻癢。', lastUpdated: '2026-03-28' },
-      { id: 'ent-hearing', title: '聽力保健', summary: '聽力是重要的感官功能，了解聽力保健知識有助於預防聽力損失。', lastUpdated: '2026-03-28' },
-      { id: 'ent-vertigo', title: '眩暈', summary: '眩暈是感覺自身或周圍環境旋轉的症狀，常見原因包括良性陣發性姿勢性眩暈及梅尼爾氏症。', lastUpdated: '2026-03-28' },
-      { id: 'ent-snoring', title: '打呼看診流程', summary: '打呼不只是噪音問題，可能是睡眠呼吸中止症的警訊。了解完整的看診評估流程，從初診理學檢查到居家睡眠檢測，幫助您找到最適合的治療方案。', lastUpdated: '2026-03-28' },
-      { id: 'ent-bppv', title: '良性陣發性姿勢性眩暈（耳石症）', summary: '翻身或起床時突然天旋地轉？耳石脫落是最常見原因。了解耳石症的症狀、Epley 等復位術治療方式，以及復位後的居家注意事項。', lastUpdated: '2026-03-31' },
-      { id: 'ent-tinnitus', title: '耳鳴 (Tinnitus)', summary: '耳鳴是在沒有外部聲源的情況下聽到嗡嗡聲、蟬鳴或鈴聲的症狀，盛行率高達 10–25%。本文說明常見原因、診斷方式、聲音療法與認知行為療法等治療選項，以及何時需要立即就醫。', lastUpdated: '2026-04-06' },
-      { id: 'ent-lpr-chronic-pharyngitis', title: '逆流性咽喉炎 (Laryngopharyngeal Reflux, LPR)', summary: '喉嚨有異物感、常常需要清喉嚨、聲音沙啞——這些症狀合稱「慢性咽喉炎」，很多時候是胃酸逆流到咽喉（LPR）引起的。了解成因、調整生活習慣，多數人都能有效改善。', lastUpdated: '2026-04-06' },
-      { id: 'ent-menieres-disease', title: '梅尼爾氏症 (Meniere\'s Disease)', summary: '梅尼爾氏症是一種內耳疾病，以反覆發作的劇烈眩暈、耳鳴、耳悶脹感與聽力起伏為四大核心症狀。發作無法預測，嚴重影響日常生活。本文說明成因、診斷方式、分階段治療選項，以及日常生活如何降低發作頻率。', lastUpdated: '2026-04-06' },
-      { id: 'ent-obstructive-sleep-apnea', title: '阻塞性睡眠呼吸中止症 (Obstructive Sleep Apnea)', summary: '打呼不是睡得好的象徵，可能是上呼吸道在夜間反覆塌陷的警訊。阻塞性睡眠呼吸中止症悄悄剝奪你的睡眠品質，增加高血壓、心臟病、腦中風風險。台灣估計有 230 萬人患病，但確診率僅一成——看完這篇，帶著清單去評估自己的風險。', lastUpdated: '2026-04-06' },
-      { id: 'ent-otitis-media', title: '急性中耳炎 (Acute Otitis Media, AOM)', summary: '急性中耳炎是兒童最常見的細菌感染之一，好發於 2 歲以下嬰幼兒。孩子因無法表達耳痛，常以半夜哭鬧、拒食、發燒等行為表現，讓父母不知所措。了解症狀辨識、就醫時機與照護原則，有助於減少不必要的抗生素使用，讓孩子更快康復。', lastUpdated: '2026-04-06' },
-    ]
-  },
-  {
-    id: 'internal',
-    name: '內科',
-    icon: '🏥',
-    description: '內科常見疾病與慢性病管理',
-    topics: [
-      { id: 'internal-hypertension', title: '高血壓', summary: '高血壓是血壓持續偏高的慢性疾病，是心血管疾病的主要危險因子。', lastUpdated: '2026-03-28' },
-      { id: 'internal-diabetes', title: '糖尿病', summary: '糖尿病是血糖調控異常的代謝性疾病，需要長期管理以預防併發症。', lastUpdated: '2026-03-28' },
-      { id: 'internal-cold', title: '感冒', summary: '感冒是上呼吸道的病毒感染，通常症狀輕微，可自行緩解。', lastUpdated: '2026-03-28' },
-      { id: 'internal-flu', title: '流感', summary: '流行性感冒是由流感病毒引起的急性呼吸道感染，症狀比普通感冒嚴重。', lastUpdated: '2026-03-28' },
-      { id: 'internal-asthma', title: '氣喘', summary: '氣喘是慢性氣道發炎疾病，會造成反覆的喘鳴、呼吸困難、胸悶及咳嗽。', lastUpdated: '2026-03-28' },
-      { id: 'internal-hypertension-dash-diet', title: '高血壓 (Hypertension) 與得舒飲食 (DASH Diet)', summary: '高血壓常年無症狀，卻是心臟病、腦中風、腎臟病的頭號推手。了解血壓分級、認識得舒飲食 (DASH Diet) 的核心原則，搭配生活型態調整，讓血壓重回正常範圍。', lastUpdated: '2026-04-13' },
-    ]
-  },
-  {
-    id: 'surgical',
-    name: '外科',
-    icon: '🔪',
-    description: '外科傷口處置與術後照護',
-    topics: [
-      { id: 'surgical-wound', title: '傷口照護', summary: '正確的傷口照護是預防感染、促進癒合的關鍵。', lastUpdated: '2026-03-28' },
-      { id: 'surgical-postop', title: '術後注意事項', summary: '手術後的照護與注意事項對於順利恢復至關重要。', lastUpdated: '2026-03-28' },
-    ]
-  },
-  {
-    id: 'pediatric',
-    name: '兒科',
-    icon: '👶',
-    description: '嬰幼兒及兒童健康照護指引',
-    topics: [
-      { id: 'pediatric-fever', title: '小兒發燒', summary: '發燒是兒童常見的症狀，瞭解正確的處理方式有助於家長安心照護。', lastUpdated: '2026-03-28' },
-      { id: 'pediatric-otitis', title: '小兒中耳炎', summary: '中耳炎是兒童最常見的細菌感染之一，及早治療可避免聽力影響。', lastUpdated: '2026-03-28' },
-      { id: 'pediatric-medication', title: '兒童用藥', summary: '兒童用藥需特別注意劑量計算和給藥方式，確保用藥安全。', lastUpdated: '2026-03-28' },
-      { id: 'pediatric-adenovirus-fever-children', title: '腺病毒感染 (Adenovirus Infection)', summary: '腺病毒是兒童高燒最常見的元兇之一，體溫常超過 39°C 且可持續 5–10 天，俗稱「燒久姬」。除了高燒，還常合併眼睛紅、喉嚨痛、腸胃不適等多重症狀。目前無特效藥，了解正確的居家照護與就醫時機，是陪孩子安全度過病程的關鍵。', lastUpdated: '2026-04-07' },
-      { id: 'pediatric-atopic-dermatitis-infant', title: '嬰幼兒異位性皮膚炎 (Atopic Dermatitis / Infantile Eczema)', summary: '異位性皮膚炎是台灣最常見的嬰幼兒慢性皮膚病，影響約一成兒童，60% 在一歲前發病。文章說明症狀辨識、居家照護重點（正確泡澡與保濕技巧）、用藥原則，以及何時需要到診所進一步評估與治療。', lastUpdated: '2026-04-08' },
-      { id: 'pediatric-croup', title: '哮吼 (Croup / Laryngotracheobronchitis)', summary: '哮吼是好發於嬰幼兒的病毒性上呼吸道感染，最典型的症狀是像海豹叫聲的犬吠咳嗽。大多數孩子屬輕症，可在家照護；但出現安靜時喘鳴或呼吸費力，就需要立即就醫。', lastUpdated: '2026-04-07' },
-      { id: 'pediatric-enterovirus', title: '腸病毒感染 (Enterovirus Infection)', summary: '腸病毒是台灣每年春末夏初的兒童公敵，多數孩子 7-10 天可自行恢復，但少數會演變成腦炎等重症。這篇文章教你辨識重症前兆、做好居家隔離，以及何時該直奔急診。', lastUpdated: '2026-04-07' },
-      { id: 'pediatric-growth-chart-guide', title: '兒童生長曲線解讀 (Child Growth Chart Interpretation)', summary: '生長曲線圖是追蹤孩子發育最重要的工具，但百分位數字常讓爸媽誤解。本文帶你看懂第3到97百分位的意義、生長速率警示、以及什麼情況真的需要帶孩子去看醫師。', lastUpdated: '2026-04-12' },
-      { id: 'pediatric-norovirus-rotavirus-hydration', title: '諾羅病毒與輪狀病毒腸胃炎 (Norovirus & Rotavirus Gastroenteritis)', summary: '孩子突然上吐下瀉，是諾羅還是輪狀？兩種病毒都沒有特效藥，關鍵在於「補水」。本文帶你認識兩種病毒的差異、脫水的警示徵兆，以及正確的補水與飲食策略，讓孩子早日恢復。', lastUpdated: '2026-04-11' },
-      { id: 'pediatric-roseola-infantum', title: '玫瑰疹 (Roseola Infantum / Exanthem Subitum)', summary: '玫瑰疹是嬰幼兒最常見的病毒感染之一，特徵是高燒 3-4 天、退燒後全身出現粉紅色皮疹。了解其病程、熱性痙攣的處理方式，以及何時需要立即就醫，幫助爸媽冷靜應對這個常見但讓人心驚的疾病。', lastUpdated: '2026-04-09' },
-    ]
-  },
-  {
-    id: 'gynecology',
-    name: '婦科',
-    icon: '👩',
-    description: '婦科常見問題與健康照護',
-    topics: [
-      { id: 'gyn-pregnancy-med', title: '孕期用藥注意', summary: '懷孕期間用藥需格外謹慎，某些藥物可能影響胎兒發育。', lastUpdated: '2026-03-28' },
-      { id: 'gyn-menopause', title: '更年期保健', summary: '更年期是女性自然的生理過程，了解相關知識有助於順利度過這個階段。', lastUpdated: '2026-03-28' },
-    ]
-  },
-  {
-    id: 'examination',
-    name: '檢驗',
-    icon: '🔬',
-    description: '各項檢驗項目說明與解讀',
-    topics: [
-      { id: 'exam-hearing', title: '聽力檢查', summary: '聽力檢查是評估聽覺功能的重要工具，有助於早期發現聽力問題。', lastUpdated: '2026-03-28' },
-      { id: 'exam-blood', title: '血液檢查', summary: '血液檢查是最基本也最重要的健康篩檢工具，可反映多種身體狀況。', lastUpdated: '2026-03-28' },
-      { id: 'exam-allergy', title: '過敏原檢測', summary: '過敏原檢測有助於找出引起過敏反應的特定物質，進而採取有效的預防措施。', lastUpdated: '2026-03-28' },
-    ]
-  },
-  {
-    id: 'surgery',
-    name: '手術',
-    icon: '🏥',
-    description: '手術前後照護與注意事項',
-    topics: [
-      { id: 'surgery-tonsil', title: '扁桃腺手術', summary: '扁桃腺手術是治療反覆性扁桃腺炎和扁桃腺肥大的有效方式。', lastUpdated: '2026-03-28' },
-      { id: 'surgery-septum', title: '鼻中隔手術', summary: '鼻中隔矯正手術可改善因鼻中隔彎曲造成的鼻塞和相關症狀。', lastUpdated: '2026-03-28' },
-      { id: 'surgery-preop', title: '術前準備', summary: '充分的術前準備是手術順利進行和術後良好恢復的基礎。', lastUpdated: '2026-03-28' },
-      { id: 'surgery-postop', title: '術後照護', summary: '正確的術後照護有助於傷口癒合和身體恢復，減少併發症風險。', lastUpdated: '2026-03-28' },
-      { id: 'surgery-turbinate-rfa', title: '下鼻甲射頻消融術', summary: '下鼻甲射頻消融術（RFA）是治療慢性鼻塞的微創門診手術，局部麻醉、15–20 分鐘、當天可正常生活，適合藥物治療效果不佳的下鼻甲肥大患者。', lastUpdated: '2026-03-28' },
-    ]
-  },
-  {
-    id: 'medication',
-    name: '用藥衛教',
-    icon: '💊',
-    description: '常見藥物使用說明與注意事項',
-    topics: [
-      { id: 'med-antibiotics', title: '抗生素使用', summary: '正確使用抗生素是治療細菌感染的關鍵，濫用會導致抗藥性。', lastUpdated: '2026-03-28' },
-      { id: 'med-nasal-spray', title: '鼻噴劑使用', summary: '鼻噴劑是治療鼻炎和鼻塞的常用藥物，正確的使用方法可提升療效。', lastUpdated: '2026-03-28' },
-      { id: 'med-ear-drops', title: '耳滴劑使用', summary: '耳滴劑是治療外耳道疾病的常用藥物，正確的使用方法非常重要。', lastUpdated: '2026-03-28' },
-      { id: 'med-steroid-nasal-spray', title: '鼻用類固醇噴劑', summary: '類固醇鼻噴劑是治療過敏性鼻炎最安全有效的第一線藥物，全身吸收量極少，與口服類固醇截然不同。本頁說明正確噴藥方向、兩類鼻噴劑差異、孕婦兒童注意事項及常見問題。', lastUpdated: '2026-03-28' },
-    ]
-  },
-  {
-    id: 'lifestyle',
-    name: '生活衛教',
-    icon: '🌿',
-    description: '日常生活保健與預防醫學',
-    topics: [
-      { id: 'life-noise', title: '噪音防護', summary: '長期暴露於高分貝噪音環境會造成不可逆的聽力損害，正確防護至關重要。', lastUpdated: '2026-03-28' },
-      { id: 'life-nasal-irrigation', title: '鼻腔沖洗', summary: '鼻腔沖洗是安全有效的鼻部保健方法，有助於緩解鼻塞和預防鼻竇炎。', lastUpdated: '2026-03-28' },
-      { id: 'life-throat', title: '喉嚨保養', summary: '日常喉嚨保養有助於預防聲帶損傷和喉部疾病，特別適合用聲需求高的人。', lastUpdated: '2026-03-28' },
-    ]
+      { id: 'ent-menieres-disease', title: '梅尼爾氏症 (Meniere\'s Disease)', summary: '梅尼爾氏症是一種內耳疾病，以反覆發作的劇烈眩暈、耳鳴、耳悶脹感與聽力起伏為四大核心症狀。發作無法預測，嚴重影響日常生活。本文說明成因、診斷方式、分階段治療選項，以及日常生活如何降低發作頻率。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-menieres-disease.html' },
+      { id: 'ent-obstructive-sleep-apnea', title: '阻塞性睡眠呼吸中止症 (Obstructive Sleep Apnea)', summary: '打呼不是睡得好的象徵，可能是上呼吸道在夜間反覆塌陷的警訊。阻塞性睡眠呼吸中止症悄悄剝奪你的睡眠品質，增加高血壓、心臟病、腦中風風險。台灣估計有 230 萬人患病，但確診率僅一成——看完這篇，帶著清單去評估自己的風險。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-obstructive-sleep-apnea.html' },
+      { id: 'ent-otitis-media', title: '急性中耳炎 (Acute Otitis Media, AOM)', summary: '急性中耳炎是兒童最常見的細菌感染之一，好發於 2 歲以下嬰幼兒。孩子因無法表達耳痛，常以半夜哭鬧、拒食、發燒等行為表現，讓父母不知所措。了解症狀辨識、就醫時機與照護原則，有助於減少不必要的抗生素使用，讓孩子更快康復。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-otitis-media.html' },
+      { id: 'ent-tinnitus', title: '耳鳴 (Tinnitus)', summary: '耳鳴是在沒有外部聲源的情況下聽到嗡嗡聲、蟬鳴或鈴聲的症狀，盛行率高達 10–25%。本文說明常見原因、診斷方式、聲音療法與認知行為療法等治療選項，以及何時需要立即就醫。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-tinnitus.html' },
+    ],
   },
 ];
+
+// ── Block 3: CATEGORIES Proxy wrapper ─────────────────────────
+// When <html data-cvd="on"> is set, CATEGORIES[i].tone returns toneCvd.
+
+const CATEGORIES = CATEGORIES_BASE.map(base => new Proxy(base, {
+  get(target, prop) {
+    if (prop === 'tone' && typeof document !== 'undefined'
+        && document.documentElement.getAttribute('data-cvd') === 'on') {
+      return target.toneCvd || target.tone;
+    }
+    return target[prop];
+  },
+}));
+
+// ── Block 4: Placeholders ─────────────────────────────────────
+
+const DOCTORS = [
+  {
+    id: 'doc-1',
+    name: '張OO 醫師（TODO）',
+    title: '院長 · 家庭醫學專科',
+    expertise: ['慢性病照護', '成人健檢'],
+    bio: 'TODO：請填寫醫師學經歷與專長簡介。',
+    hue: '#0e7c7b',
+  },
+  {
+    id: 'doc-2',
+    name: '李OO 醫師（TODO）',
+    title: '副院長 · 耳鼻喉科專科',
+    expertise: ['過敏性鼻炎', '眩暈', '睡眠呼吸中止症'],
+    bio: 'TODO：請填寫醫師學經歷與專長簡介。',
+    hue: '#1f8e84',
+  },
+  {
+    id: 'doc-3',
+    name: '陳OO 醫師（TODO）',
+    title: '主治醫師 · 內科',
+    expertise: ['高血壓', '糖尿病', '心血管風險評估'],
+    bio: 'TODO：請填寫醫師學經歷與專長簡介。',
+    hue: '#e89661',
+  },
+  {
+    id: 'doc-4',
+    name: '王OO 醫師（TODO）',
+    title: '主治醫師 · 兒科',
+    expertise: ['兒童發展', '疫苗', '過敏'],
+    bio: 'TODO：請填寫醫師學經歷與專長簡介。',
+    hue: '#4a9e94',
+  },
+];
+
+const FAQS = [
+  {
+    id: 'faq-1',
+    q: '第一次看診需要帶什麼？',
+    a: 'TODO：請填寫初診所需攜帶文件，例如健保卡、轉診單、過去病歷或用藥紀錄等。',
+  },
+  {
+    id: 'faq-2',
+    q: '沒有健保可以看診嗎？',
+    a: 'TODO：請說明自費看診的費用方式及掛號流程。',
+  },
+  {
+    id: 'faq-3',
+    q: '慢性處方箋可以提前領藥嗎？',
+    a: 'TODO：請說明慢性病連續處方箋的領藥時間規定與例外情形。',
+  },
+  {
+    id: 'faq-4',
+    q: '可以代家人掛號嗎？',
+    a: 'TODO：請說明代理掛號的條件，例如需攜帶健保卡及委託人身分證明等。',
+  },
+  {
+    id: 'faq-5',
+    q: '打疫苗需要預約嗎？',
+    a: 'TODO：請說明疫苗施打是否需事先預約、提供哪些疫苗項目及注意事項。',
+  },
+  {
+    id: 'faq-6',
+    q: '診所有停車位嗎？',
+    a: 'TODO：請說明診所停車位數量、收費方式或鄰近停車場資訊。',
+  },
+];
+
+const HOURS = [
+  { day: '星期一', am: 'TODO', pm: 'TODO', ev: 'TODO' },
+  { day: '星期二', am: 'TODO', pm: 'TODO', ev: 'TODO' },
+  { day: '星期三', am: 'TODO', pm: 'TODO', ev: 'TODO' },
+  { day: '星期四', am: 'TODO', pm: 'TODO', ev: 'TODO' },
+  { day: '星期五', am: 'TODO', pm: 'TODO', ev: 'TODO' },
+  { day: '星期六', am: 'TODO', pm: 'TODO', ev: 'TODO' },
+  { day: '星期日', am: '休診', pm: '休診', ev: '休診' },
+];
+
+// ── Block 5: Export to window ─────────────────────────────────
+
+Object.assign(window, { CONFIG, CATEGORIES, DOCTORS, FAQS, HOURS });

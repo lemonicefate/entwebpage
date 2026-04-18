@@ -19,6 +19,40 @@ usage() {
   echo "  ./publish.sh --all               # 批次轉換所有 drafts/"
   echo "  ./publish.sh --serve             # 啟動 http://localhost:8000"
   echo "  ./publish.sh --status            # 列出尚未轉換的草稿"
+  echo "  ./publish.sh --build             # 只編譯 JSX → dist/app.js"
+}
+
+# ── B2 build ──
+ensure_esbuild() {
+  if [[ -x ./tools/esbuild ]]; then return 0; fi
+  echo "📦 Downloading esbuild (one-time)…"
+  mkdir -p tools
+  local pkg
+  case "$(uname -s)-$(uname -m)" in
+    Linux-x86_64)   pkg="@esbuild/linux-x64/-/linux-x64-0.21.5.tgz" ;;
+    Linux-aarch64)  pkg="@esbuild/linux-arm64/-/linux-arm64-0.21.5.tgz" ;;
+    Darwin-arm64)   pkg="@esbuild/darwin-arm64/-/darwin-arm64-0.21.5.tgz" ;;
+    Darwin-x86_64)  pkg="@esbuild/darwin-x64/-/darwin-x64-0.21.5.tgz" ;;
+    *)              echo "❌ Unsupported: $(uname -s)-$(uname -m)"; exit 1 ;;
+  esac
+  curl -fsSL "https://registry.npmjs.org/${pkg}" | tar -xz -C tools --strip-components=2 package/bin/esbuild
+  chmod +x ./tools/esbuild
+  echo "✅ $(./tools/esbuild --version)"
+}
+
+compile_jsx() {
+  ensure_esbuild
+  echo "🔨 Compiling JSX → dist/app.js"
+  ./tools/esbuild \
+    src/components/shared.jsx src/components/data.jsx \
+    src/components/navbar.jsx src/components/heroes.jsx \
+    src/components/sections.jsx src/components/pages.jsx \
+    src/components/app.jsx \
+    --bundle --outfile=dist/app.js \
+    --loader:.jsx=jsx --format=iife --target=es2020 --minify \
+    --external:react --external:react-dom --external:dompurify \
+    --define:process.env.NODE_ENV=\"production\"
+  echo "✅ dist/app.js built ($(wc -c < dist/app.js) bytes)"
 }
 
 get_output_path() {
@@ -48,6 +82,10 @@ PYEOF
 }
 
 case "${1:-}" in
+  --build)
+    compile_jsx
+    ;;
+
   --serve)
     echo "🌐 啟動預覽伺服器：http://localhost:8000"
     python3 -m http.server 8000
@@ -102,6 +140,7 @@ PYEOF
     git diff --stat || true
     echo ""
     echo "✅ 批次轉換完成。執行 git add . && git commit 發布。"
+    compile_jsx
     ;;
 
   "")
@@ -145,5 +184,6 @@ PYEOF
       echo ""
       git diff --stat || true
     fi
+    compile_jsx
     ;;
 esac

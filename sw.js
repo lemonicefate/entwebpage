@@ -3,14 +3,18 @@
  * 策略：Cache First（優先讀快取，背景更新）
  */
 
-const CACHE_NAME = 'entwebpage-v1';
+const CACHE_NAME = 'entwebpage-v2-b2-react';
 const PRE_CACHE = [
   './',
   './index.html',
-  './css/style.css',
-  './js/app.js',
+  './src/styles/main.css',
   './js/content.js',
-  './assets/logo.jpg'
+  './dist/app.js',
+  './assets/logo.jpg',
+  'https://unpkg.com/react@18.3.1/umd/react.production.min.js',
+  'https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js',
+  'https://unpkg.com/dompurify@3.1.6/dist/purify.min.js',
+  'https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&family=Instrument+Serif&display=swap',
 ];
 
 // 安裝：預快取核心資源

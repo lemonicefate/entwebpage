@@ -30,3 +30,11 @@ design-refs/*
 
 # Git worktrees（本地工作區，不追蹤）
 .worktrees/
+
+# esbuild binary — downloaded by publish.sh on first run
+tools/esbuild
+tools/esbuild.exe
+
+# Keep dist/ and src/ tracked (dist/*.js is what GH Pages serves)
+!dist/
+!src/
