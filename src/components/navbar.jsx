@@ -148,7 +148,7 @@ function Navbar({ ctx }) {
           {/* Logo block */}
           <a href="#/"
              style={{ display: 'flex', gap: 12, alignItems: 'center', textDecoration: 'none' }}>
-            <ClinicMark size={44}/>
+            <img src="./assets/logo_pic.jpg" alt="工學誠心診所" style={{ width: 44, height: 44, objectFit: 'contain' }}/>
             <div style={{ lineHeight: 1.1 }}>
               <div className="r-logo-title" style={{ fontSize: 18, fontWeight: 700, color: 'var(--fg-heading)', letterSpacing: '0.02em' }}>
                 工學誠心診所
@@ -284,7 +284,7 @@ function Navbar({ ctx }) {
         <div className="mobile-drawer-panel" onClick={(e) => e.stopPropagation()}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '16px 20px', borderBottom: '1px solid var(--border-soft)' }}>
             <div style={{ display: 'flex', gap: 10, alignItems: 'center' }}>
-              <ClinicMark size={36}/>
+              <img src="./assets/logo_pic.jpg" alt="工學誠心診所" style={{ width: 36, height: 36, objectFit: 'contain' }}/>
               <div style={{ fontSize: 15, fontWeight: 700, color: 'var(--fg-heading)' }}>工學誠心診所</div>
             </div>
             <button onClick={() => setDrawerOpen(false)} aria-label="關閉" style={{ ...iconBtn, width: 36, height: 36 }}>
