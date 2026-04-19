@@ -367,3 +367,25 @@ a:focus-visible {
     margin-top: 0 !important;
   }
 }
+
+/* ── Hero card float animations ── */
+@keyframes heroFloat1 {
+  0%, 100% { transform: rotate(-3deg) translateY(0px); }
+  50%       { transform: rotate(-3deg) translateY(-10px); }
+}
+@keyframes heroFloat2 {
+  0%, 100% { transform: rotate(2deg) translateY(0px); }
+  50%       { transform: rotate(2deg) translateY(-14px); }
+}
+@keyframes heroFloat3 {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+
+.hero-card-back  { animation: heroFloat1 6s ease-in-out infinite; }
+.hero-card-front { animation: heroFloat2 8s ease-in-out infinite 1s; }
+.hero-card-pill  { animation: heroFloat3 5s ease-in-out infinite 0.5s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-card-back, .hero-card-front, .hero-card-pill { animation: none; }
+}

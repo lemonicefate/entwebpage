@@ -10,21 +10,21 @@
 // ── Block 1: CONFIG ──────────────────────────────────────────
 
 const CONFIG = {
-  siteName: '誠心醫療體系工學診所衛教專區',
-  siteNameShort: '工學診所衛教專區',
+  siteName: '誠心醫療體系工學誠心診所衛教專區',
+  siteNameShort: '工學誠心診所衛教專區',
   clinicName: '誠心醫療體系工學診所',
-  clinicNameEn: 'GONGXUE FAMILY CLINIC',
-  description: '家醫科衛教資訊平台，提供慢性病、呼吸道、腸胃、兒童、長者等健康照護知識。',
+  clinicNameEn: 'GONGXUE ALLHEART CLINIC',
+  description: '耳鼻喉科及家醫科衛教資訊平台，提供耳鼻喉科、家醫科、慢性病、兒童、預防醫學、功能醫學等健康照護知識。',
   gaId: '',
   defaultLang: 'zh-TW',
   contact: {
-    address: '',
-    phone: '',
+    address: '402 臺中市南區工學路159號1樓',
+    phone: '(04) 2260-9600',
     email: '',
     hours: '',
     mapEmbedUrl: '',
-    lineUrl: '',
-    lineQrCode: './assets/images/line-qrcode.png',
+    lineUrl: 'https://lin.ee/tlWbWm0',
+    lineQrCode: 'https://qr-official.line.me/gs/M_288qqtru_GW.png?oat_content=qr',
     formEndpoint: '',
   },
   announcements: [],
@@ -147,7 +147,7 @@ const CATEGORIES_BASE = [
 const CATEGORIES = CATEGORIES_BASE.map(base => new Proxy(base, {
   get(target, prop) {
     if (prop === 'tone' && typeof document !== 'undefined'
-        && document.documentElement.getAttribute('data-cvd') === 'on') {
+      && document.documentElement.getAttribute('data-cvd') === 'on') {
       return target.toneCvd || target.tone;
     }
     return target[prop];
@@ -160,6 +160,7 @@ const DOCTORS = [
   {
     id: 'doc-lee-minghung',
     name: '李名弘',
+    photo: './assets/doctors/doc-lee-minghung.jpg',
     title: '工學誠心診所院長 · 耳鼻喉頭頸外科專科',
     expertise: ['鼻塞／鼻過敏／鼻竇炎', '中耳炎／耳鳴／暈眩', '睡眠呼吸中止症', '頭頸部超音波', '耳鼻喉局部手術'],
     bio: '臺中榮民總醫院耳鼻喉頭頸部專科主治醫師，高雄醫學大學醫學系畢業。擅長成人與兒童耳鼻喉疾病全方位診療，並提供口腔黏膜篩檢及戒菸服務。',
@@ -187,6 +188,7 @@ const DOCTORS = [
   {
     id: 'doc-hung-liqi',
     name: '洪麗期',
+    photo: './assets/doctors/doc-hung-liqi.jpg',
     title: '工學誠心診所副院長 · 家庭醫學科專科',
     expertise: ['慢性病管理', '體重管理', '糖尿病共照', '皮膚疾病', '精神心理健康'],
     bio: '中山醫學大學附設醫院家庭醫學科專科醫師，曾任台中市新社衛生所主任及國際醫療服務，中西醫雙主修背景，提供全人整合照護。',
@@ -211,6 +213,7 @@ const DOCTORS = [
   {
     id: 'doc-chi-fanxiang',
     name: '齊凡翔',
+    photo: './assets/doctors/doc-chi-fanxiang.jpg',
     title: '誠心醫療體系總院長 · 耳鼻喉頭頸外科專科',
     expertise: ['過敏性鼻炎', '耳鼻喉專科手術', '微創手術', '自然與功能醫學', '國際醫療技術'],
     bio: '臺大醫院耳鼻喉科主治醫師，曾任多家醫學中心耳鼻喉科主任，赴美國哥倫比亞附設醫院及韓國峨山醫院進修，融合整合醫學提供全人照護。',
@@ -238,6 +241,7 @@ const DOCTORS = [
   {
     id: 'doc-lee-tzuchiang',
     name: '李自強',
+    photo: './assets/doctors/doc-lee-tzuchiang.jpg',
     title: '誠心親子耳鼻喉科診所院長 · 耳鼻喉頭頸外科專科',
     expertise: ['鼻整形手術', '甲狀腺消融(RFA)', '小兒耳鼻喉', '頭頸超音波導引', '顏面整形重建'],
     bio: '臺大醫院耳鼻喉科專科醫師，曾赴美國 MSKCC 及韓國峨山醫院進修，為甲狀腺腫瘤 RFA 消融原廠培訓醫師，《JAMA》國際期刊第一作者。',
@@ -270,6 +274,7 @@ const DOCTORS = [
   {
     id: 'doc-hung-chianhui',
     name: '洪千惠',
+    photo: './assets/doctors/doc-hung-chianhui.jpg',
     title: '誠心親子耳鼻喉科診所兒科部部長 · 兒科專科',
     expertise: ['小兒耳鼻喉', '兒童過敏性鼻炎', '氣喘', '兒童風濕免疫', '兒童成長發育'],
     bio: '臺大醫院小兒科專科醫師訓練，具兒童過敏風濕免疫專科資格，從一般小兒科到免疫風濕疾病均有豐富診療經驗。',
@@ -296,6 +301,7 @@ const DOCTORS = [
   {
     id: 'doc-ku-tingyu',
     name: '古庭瑜',
+    photo: './assets/doctors/doc-ku-tingyu.png',
     title: '家庭醫學科主治醫師 · 老年醫學專科',
     expertise: ['三高慢性病照護', '老年醫學', '勞工健檢', '戒菸治療', '預防保健諮詢'],
     bio: '中山醫學大學附設醫院家庭醫學科訓練，具老年醫學及職業醫學專科資格，專注全人健康管理、慢性疾病整合照護與預防醫學。',
@@ -357,15 +363,146 @@ const FAQS = [
 ];
 
 const HOURS = [
-  { day: '星期一', am: 'TODO', pm: 'TODO', ev: 'TODO' },
-  { day: '星期二', am: 'TODO', pm: 'TODO', ev: 'TODO' },
-  { day: '星期三', am: 'TODO', pm: 'TODO', ev: 'TODO' },
-  { day: '星期四', am: 'TODO', pm: 'TODO', ev: 'TODO' },
-  { day: '星期五', am: 'TODO', pm: 'TODO', ev: 'TODO' },
-  { day: '星期六', am: 'TODO', pm: 'TODO', ev: 'TODO' },
-  { day: '星期日', am: '休診', pm: '休診', ev: '休診' },
+  { day: '星期一', am: '08:00–12:00', pm: '14:30–17:30', ev: '18:00–21:00' },
+  { day: '星期二', am: '08:00–12:00', pm: '14:30–17:30', ev: '18:00–21:00' },
+  { day: '星期三', am: '08:00–12:00', pm: '14:30–17:30', ev: '18:00–21:00' },
+  { day: '星期四', am: '08:00–12:00', pm: '14:30–17:30', ev: '18:00–21:00' },
+  { day: '星期五', am: '08:00–12:00', pm: '14:30–17:30', ev: '18:00–21:00' },
+  { day: '星期六', am: '休診', pm: '休診', ev: '休診' },
+  { day: '星期日', am: '08:00–12:00', pm: '14:30–18:00', ev: '休診', pmSpecial: true },
 ];
 
-// ── Block 5: Export to window ─────────────────────────────────
+// ── Block 5-A: 本週精選（後方圖表卡）── 依週數循環 ────────────
+// 新增文章後直接在陣列尾端加條目；系統自動依 ISO 週數輪換。
+// 建議主題：慢性病、健康檢查、數據解讀（視覺與血壓圖吻合）
 
-Object.assign(window, { CONFIG, CATEGORIES, DOCTORS, FAQS, HOURS });
+const HERO_WEEKLY = [
+  {
+    eyebrow: '本週精選',
+    title: '高血壓，\n沉默的健康殺手',
+    tags: ['血壓', '得舒飲食'],
+    href: '#/chronic/chronic-hypertension-dash-diet',
+    readingMinutes: 7,
+  },
+  {
+    eyebrow: '本週精選',
+    title: '健檢報告的\n膽固醇數字怎麼看？',
+    tags: ['血脂', '健檢'],
+    href: '#/chronic/chronic-lipid-panel-interpretation',
+    readingMinutes: 6,
+  },
+  {
+    eyebrow: '本週精選',
+    title: '糖尿病前期，\n你可能不知道自己中獎',
+    tags: ['血糖', '預防'],
+    href: '#/chronic/chronic-insulin-resistance-type2-diabetes-prevention',
+    readingMinutes: 8,
+  },
+  {
+    eyebrow: '本週精選',
+    title: '腰圍超標，\n五個警訊同時亮紅燈',
+    tags: ['代謝', '慢性病'],
+    href: '#/preventiv/preventiv-metabolic-syndrome',
+    readingMinutes: 6,
+  },
+  {
+    eyebrow: '本週精選',
+    title: '痛風發作，\n不只是大腳趾的問題',
+    tags: ['尿酸', '飲食'],
+    href: '#/chronic/chronic-gout-diet-medication-principles',
+    readingMinutes: 6,
+  },
+];
+
+// ── Block 5-B: 季節專題（前方主題卡）── 依月份 1–12 ───────────
+// 一年設定一次；每月一日自動切換。
+// 建議主題：時令疾病、當月衛教焦點。
+
+const HERO_MONTHLY = {
+  1: {
+    eyebrow: '冬季健康 · 一月',
+    title: '冬天鼻塞流鼻水，\n感冒還是鼻竇炎？',
+    author: '李名弘 醫師', readingMinutes: 5,
+    href: '#/respir/respir-sinusitis',
+  },
+  2: {
+    eyebrow: '過年健康 · 二月',
+    title: '年節大魚大肉後，\n關節突然劇痛發作',
+    author: '古庭瑜 醫師', readingMinutes: 6,
+    href: '#/chronic/chronic-gout-diet-medication-principles',
+  },
+  3: {
+    eyebrow: '春季過敏 · 三月',
+    title: '春天來了，\n鼻子又開始造反？',
+    author: '李名弘 醫師', readingMinutes: 5,
+    href: '#/respir/respir-allergic-rhinitis',
+  },
+  4: {
+    eyebrow: '春季過敏 · 四月',
+    title: '鼻塞頭痛超過一週，\n小心是鼻竇炎',
+    author: '李名弘 醫師', readingMinutes: 5,
+    href: '#/respir/respir-sinusitis',
+  },
+  5: {
+    eyebrow: '兒童健康 · 五月',
+    title: '腸病毒高峰期，\n重症前兆要認識',
+    author: '洪千惠 醫師', readingMinutes: 6,
+    href: '#/gi/gi-enterovirus',
+  },
+  6: {
+    eyebrow: '兒童健康 · 六月',
+    title: '發燒五天退不了？\n腺病毒「燒久姬」攻略',
+    author: '洪千惠 醫師', readingMinutes: 6,
+    href: '#/gi/gi-adenovirus-fever-children',
+  },
+  7: {
+    eyebrow: '暑期腸胃 · 七月',
+    title: '上吐下瀉來得急，\n補水才是關鍵',
+    author: '洪千惠 醫師', readingMinutes: 5,
+    href: '#/gi/gi-norovirus-rotavirus-hydration',
+  },
+  8: {
+    eyebrow: '暑期兒童 · 八月',
+    title: '開學前，\n認識孩子的生長曲線',
+    author: '洪千惠 醫師', readingMinutes: 5,
+    href: '#/kids/kids-growth-chart-guide',
+  },
+  9: {
+    eyebrow: '秋季保健 · 九月',
+    title: '喉嚨老是有痰，\n可能是胃酸在作怪',
+    author: '李名弘 醫師', readingMinutes: 5,
+    href: '#/respir/respir-lpr-chronic-pharyngitis',
+  },
+  10: {
+    eyebrow: '秋季睡眠 · 十月',
+    title: '打呼不是睡好，\n可能是呼吸在夜間暫停',
+    author: '李名弘 醫師', readingMinutes: 7,
+    href: '#/ent/ent-obstructive-sleep-apnea',
+  },
+  11: {
+    eyebrow: '秋冬保健 · 十一月',
+    title: '耳鳴像蟬叫，\n什麼時候該看醫師？',
+    author: '李名弘 醫師', readingMinutes: 5,
+    href: '#/ent/ent-tinnitus',
+  },
+  12: {
+    eyebrow: '冬季兒童 · 十二月',
+    title: '孩子突然犬吠咳嗽，\n哮吼怎麼處理？',
+    author: '洪千惠 醫師', readingMinutes: 5,
+    href: '#/respir/respir-croup',
+  },
+};
+
+// ── 自動組合 HERO ──────────────────────────────────────────────
+const _isoWeek = Math.floor(Date.now() / 604800000);
+const _month = new Date().getMonth() + 1; // 1–12
+
+const HERO = {
+  featured: HERO_WEEKLY[_isoWeek % HERO_WEEKLY.length],
+  seasonal: HERO_MONTHLY[_month],
+  pill: { label: '慢性病照護', count: 4 },
+};
+
+// ── Block 6: Export to window ─────────────────────────────────
+
+Object.assign(window, { CONFIG, CATEGORIES, DOCTORS, FAQS, HOURS, HERO, HERO_WEEKLY, HERO_MONTHLY });

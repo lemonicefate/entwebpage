@@ -201,6 +201,17 @@ function Stat({ n, label }) {
 }
 
 function HeroIllustration() {
+  const h = window.HERO || {};
+  const featured = h.featured || {};
+  const seasonal = h.seasonal || {};
+  const pill     = h.pill     || {};
+
+  const titleLines = (seasonal.title || '').split('\n');
+
+  const cardBase = {
+    position: 'absolute', borderRadius: 22, textDecoration: 'none', display: 'block',
+  };
+
   return (
     <div
       style={{
@@ -211,217 +222,110 @@ function HeroIllustration() {
         marginLeft: 'auto',
       }}
     >
-      {/* Back card: chart */}
-      <div
+      {/* Back card: featured article */}
+      <a
+        className="hero-card-back"
+        href={featured.href || '#/'}
         style={{
-          position: 'absolute',
-          left: '4%',
-          top: '8%',
-          width: '62%',
-          aspectRatio: '1/1.1',
-          background: '#fff',
-          borderRadius: 22,
-          padding: 22,
-          boxShadow: 'var(--shadow-lift)',
-          border: '1px solid var(--border-soft)',
-          transform: 'rotate(-3deg)',
+          ...cardBase,
+          left: '4%', top: '8%', width: '62%', aspectRatio: '1/1.1',
+          background: '#fff', padding: 22,
+          boxShadow: 'var(--shadow-lift)', border: '1px solid var(--border-soft)',
         }}
       >
-        <div
-          style={{
-            fontSize: 11,
-            color: 'var(--teal-2)',
-            fontWeight: 600,
-            letterSpacing: '0.12em',
-          }}
-        >
-          本週精選
+        <div style={{ fontSize: 11, color: 'var(--teal-2)', fontWeight: 600, letterSpacing: '0.12em' }}>
+          {featured.eyebrow || '本週精選'}
         </div>
-        <div
-          style={{
-            fontSize: 16,
-            fontWeight: 600,
-            color: 'var(--fg-heading)',
-            marginTop: 4,
-            lineHeight: 1.4,
-          }}
-        >
-          在家量血壓的722原則
+        <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--fg-heading)', marginTop: 4, lineHeight: 1.4 }}>
+          {featured.title || ''}
         </div>
-        <div
-          style={{
-            marginTop: 14,
-            height: 120,
-            background: 'var(--cream-1)',
-            borderRadius: 12,
-            padding: 12,
-            display: 'grid',
-            gridTemplateRows: '1fr auto',
-            gap: 6,
-          }}
-        >
-          <svg
-            viewBox="0 0 120 60"
-            style={{ width: '100%', height: '100%' }}
-            preserveAspectRatio="none"
-          >
+        <div style={{
+          marginTop: 14, height: 120, background: 'var(--cream-1)',
+          borderRadius: 12, padding: 12, display: 'grid', gridTemplateRows: '1fr auto', gap: 6,
+        }}>
+          <svg viewBox="0 0 120 60" style={{ width: '100%', height: '100%' }} preserveAspectRatio="none">
             <defs>
               <linearGradient id="hg" x1="0" x2="0" y1="0" y2="1">
                 <stop offset="0%" stopColor="var(--teal-2)" stopOpacity="0.35" />
                 <stop offset="100%" stopColor="var(--teal-2)" stopOpacity="0" />
               </linearGradient>
             </defs>
-            <path
-              d="M0 50 L15 40 L30 45 L45 30 L60 32 L75 22 L90 26 L105 18 L120 22 L120 60 L0 60 Z"
-              fill="url(#hg)"
-            />
-            <path
-              d="M0 50 L15 40 L30 45 L45 30 L60 32 L75 22 L90 26 L105 18 L120 22"
-              stroke="var(--teal)"
-              strokeWidth="2"
-              fill="none"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-            {[[15, 40], [45, 30], [75, 22], [105, 18]].map(([x, y], i) => (
-              <circle
-                key={i}
-                cx={x}
-                cy={y}
-                r="2.5"
-                fill="#fff"
-                stroke="var(--teal)"
-                strokeWidth="1.5"
-              />
+            <path d="M0 50 L15 40 L30 45 L45 30 L60 32 L75 22 L90 26 L105 18 L120 22 L120 60 L0 60 Z" fill="url(#hg)" />
+            <path d="M0 50 L15 40 L30 45 L45 30 L60 32 L75 22 L90 26 L105 18 L120 22"
+              stroke="var(--teal)" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+            {[[15,40],[45,30],[75,22],[105,18]].map(([x,y],i) => (
+              <circle key={i} cx={x} cy={y} r="2.5" fill="#fff" stroke="var(--teal)" strokeWidth="1.5" />
             ))}
           </svg>
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              fontSize: 10,
-              color: 'var(--muted-3)',
-            }}
-          >
-            <span>週一</span>
-            <span>週三</span>
-            <span>週五</span>
-            <span>週日</span>
+          <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: 10, color: 'var(--muted-3)' }}>
+            <span>週一</span><span>週三</span><span>週五</span><span>週日</span>
           </div>
         </div>
-        <div style={{ display: 'flex', gap: 6, marginTop: 10, fontSize: 10 }}>
-          <span style={tagChip('var(--success-bg)', 'var(--teal)')}>
-            血壓
-          </span>
-          <span style={tagChip('var(--warn-bg)', 'var(--warn-fg)')}>
-            健檢
-          </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 6, marginTop: 10, fontSize: 10, flexWrap: 'wrap' }}>
+          {(featured.tags || []).map((tag, i) => (
+            <span key={i} style={tagChip(
+              i === 0 ? 'var(--success-bg)' : 'var(--warn-bg)',
+              i === 0 ? 'var(--teal)'       : 'var(--warn-fg)',
+            )}>{tag}</span>
+          ))}
+          {featured.readingMinutes && (
+            <span style={{ color: 'var(--muted-3)', marginLeft: 'auto' }}>{featured.readingMinutes} 分鐘</span>
+          )}
         </div>
-      </div>
+      </a>
 
-      {/* Front card: illustration */}
-      <div
+      {/* Front card: seasonal article */}
+      <a
+        className="hero-card-front"
+        href={seasonal.href || '#/'}
         style={{
-          position: 'absolute',
-          right: '2%',
-          bottom: '6%',
-          width: '58%',
-          aspectRatio: '1/1.15',
+          ...cardBase,
+          right: '2%', bottom: '6%', width: '58%', aspectRatio: '1/1.15',
           background: 'linear-gradient(170deg, var(--peach-light), var(--peach-dark))',
-          borderRadius: 22,
-          padding: 22,
-          color: '#fff',
-          transform: 'rotate(2deg)',
-          boxShadow: 'var(--shadow-hero)',
+          padding: 22, color: '#fff', boxShadow: 'var(--shadow-hero)',
         }}
       >
-        <div
-          style={{
-            width: 42,
-            height: 42,
-            borderRadius: 99,
-            background: 'var(--gold)',
-            display: 'grid',
-            placeItems: 'center',
-            color: 'var(--fg-heading)',
-            fontWeight: 700,
-            fontSize: 18,
-          }}
-        >
+        <div style={{ width: 42, height: 42, borderRadius: 99, background: 'var(--gold)',
+          display: 'grid', placeItems: 'center', color: 'var(--fg-heading)', fontWeight: 700, fontSize: 18 }}>
           +
         </div>
-        <div
-          style={{
-            fontSize: 13,
-            color: '#c9ede9',
-            marginTop: 18,
-            letterSpacing: '0.1em',
-          }}
-        >
-          季節專題 ‧ 04月
+        <div style={{ fontSize: 13, color: '#c9ede9', marginTop: 18, letterSpacing: '0.1em' }}>
+          {seasonal.eyebrow || ''}
         </div>
         <div style={{ fontSize: 22, fontWeight: 700, lineHeight: 1.3, marginTop: 6 }}>
-          流感季來了,
-          <br />
-          別把重症當小感冒
+          {titleLines.map((line, i) => (
+            <React.Fragment key={i}>{line}{i < titleLines.length - 1 && <br/>}</React.Fragment>
+          ))}
         </div>
-        <div
-          style={{
-            marginTop: 'auto',
-            position: 'absolute',
-            bottom: 18,
-            left: 22,
-            right: 22,
-          }}
-        >
+        <div style={{ position: 'absolute', bottom: 18, left: 22, right: 22 }}>
           <div style={{ height: 1, background: 'rgba(255,255,255,0.2)' }} />
-          <div
-            style={{
-              marginTop: 12,
-              fontSize: 13,
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
-            <span>陳志明 醫師</span>
-            <span style={{ opacity: 0.7 }}>6 分鐘閱讀</span>
+          <div style={{ marginTop: 12, fontSize: 13, display: 'flex', justifyContent: 'space-between' }}>
+            <span>{seasonal.author || ''}</span>
+            {seasonal.readingMinutes && (
+              <span style={{ opacity: 0.7 }}>{seasonal.readingMinutes} 分鐘閱讀</span>
+            )}
           </div>
         </div>
-      </div>
+      </a>
 
-      {/* Floating pill: search */}
+      {/* Floating pill */}
       <div
+        className="hero-card-pill"
         style={{
-          position: 'absolute',
-          left: '-6%',
-          bottom: '18%',
-          background: '#fff',
-          borderRadius: 14,
-          padding: '10px 14px',
-          boxShadow: 'var(--shadow-lift)',
-          display: 'flex',
-          alignItems: 'center',
-          gap: 10,
-          fontSize: 13,
-          border: '1px solid var(--border-soft)',
+          position: 'absolute', left: '-6%', bottom: '18%',
+          background: '#fff', borderRadius: 14, padding: '10px 14px',
+          boxShadow: 'var(--shadow-lift)', display: 'flex', alignItems: 'center',
+          gap: 10, fontSize: 13, border: '1px solid var(--border-soft)',
         }}
       >
-        <div
-          style={{
-            width: 30,
-            height: 30,
-            borderRadius: 8,
-            background: 'var(--cream-1)',
-            display: 'grid',
-            placeItems: 'center',
-          }}
-        >
+        <div style={{ width: 30, height: 30, borderRadius: 8, background: 'var(--cream-1)',
+          display: 'grid', placeItems: 'center' }}>
           <Icon.Heart style={{ width: 16, height: 16, color: '#d96757' }} />
         </div>
         <div>
           <div style={{ fontSize: 11, color: 'var(--muted-2)' }}>已收藏</div>
           <div style={{ fontWeight: 600, color: 'var(--fg-heading)' }}>
-            糖尿病飲食 12 篇
+            {pill.label || ''}{pill.count ? ` ${pill.count} 篇` : ''}
           </div>
         </div>
       </div>

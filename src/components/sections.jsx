@@ -41,20 +41,20 @@ function FeaturedSection() {
   const rest = featured.slice(1);
 
   return (
-    <section className="r-section container" style={{ padding: '80px 24px', background: 'var(--cream-1)' }}>
-      <SectionHeader
-        eyebrow="FEATURED · 精選主題"
-        title="本週編輯精選"
-        desc="從門診最常被問到的問題出發，醫師與護理師共同審訂、定期更新。"
-      />
+    <section className="r-section" style={{ background: '#fff' }}>
+      <div className="container" style={{ padding: '80px 24px' }}>
+        <SectionHeader
+          eyebrow="FEATURED · 精選主題"
+          title="本週編輯精選"
+          desc="從門診最常被問到的問題出發，醫師與護理師共同審訂、定期更新。"
+        />
 
-      <div className="r-feat-grid" style={{
-        display: 'grid', gridTemplateColumns: '1.3fr 1fr 1fr', gap: 20,
-      }}>
-        {/* Big card */}
-        <FeatureCardLarge article={big}/>
-        {/* Smaller cards */}
-        {rest.map((t) => <FeatureCardMedium key={t.id} article={t}/>)}
+        <div className="r-feat-grid" style={{
+          display: 'grid', gridTemplateColumns: '1.3fr 1fr 1fr', gap: 20,
+        }}>
+          <FeatureCardLarge article={big}/>
+          {rest.map((t) => <FeatureCardMedium key={t.id} article={t}/>)}
+        </div>
       </div>
     </section>
   );
@@ -157,7 +157,8 @@ function FeatureCardMedium({ article }) {
 function CategoriesSection() {
   const categories = window.CATEGORIES || [];
   return (
-    <section className="r-section container" style={{ padding: '80px 24px', background: 'var(--cream-2)' }}>
+    <section className="r-section" style={{ background: 'var(--cream-2)' }}>
+      <div className="container" style={{ padding: '80px 24px' }}>
       <SectionHeader
         eyebrow="TOPICS · 主題分類"
         title="從您關心的主題開始讀起"
@@ -214,6 +215,7 @@ function CategoriesSection() {
           );
         })}
       </div>
+      </div>
     </section>
   );
 }
@@ -226,59 +228,61 @@ function LatestSection() {
   const categories = window.CATEGORIES || [];
 
   return (
-    <section className="r-section container" style={{ padding: '80px 24px', background: 'var(--cream-1)' }}>
-      <SectionHeader
-        eyebrow="LATEST · 最新文章"
-        title="這週新上線"
-        desc="醫師每週更新，跟著季節與流行病一起轉換話題。"
-        action="文章列表"
-        linkHref="#/"
-      />
+    <section className="r-section" style={{ background: '#fff' }}>
+      <div className="container" style={{ padding: '80px 24px' }}>
+        <SectionHeader
+          eyebrow="LATEST · 最新文章"
+          title="這週新上線"
+          desc="醫師每週更新，跟著季節與流行病一起轉換話題。"
+          action="文章列表"
+          linkHref="#/"
+        />
 
-      <div className="r-latest-grid" style={{
-        display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0,
-        border: '1px solid var(--border-soft)', borderRadius: 16, overflow: 'hidden',
-      }}>
-        {latest.map((a, i) => {
-          const cat = categories.find(c => c.id === a.categoryId) || categories[0] || {};
-          const I = Illo[cat.icon] || Illo.Shield;
-          const tone = cat.tone || a.accent || 'var(--teal)';
-          const col = i % 3, row = Math.floor(i / 3);
-          const totalRows = Math.ceil(latest.length / 3);
-          return (
-            <a key={a.id} href={`#/${a.categoryId}/${a.id}`}
-              className="latest-row"
-              style={{
-                padding: '22px 24px', textDecoration: 'none', color: 'inherit',
-                borderRight: col < 2 ? '1px solid var(--border-soft)' : 'none',
-                borderBottom: row < totalRows - 1 ? '1px solid var(--border-soft)' : 'none',
-                display: 'flex', gap: 16, alignItems: 'flex-start',
-                transition: 'background .15s',
-              }}>
-              <div style={{
-                width: 44, height: 44, borderRadius: 10, background: `${tone}12`,
-                display: 'grid', placeItems: 'center', flexShrink: 0,
-              }}>
-                <div style={{ width: 28, height: 28 }}><I tone={tone}/></div>
-              </div>
-              <div style={{ flex: 1 }}>
-                <span style={{
-                  fontSize: 11, color: tone, fontWeight: 600,
-                  letterSpacing: '0.06em',
-                }}>{a.tag}</span>
+        <div className="r-latest-grid" style={{
+          display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 0,
+          border: '1px solid var(--border-soft)', borderRadius: 16, overflow: 'hidden',
+        }}>
+          {latest.map((a, i) => {
+            const cat = categories.find(c => c.id === a.categoryId) || categories[0] || {};
+            const I = Illo[cat.icon] || Illo.Shield;
+            const tone = cat.tone || a.accent || 'var(--teal)';
+            const col = i % 3, row = Math.floor(i / 3);
+            const totalRows = Math.ceil(latest.length / 3);
+            return (
+              <a key={a.id} href={`#/${a.categoryId}/${a.id}`}
+                className="latest-row"
+                style={{
+                  padding: '22px 24px', textDecoration: 'none', color: 'inherit',
+                  borderRight: col < 2 ? '1px solid var(--border-soft)' : 'none',
+                  borderBottom: row < totalRows - 1 ? '1px solid var(--border-soft)' : 'none',
+                  display: 'flex', gap: 16, alignItems: 'flex-start',
+                  transition: 'background .15s',
+                }}>
                 <div style={{
-                  fontSize: 16, fontWeight: 600, color: 'var(--fg-heading)', marginTop: 6,
-                  lineHeight: 1.45,
-                }}>{a.title}</div>
-                {a.lastUpdated && (
-                  <div style={{ fontSize: 12, color: 'var(--muted-2)', marginTop: 10 }}>
-                    {a.lastUpdated}
-                  </div>
-                )}
-              </div>
-            </a>
-          );
-        })}
+                  width: 44, height: 44, borderRadius: 10, background: `${tone}12`,
+                  display: 'grid', placeItems: 'center', flexShrink: 0,
+                }}>
+                  <div style={{ width: 28, height: 28 }}><I tone={tone}/></div>
+                </div>
+                <div style={{ flex: 1 }}>
+                  <span style={{
+                    fontSize: 11, color: tone, fontWeight: 600,
+                    letterSpacing: '0.06em',
+                  }}>{a.tag}</span>
+                  <div style={{
+                    fontSize: 16, fontWeight: 600, color: 'var(--fg-heading)', marginTop: 6,
+                    lineHeight: 1.45,
+                  }}>{a.title}</div>
+                  {a.lastUpdated && (
+                    <div style={{ fontSize: 12, color: 'var(--muted-2)', marginTop: 10 }}>
+                      {a.lastUpdated}
+                    </div>
+                  )}
+                </div>
+              </a>
+            );
+          })}
+        </div>
       </div>
     </section>
   );
@@ -289,59 +293,63 @@ function DoctorsSection() {
   const doctors = window.DOCTORS || [];
   if (doctors.length === 0) return null;
   return (
-    <section className="r-section container" style={{ padding: '80px 24px', background: 'var(--cream-2)' }}>
-      <SectionHeader
-        eyebrow="DOCTORS · 醫師團隊"
-        title="認識您的醫師"
-        desc="每位醫師都會花時間聽您說話。看診前多了解一點，溝通時就更有效率。"
-      />
+    <section className="r-section" style={{ background: 'var(--cream-2)' }}>
+      <div className="container" style={{ padding: '80px 24px' }}>
+        <SectionHeader
+          eyebrow="DOCTORS · 醫師團隊"
+          title="認識您的醫師"
+          desc="每位醫師都會花時間聽您說話。看診前多了解一點，溝通時就更有效率。"
+        />
 
-      <div className="r-docs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
-        {doctors.map(d => (
-          <div key={d.id || d.name} style={{
-            background: '#fff', borderRadius: 18, overflow: 'hidden',
-            border: '1px solid var(--border-soft)',
-          }}>
-            {/* Portrait placeholder */}
-            <div style={{
-              aspectRatio: '1/1', background: `linear-gradient(155deg, ${d.hue}22 0%, ${d.hue}05 100%)`,
-              position: 'relative', display: 'grid', placeItems: 'center',
+        <div className="r-docs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
+          {doctors.map(d => (
+            <div key={d.id || d.name} style={{
+              background: '#fff', borderRadius: 18, overflow: 'hidden',
+              border: '1px solid var(--border-soft)',
             }}>
+              {/* Portrait */}
               <div style={{
-                width: '62%', aspectRatio: '1', borderRadius: '50%',
-                background: `linear-gradient(160deg, ${d.hue} 0%, ${shade(d.hue)} 100%)`,
-                display: 'grid', placeItems: 'center', color: '#fff',
-                boxShadow: `0 20px 40px -20px ${d.hue}88`,
+                aspectRatio: '1/1', background: `linear-gradient(155deg, ${d.hue}22 0%, ${d.hue}05 100%)`,
+                position: 'relative', display: 'grid', placeItems: 'center',
+                overflow: 'hidden',
               }}>
-                {/* SVG doctor illustration scaled to 72×72 inside circle */}
-                <div style={{ width: 72, height: 72 }}>
-                  <Illo.Doctor tone="rgba(255,255,255,0.85)"/>
+                {d.photo
+                  ? <img src={d.photo} alt={`${d.name} 醫師`} style={{
+                      width: '100%', height: '100%',
+                      objectFit: 'cover', objectPosition: 'top center',
+                    }}/>
+                  : <div style={{
+                      width: '62%', aspectRatio: '1', borderRadius: '50%',
+                      background: `linear-gradient(160deg, ${d.hue} 0%, ${shade(d.hue)} 100%)`,
+                      display: 'grid', placeItems: 'center', color: '#fff',
+                      boxShadow: `0 20px 40px -20px ${d.hue}88`,
+                    }}>
+                      <div style={{ width: 72, height: 72 }}>
+                        <Illo.Doctor tone="rgba(255,255,255,0.85)"/>
+                      </div>
+                    </div>
+                }
+              </div>
+              <div style={{ padding: '18px 20px 22px' }}>
+                <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--fg-heading)' }}>
+                  {d.name} <span style={{ fontWeight: 400, color: 'var(--muted)', fontSize: 14 }}>醫師</span>
+                </div>
+                <div style={{ fontSize: 12, color: 'var(--teal)', fontWeight: 600, marginTop: 4, lineHeight: 1.6 }}>
+                  {d.title?.split(' · ').map((part, i) => <div key={i}>{part}</div>)}
+                </div>
+                <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.55, margin: '12px 0 0' }}>{d.bio}</p>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 12 }}>
+                  {(d.expertise || []).map(x => (
+                    <span key={x} style={{
+                      fontSize: 11, color: 'var(--muted)', background: 'var(--cream-2)',
+                      padding: '3px 8px', borderRadius: 4,
+                    }}>{x}</span>
+                  ))}
                 </div>
               </div>
-              <span style={{
-                position: 'absolute', top: 14, left: 14,
-                background: '#fff', color: d.hue, fontWeight: 600,
-                fontSize: 11, padding: '4px 10px', borderRadius: 4,
-                letterSpacing: '0.05em',
-              }}>{d.title?.split('‧')[0]?.trim() || '醫師'}</span>
             </div>
-            <div style={{ padding: '18px 20px 22px' }}>
-              <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--fg-heading)' }}>
-                {d.name} <span style={{ fontWeight: 400, color: 'var(--muted)', fontSize: 14 }}>醫師</span>
-              </div>
-              <div style={{ fontSize: 12, color: 'var(--teal)', fontWeight: 600, marginTop: 4 }}>{d.title}</div>
-              <p style={{ fontSize: 13, color: 'var(--muted)', lineHeight: 1.55, margin: '12px 0 0' }}>{d.bio}</p>
-              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 5, marginTop: 12 }}>
-                {(d.expertise || []).map(x => (
-                  <span key={x} style={{
-                    fontSize: 11, color: 'var(--muted)', background: 'var(--cream-2)',
-                    padding: '3px 8px', borderRadius: 4,
-                  }}>{x}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -360,7 +368,8 @@ function FaqSection() {
   const lineUrl = window.CONFIG?.contact?.lineUrl || '';
 
   return (
-    <section className="r-section container" style={{ padding: '80px 24px', background: 'var(--cream-1)' }}>
+    <section id="faq" className="r-section" style={{ background: '#fff' }}>
+      <div className="container" style={{ padding: '80px 24px' }}>
       <div className="r-faq-grid" style={{
         display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 60, alignItems: 'flex-start',
       }}>
@@ -375,17 +384,28 @@ function FaqSection() {
           }}>看診前，<br/>先把疑問解決</h2>
           <p style={{ color: 'var(--muted)', fontSize: 15, marginTop: 16, lineHeight: 1.7 }}>
             整理自櫃台與門診最常被問到的問題。
-            若您的問題不在這裡，歡迎透過 LINE 官方帳號直接詢問。
+            {lineUrl
+              ? '若您的問題不在這裡，歡迎透過 LINE 官方帳號直接詢問。'
+              : '若有其他疑問，歡迎來電或親洽診所詢問。'}
           </p>
           {lineUrl && (
-            <a href={lineUrl} target="_blank" rel="noopener noreferrer" style={{
-              marginTop: 24, display: 'inline-flex', alignItems: 'center', gap: 8,
-              padding: '12px 20px', background: '#06C755', color: '#fff',
-              borderRadius: 999, textDecoration: 'none', fontWeight: 600, fontSize: 14,
-            }}>
-              <Icon.Line style={{ width: 18, height: 18 }}/>
-              加入 LINE 詢問
-            </a>
+            <div style={{ marginTop: 24 }}>
+              <a href={lineUrl} target="_blank" rel="noopener noreferrer" style={{
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+                padding: '12px 20px', background: '#06C755', color: '#fff',
+                borderRadius: 999, textDecoration: 'none', fontWeight: 600, fontSize: 14,
+              }}>
+                <Icon.Line style={{ width: 18, height: 18 }}/>
+                加入 LINE 詢問
+              </a>
+              {window.CONFIG?.contact?.lineQrCode && (
+                <img
+                  src={window.CONFIG.contact.lineQrCode}
+                  alt="LINE QR Code"
+                  style={{ display: 'block', marginTop: 16, width: 120, height: 120, borderRadius: 8 }}
+                />
+              )}
+            </div>
           )}
         </div>
 
@@ -426,6 +446,7 @@ function FaqSection() {
           })}
         </div>
       </div>
+      </div>
     </section>
   );
 }
@@ -445,8 +466,7 @@ function InfoSection() {
   const contact = window.CONFIG?.contact || {};
   const hasAddress = contact.address && contact.address !== '';
   const hasPhone = contact.phone && contact.phone !== '';
-  const hasEmail = contact.email && contact.email !== '';
-  const hasAny = hasAddress || hasPhone || hasEmail;
+  const lineUrl = contact.lineUrl || '';
 
   return (
     <section
@@ -472,7 +492,48 @@ function InfoSection() {
         padding: '0 24px', display: 'grid', gridTemplateColumns: '1fr 1.1fr', gap: 60,
         position: 'relative', alignItems: 'flex-start',
       }}>
-        {/* Schedule table (left) */}
+        {/* Contact block (left) */}
+        <div>
+          <div style={{
+            fontSize: 12, color: 'var(--gold)', fontWeight: 600, letterSpacing: '0.18em',
+            marginBottom: 8, textTransform: 'uppercase',
+          }}>INFO · 門診資訊</div>
+          <h2 style={{
+            fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 700,
+            letterSpacing: '-0.01em', lineHeight: 1.2, margin: 0, color: 'var(--fg-heading)',
+          }}>就在您家巷口，<br/>看診更自在</h2>
+
+          <div style={{ marginTop: 32, display: 'grid', gap: 20 }}>
+            {hasAddress && (
+              <InfoRow icon={Icon.Pin} label="診所地址" value={contact.address} sub={contact.addressSub || ''}/>
+            )}
+            {hasPhone && (
+              <InfoRow icon={Icon.Phone} label="聯絡電話" value={contact.phone} sub={contact.phoneSub || ''}/>
+            )}
+            {lineUrl && (
+              <InfoRow icon={Icon.Line} label="線上預約" value="LINE 官方帳號" sub="亦可網站預約"/>
+            )}
+          </div>
+
+          <div style={{ marginTop: 36, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+            {lineUrl && (
+              <a href={lineUrl} target="_blank" rel="noopener noreferrer" style={{
+                padding: '12px 22px', background: 'var(--teal)', color: '#fff', borderRadius: 999,
+                textDecoration: 'none', fontWeight: 600, fontSize: 14,
+                display: 'inline-flex', alignItems: 'center', gap: 8,
+              }}>
+                <Icon.Line style={{ width: 16, height: 16 }}/> 立即預約
+              </a>
+            )}
+            <a href="#/contact" style={{
+              padding: '12px 22px', background: '#fff', color: 'var(--fg-heading)', borderRadius: 999,
+              textDecoration: 'none', fontWeight: 600, fontSize: 14,
+              border: '1px solid var(--border-soft)',
+            }}>交通指引</a>
+          </div>
+        </div>
+
+        {/* Schedule table (right) */}
         <div style={{
           background: '#fff', borderRadius: 20, padding: 28,
           border: '1px solid var(--border-soft)', boxShadow: 'var(--shadow-soft)',
@@ -480,9 +541,9 @@ function InfoSection() {
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
             <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--fg-heading)' }}>每週門診時段</div>
             <span style={{
-              fontSize: 11, color: 'var(--gold)', border: '1px solid var(--gold)',
+              fontSize: 11, color: '#b38a1a', border: '1px solid #e5cf7c',
               padding: '3px 10px', borderRadius: 4, letterSpacing: '0.08em', fontWeight: 600,
-              background: 'var(--peach-light)',
+              background: '#fdf4d9',
             }}>本週</span>
           </div>
           <div style={{
@@ -494,67 +555,21 @@ function InfoSection() {
             <div style={hdrCell}>下午診</div>
             <div style={hdrCell}>晚診</div>
             {hours.map((h) => {
-              const mutedColor = 'var(--muted-3)';
-              const normalColor = 'var(--muted)';
               const isMuted = (v) => v === '休診' || v === 'TODO';
               return (
                 <React.Fragment key={h.day}>
                   <div style={{ ...cell, fontWeight: 600, color: 'var(--fg-heading)' }}>{h.day}</div>
-                  <div style={{ ...cell, color: isMuted(h.am) ? mutedColor : normalColor }}>{h.am}</div>
-                  <div style={{ ...cell, color: isMuted(h.pm) ? mutedColor : normalColor }}>{h.pm}</div>
-                  <div style={{ ...cell, color: isMuted(h.ev) ? mutedColor : normalColor }}>{h.ev}</div>
+                  <div style={{ ...cell, color: isMuted(h.am) ? 'var(--muted-3)' : 'var(--muted)' }}>{h.am}</div>
+                  <div style={{
+                    ...cell,
+                    color: h.pmSpecial ? '#b38a1a' : isMuted(h.pm) ? 'var(--muted-3)' : 'var(--muted)',
+                    fontWeight: h.pmSpecial ? 600 : undefined,
+                  }}>{h.pm}</div>
+                  <div style={{ ...cell, color: isMuted(h.ev) ? 'var(--muted-3)' : 'var(--muted)' }}>{h.ev}</div>
                 </React.Fragment>
               );
             })}
           </div>
-        </div>
-
-        {/* Contact block (right) */}
-        <div>
-          <div style={{
-            fontSize: 12, color: 'var(--gold)', fontWeight: 600, letterSpacing: '0.18em',
-            marginBottom: 8, textTransform: 'uppercase',
-          }}>INFO · 門診資訊</div>
-          <h2 style={{
-            fontSize: 'clamp(28px, 3vw, 36px)', fontWeight: 700,
-            letterSpacing: '-0.01em', lineHeight: 1.2, margin: 0, color: 'var(--fg-heading)',
-          }}>就在您家附近，<br/>看診更自在</h2>
-
-          <div style={{ marginTop: 32, display: 'grid', gap: 20 }}>
-            {!hasAny && (
-              <p style={{ color: 'var(--muted)', fontStyle: 'italic', fontSize: 14 }}>
-                TODO: 請於 js/content.js 的 CONFIG.contact 填入聯絡資訊
-              </p>
-            )}
-            {hasAddress && (
-              <InfoRow icon={Icon.Pin} label="診所地址" value={contact.address} sub=""/>
-            )}
-            {hasPhone && (
-              <InfoRow icon={Icon.Phone} label="聯絡電話" value={contact.phone} sub=""/>
-            )}
-            {hasEmail && (
-              <InfoRow icon={Icon.Calendar} label="電子信箱" value={contact.email} sub=""/>
-            )}
-          </div>
-
-          {(contact.lineUrl || contact.address) && (
-            <div style={{ marginTop: 36, display: 'flex', gap: 10, flexWrap: 'wrap' }}>
-              {contact.lineUrl && (
-                <a href={contact.lineUrl} target="_blank" rel="noopener noreferrer" style={{
-                  padding: '12px 22px', background: 'var(--teal)', color: '#fff', borderRadius: 999,
-                  textDecoration: 'none', fontWeight: 600, fontSize: 14,
-                  display: 'inline-flex', alignItems: 'center', gap: 8,
-                }}>
-                  <Icon.Line style={{ width: 16, height: 16 }}/> LINE 詢問
-                </a>
-              )}
-              <a href="#/contact" style={{
-                padding: '12px 22px', background: '#fff', color: 'var(--fg-heading)', borderRadius: 999,
-                textDecoration: 'none', fontWeight: 600, fontSize: 14,
-                border: '1px solid var(--border-soft)',
-              }}>聯絡我們</a>
-            </div>
-          )}
         </div>
       </div>
     </section>
@@ -566,8 +581,8 @@ function InfoRow({ icon: I, label, value, sub }) {
     <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
       <div style={{
         width: 44, height: 44, borderRadius: 12, flexShrink: 0,
-        background: 'var(--peach-light)', color: 'var(--gold)',
-        display: 'grid', placeItems: 'center', border: '1px solid var(--border-soft)',
+        background: '#fff8ec', color: '#b38a1a',
+        display: 'grid', placeItems: 'center', border: '1px solid #f0e5c4',
       }}>
         <I style={{ width: 20, height: 20 }}/>
       </div>
@@ -670,6 +685,18 @@ function Footer({ ctx }) {
 
 // ───────────────────────── HomePage wrapper ─────────────────────────
 function HomePage({ ctx }) {
+  React.useEffect(() => {
+    const t = window.__scrollTarget;
+    if (!t) return;
+    window.__scrollTarget = null;
+    setTimeout(() => {
+      const el = document.getElementById(t);
+      if (!el) return;
+      const navH = document.querySelector('header')?.offsetHeight || 0;
+      window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - navH - 16, behavior: 'smooth' });
+    }, 80);
+  }, []);
+
   return (
     <main>
       <HeroBig ctx={ctx}/>

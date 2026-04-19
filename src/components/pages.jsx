@@ -274,7 +274,9 @@ function DoctorsPage() {
                 <div style={{ fontSize: 22, fontWeight: 700, color: 'var(--fg-heading)' }}>
                   {d.name} <span style={{ fontSize: 14, fontWeight: 400, color: 'var(--muted)' }}>醫師</span>
                 </div>
-                <div style={{ fontSize: 13, color: d.hue, fontWeight: 600, marginTop: 4 }}>{d.title}</div>
+                <div style={{ fontSize: 13, color: d.hue, fontWeight: 600, marginTop: 4, lineHeight: 1.6 }}>
+                  {d.title?.split(' · ').map((part, i) => <div key={i}>{part}</div>)}
+                </div>
               </div>
 
               {/* Photo area */}
@@ -286,13 +288,13 @@ function DoctorsPage() {
               }}>
                 {d.photo
                   ? <img src={d.photo} alt={`${d.name} 醫師`} style={{
-                      width: 120, height: 120, borderRadius: '50%',
+                      width: 240, height: 240, borderRadius: '50%',
                       objectFit: 'cover', objectPosition: 'top',
                       border: `3px solid ${d.hue}44`,
                       boxShadow: `0 8px 24px -8px ${d.hue}66`,
                     }}/>
                   : <div style={{
-                      width: 120, height: 120, borderRadius: '50%',
+                      width: 240, height: 240, borderRadius: '50%',
                       background: `linear-gradient(160deg, ${d.hue} 0%, ${d.hue}bb 100%)`,
                       display: 'grid', placeItems: 'center',
                       boxShadow: `0 8px 24px -8px ${d.hue}66`,

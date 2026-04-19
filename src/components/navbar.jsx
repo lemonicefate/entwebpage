@@ -4,9 +4,47 @@ function TopStrip() {
   const phone   = window.CONFIG?.contact?.phone;
   const address = window.CONFIG?.contact?.address;
   const lineUrl = window.CONFIG?.contact?.lineUrl;
+
+  const todayStatus = React.useMemo(() => {
+    const hours = window.HOURS || [];
+    const dayNames = ['星期日','星期一','星期二','星期三','星期四','星期五','星期六'];
+
+    // GMT+8 current time
+    const gmt8 = new Date(Date.now() + (8 * 60 + new Date().getTimezoneOffset()) * 60000);
+    const nowMin = gmt8.getHours() * 60 + gmt8.getMinutes();
+    const todayName = dayNames[gmt8.getDay()];
+
+    const entry = hours.find(h => h.day === todayName);
+    if (!entry) return null;
+    if ([entry.am, entry.pm, entry.ev].every(v => !v || v === 'TODO')) return null;
+
+    const parseMin = s => { const [h, m] = s.trim().split(':').map(Number); return h * 60 + m; };
+    const isValid = v => v && v !== '休診' && v !== 'TODO';
+
+    const sessions = [
+      { label: '上午診', time: entry.am },
+      { label: '下午診', time: entry.pm },
+      { label: '晚診',   time: entry.ev },
+    ];
+
+    let hasAnySession = false;
+    for (const s of sessions) {
+      if (!isValid(s.time)) continue;
+      const parts = s.time.split('–');
+      if (parts.length < 2) continue;
+      hasAnySession = true;
+      if (nowMin >= parseMin(parts[0]) && nowMin < parseMin(parts[1])) {
+        return { open: true, label: s.label };
+      }
+    }
+    // has sessions today but not currently in one vs. full day off
+    return { open: false, allDay: !hasAnySession };
+  }, []);
+
   return (
     <div className="r-nav-topstrip" style={{
-      background: 'linear-gradient(90deg, #f0f7f4 0%, #e4ede9 100%)', color: '#5a7370', fontSize: 13, letterSpacing: 0.2, borderBottom: '1px solid var(--border-soft)',
+      background: 'linear-gradient(90deg, #f0f7f4 0%, #e4ede9 100%)', color: '#5a7370',
+      fontSize: 13, letterSpacing: 0.2, borderBottom: '1px solid var(--border-soft)',
     }}>
       <div className="container" style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -25,9 +63,18 @@ function TopStrip() {
               {address}
             </span>
           )}
+          {todayStatus && (
+            <span style={{ display: 'inline-flex', gap: 6, alignItems: 'center', color: todayStatus.open ? 'var(--gold)' : '#5a7370' }}>
+              <span style={{
+                width: 6, height: 6, borderRadius: 99, flexShrink: 0,
+                background: todayStatus.open ? '#4fb39a' : '#aaa',
+                boxShadow: todayStatus.open ? '0 0 0 4px rgba(79,179,154,0.25)' : 'none',
+              }}/>
+              {todayStatus.open ? `今日門診中 · ${todayStatus.label}` : todayStatus.allDay ? '今日休診' : '休診中'}
+            </span>
+          )}
         </div>
         <div style={{ display: 'flex', gap: 18, alignItems: 'center' }}>
-          <a href="#" style={linkStyle}>院所公告</a>
           {lineUrl && (
             <a href={lineUrl} target="_blank" rel="noreferrer" style={linkStyle}>LINE 官方帳號</a>
           )}
@@ -41,9 +88,9 @@ const linkStyle = { color: '#5a7370', textDecoration: 'none', opacity: 0.9 };
 const NAV = [
   { key: 'edu',     label: '衛教專區', mega: true, target: '#/' },
   { key: 'doctors', label: '醫師團隊', target: '#/doctors' },
-  { key: 'info',    label: '門診資訊', target: '#/#info' },
-  { key: 'faq',     label: '常見問答', target: '#/#faq' },
-  { key: 'contact', label: '聯絡我們', target: '#/contact' },
+  { key: 'info',    label: '門診資訊', scrollTo: 'info' },
+  { key: 'faq',     label: '常見問答', scrollTo: 'faq' },
+  { key: 'contact', label: '聯絡我們', scrollTo: 'info' },
 ];
 
 function Navbar({ ctx }) {
@@ -53,6 +100,16 @@ function Navbar({ ctx }) {
   const [openMega, setOpenMega] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
   const [drawerOpen, setDrawerOpen] = React.useState(false);
+  const closeTimer = React.useRef(null);
+
+  const scheduleMegaClose = () => {
+    closeTimer.current = setTimeout(() => setOpenMega(false), 150);
+  };
+  const cancelMegaClose = () => {
+    if (closeTimer.current) { clearTimeout(closeTimer.current); closeTimer.current = null; }
+  };
+
+  React.useEffect(() => () => { if (closeTimer.current) clearTimeout(closeTimer.current); }, []);
 
   React.useEffect(() => {
     const on = () => setScrolled(window.scrollY > 8);
@@ -64,6 +121,17 @@ function Navbar({ ctx }) {
     document.body.style.overflow = drawerOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [drawerOpen]);
+
+  const handleScrollNav = (e, scrollTo) => {
+    e.preventDefault();
+    setDrawerOpen(false);
+    if (ctx.hashState.route === 'home') {
+      scrollToId(scrollTo);
+    } else {
+      window.__scrollTarget = scrollTo;
+      window.location.hash = '#/';
+    }
+  };
 
   return (
     <header style={{ position: 'sticky', top: 0, zIndex: 50 }}>
@@ -93,13 +161,16 @@ function Navbar({ ctx }) {
 
           {/* Primary nav — hides on mobile */}
           <nav className="r-nav-primary" style={{ display: 'flex', justifyContent: 'center', gap: 4 }}
-               onMouseLeave={() => setOpenMega(false)}>
+               onMouseLeave={scheduleMegaClose}>
             {NAV.map(item => {
               const active = current === item.key;
               return (
-                <a key={item.key} href={item.target}
-                  onMouseEnter={() => setOpenMega(item.mega ? item.key : false)}
-                  onClick={() => { if (!item.mega) setOpenMega(false); }}
+                <a key={item.key} href={item.scrollTo ? '#/' : item.target}
+                  onMouseEnter={() => { cancelMegaClose(); setOpenMega(item.mega ? item.key : false); }}
+                  onClick={(e) => {
+                    if (item.scrollTo) { handleScrollNav(e, item.scrollTo); return; }
+                    if (!item.mega) setOpenMega(false);
+                  }}
                   style={{
                     padding: '10px 16px', borderRadius: 8, textDecoration: 'none',
                     color: active ? 'var(--teal)' : 'var(--fg-heading)', fontWeight: 600,
@@ -165,7 +236,7 @@ function Navbar({ ctx }) {
 
         {/* Mega menu */}
         {openMega === 'edu' && (
-          <div onMouseEnter={() => setOpenMega('edu')} onMouseLeave={() => setOpenMega(false)}
+          <div onMouseEnter={cancelMegaClose} onMouseLeave={scheduleMegaClose}
                style={{
             position: 'absolute', left: 0, right: 0, top: '100%',
             background: '#ffffff', borderTop: '1px solid var(--border-soft)',
@@ -221,6 +292,23 @@ function Navbar({ ctx }) {
             </button>
           </div>
           <nav style={{ padding: 12 }}>
+            {/* Main nav items */}
+            {NAV.filter(item => !item.mega).map(item => (
+              <a key={item.key}
+                 href={item.scrollTo ? '#/' : item.target}
+                 onClick={(e) => {
+                   if (item.scrollTo) { handleScrollNav(e, item.scrollTo); return; }
+                   setDrawerOpen(false);
+                 }}
+                 style={{
+                   display: 'block', padding: '14px 16px', borderRadius: 10, textDecoration: 'none',
+                   color: 'var(--fg-heading)', fontWeight: 600, fontSize: 16,
+                 }}>
+                {item.label}
+              </a>
+            ))}
+            <div style={{ margin: '8px 16px', borderTop: '1px solid var(--border-soft)' }}/>
+            {/* 衛教分類 */}
             {(window.CATEGORIES || []).map(c => {
               const count = (c.topics || []).length;
               return (
@@ -239,6 +327,14 @@ function Navbar({ ctx }) {
       </div>
     </header>
   );
+}
+
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  const navH = document.querySelector('header')?.offsetHeight || 0;
+  const top = el.getBoundingClientRect().top + window.scrollY - navH - 16;
+  window.scrollTo({ top, behavior: 'smooth' });
 }
 
 const iconBtn = {
