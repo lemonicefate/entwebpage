@@ -23,7 +23,7 @@ function HeroBig({ ctx }) {
 
   const secondaryBtn = {
     padding: '14px 24px',
-    background: '#fff',
+    background: 'var(--surface)',
     color: 'var(--fg-heading)',
     borderRadius: 999,
     textDecoration: 'none',
@@ -41,7 +41,7 @@ function HeroBig({ ctx }) {
   return (
     <section
       style={{
-        background: '#fff8ec',
+        background: 'var(--surface-warm)',
         position: 'relative',
         overflow: 'hidden',
       }}
@@ -56,7 +56,7 @@ function HeroBig({ ctx }) {
           width: 520,
           height: 520,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, #c7e8e1 0%, rgba(199,232,225,0) 70%)',
+          background: 'var(--orb-teal)',
         }}
       />
       <div
@@ -68,7 +68,7 @@ function HeroBig({ ctx }) {
           width: 360,
           height: 360,
           borderRadius: '50%',
-          background: 'radial-gradient(circle, #fde2c8 0%, rgba(253,226,200,0) 70%)',
+          background: 'var(--orb-peach)',
         }}
       />
 
@@ -92,7 +92,7 @@ function HeroBig({ ctx }) {
               gap: 8,
               padding: '6px 14px',
               borderRadius: 999,
-              background: '#ffffff',
+              background: 'var(--surface)',
               border: '1px solid var(--cream-4)',
               fontSize: 13,
               color: 'var(--teal)',
@@ -229,7 +229,7 @@ function HeroIllustration() {
         style={{
           ...cardBase,
           left: '4%', top: '8%', width: '62%', aspectRatio: '1/1.1',
-          background: '#fff', padding: 22,
+          background: 'var(--surface)', padding: 22,
           boxShadow: 'var(--shadow-lift)', border: '1px solid var(--border-soft)',
         }}
       >
@@ -313,7 +313,7 @@ function HeroIllustration() {
         className="hero-card-pill"
         style={{
           position: 'absolute', left: '-6%', bottom: '18%',
-          background: '#fff', borderRadius: 14, padding: '10px 14px',
+          background: 'var(--surface)', borderRadius: 14, padding: '10px 14px',
           boxShadow: 'var(--shadow-lift)', display: 'flex', alignItems: 'center',
           gap: 10, fontSize: 13, border: '1px solid var(--border-soft)',
         }}

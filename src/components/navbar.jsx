@@ -43,8 +43,8 @@ function TopStrip() {
 
   return (
     <div className="r-nav-topstrip" style={{
-      background: 'linear-gradient(90deg, #f0f7f4 0%, #e4ede9 100%)', color: '#5a7370',
-      fontSize: 13, letterSpacing: 0.2, borderBottom: '1px solid var(--border-soft)',
+      background: 'var(--topstrip-grad)', color: 'var(--topstrip-fg)',
+      fontSize: 13, letterSpacing: 0.2, borderBottom: '1px solid var(--topstrip-divider)',
     }}>
       <div className="container" style={{
         display: 'flex', justifyContent: 'space-between', alignItems: 'center',
@@ -64,11 +64,11 @@ function TopStrip() {
             </span>
           )}
           {todayStatus && (
-            <span style={{ display: 'inline-flex', gap: 6, alignItems: 'center', color: todayStatus.open ? 'var(--gold)' : '#5a7370' }}>
+            <span style={{ display: 'inline-flex', gap: 6, alignItems: 'center', color: todayStatus.open ? 'var(--gold)' : 'var(--topstrip-fg)' }}>
               <span style={{
                 width: 6, height: 6, borderRadius: 99, flexShrink: 0,
-                background: todayStatus.open ? '#4fb39a' : '#aaa',
-                boxShadow: todayStatus.open ? '0 0 0 4px rgba(79,179,154,0.25)' : 'none',
+                background: todayStatus.open ? 'var(--accent-on)' : 'var(--accent-off)',
+                boxShadow: todayStatus.open ? '0 0 0 4px rgba(109,208,180,0.22)' : 'none',
               }}/>
               {todayStatus.open ? `今日門診中 · ${todayStatus.label}` : todayStatus.allDay ? '今日休診' : '休診中'}
             </span>
@@ -83,7 +83,7 @@ function TopStrip() {
     </div>
   );
 }
-const linkStyle = { color: '#5a7370', textDecoration: 'none', opacity: 0.9 };
+const linkStyle = { color: 'var(--topstrip-fg)', textDecoration: 'none', opacity: 0.9 };
 
 const NAV = [
   { key: 'edu',     label: '衛教專區', mega: true, target: '#/' },
@@ -137,7 +137,7 @@ function Navbar({ ctx }) {
     <header style={{ position: 'sticky', top: 0, zIndex: 50 }}>
       <TopStrip/>
       <div style={{
-        background: '#ffffffee', backdropFilter: 'saturate(140%) blur(8px)',
+        background: 'var(--surface-translucent)', backdropFilter: 'saturate(140%) blur(8px)',
         borderBottom: scrolled ? '1px solid var(--border-soft)' : '1px solid transparent',
         transition: 'border-color .2s',
       }}>
@@ -239,8 +239,8 @@ function Navbar({ ctx }) {
           <div onMouseEnter={cancelMegaClose} onMouseLeave={scheduleMegaClose}
                style={{
             position: 'absolute', left: 0, right: 0, top: '100%',
-            background: '#ffffff', borderTop: '1px solid var(--border-soft)',
-            boxShadow: '0 20px 40px -20px rgba(15,42,66,0.18)',
+            background: 'var(--surface-elevated)', borderTop: '1px solid var(--border-soft)',
+            boxShadow: 'var(--shadow-lift)',
           }}>
             <div className="container" style={{ padding: '28px 24px' }}>
               <div className="r-mega-grid" style={{

@@ -46,6 +46,25 @@
   --border-soft:   #eaf2ef;
   --border-medium: #d6cfc6;
 
+  /* Surfaces (used by inline-styled components — must be theme-aware) */
+  --surface:             #ffffff;
+  --surface-elevated:    #ffffff;
+  --surface-warm:        #fff8ec;
+  --surface-translucent: rgba(255,255,255,0.93);
+
+  /* Topstrip (the slim utility bar above the navbar) */
+  --topstrip-grad:    linear-gradient(90deg, #f0f7f4 0%, #e4ede9 100%);
+  --topstrip-fg:      #5a7370;
+  --topstrip-divider: #eaf2ef;
+
+  /* Decorative hero orbs */
+  --orb-teal:  radial-gradient(circle, #c7e8e1 0%, rgba(199,232,225,0) 70%);
+  --orb-peach: radial-gradient(circle, #fde2c8 0%, rgba(253,226,200,0) 70%);
+
+  /* Open-status accent dots */
+  --accent-on:  #4fb39a;
+  --accent-off: #aaa;
+
   /* Semantic */
   --success-bg:  #e7f5ef;
   --success-fg:  #1a7a4a;
@@ -67,18 +86,50 @@
 
 /* ─── 2. Dark mode overrides ─────────────────────────────────── */
 [data-theme="dark"] {
-  --bg:            #17221f;
-  --cream-1:       #1e2b27;
-  --cream-2:       #243330;
-  --cream-3:       #2d3d39;
+  --bg:            #14201d;
+  --cream-1:       #1a2823;
+  --cream-2:       #1f2d28;
+  --cream-3:       #243330;
   --cream-4:       #2a3a36;
-  --fg:            #e8f0ec;
-  --fg-heading:    #f5faf8;
-  --muted:         #9dccc3;
-  --muted-2:       #8aa3a0;
-  --muted-3:       #6d8481;
-  --border-soft:   #2d3d39;
-  --border-medium: #3d4d49;
+  --fg:            #d8e6e0;
+  --fg-heading:    #eef6f1;
+  --muted:         #a6c8be;
+  --muted-2:       #8aaaa3;
+  --muted-3:       #6f8d86;
+  --muted-4:       #b3d1c8;
+  --border-soft:   #263531;
+  --border-medium: #36464a;
+
+  /* Surfaces — warm-lifted, not flat black */
+  --surface:             #1e2b27;
+  --surface-elevated:    #243330;
+  --surface-warm:        #1f2c27;
+  --surface-translucent: rgba(20,32,29,0.86);
+
+  /* Topstrip — moss-to-shadow, mint text, soft divider */
+  --topstrip-grad:    linear-gradient(90deg, #1a2823 0%, #243330 100%);
+  --topstrip-fg:      #a6c8be;
+  --topstrip-divider: #263531;
+
+  /* Glow-on-dark orbs (subtler, additive) */
+  --orb-teal:  radial-gradient(circle, rgba(74,158,148,0.22) 0%, rgba(74,158,148,0) 70%);
+  --orb-peach: radial-gradient(circle, rgba(232,150,97,0.18) 0%, rgba(232,150,97,0) 70%);
+
+  --accent-on:  #6dd0b4;
+  --accent-off: #5a7370;
+
+  /* Semantic tones — re-tuned for dark */
+  --success-bg: #1c3a2c;
+  --success-fg: #6fc99c;
+  --warn-bg:    #2e2614;
+  --warn-fg:    #f0c963;
+  --danger-bg:  #3a201d;
+  --danger-fg:  #f29c87;
+
+  /* Shadows on dark — deeper, less spread */
+  --shadow-soft: 0 10px 22px -14px rgba(0,0,0,0.55);
+  --shadow-lift: 0 16px 30px -20px rgba(0,0,0,0.6);
+  --shadow-hero: 0 24px 44px -22px rgba(229,150,106,0.42);
 }
 
 /* ─── 3. Senior mode ─────────────────────────────────────────── */

@@ -41,7 +41,7 @@ function FeaturedSection() {
   const rest = featured.slice(1);
 
   return (
-    <section className="r-section" style={{ background: '#fff' }}>
+    <section className="r-section" style={{ background: 'var(--surface)' }}>
       <div className="container" style={{ padding: '80px 24px' }}>
         <SectionHeader
           eyebrow="FEATURED · 精選主題"
@@ -123,7 +123,7 @@ function FeatureCardMedium({ article }) {
         minHeight: 380, transition: 'transform .15s, box-shadow .15s',
       }}>
       <div style={{
-        width: 56, height: 56, borderRadius: 14, background: '#fff',
+        width: 56, height: 56, borderRadius: 14, background: 'var(--surface)',
         display: 'grid', placeItems: 'center', marginBottom: 22,
         border: '1px solid var(--border-soft)',
       }}>
@@ -176,7 +176,7 @@ function CategoriesSection() {
             <a key={c.id} href={`#/${c.id}`}
               className="topic-card r-cat-tile"
               style={{
-                background: '#fff', borderRadius: 18, padding: 24,
+                background: 'var(--surface)', borderRadius: 18, padding: 24,
                 border: '1px solid var(--border-soft)', textDecoration: 'none',
                 color: 'inherit', position: 'relative', overflow: 'hidden',
                 transition: 'transform .2s, box-shadow .2s',
@@ -228,7 +228,7 @@ function LatestSection() {
   const categories = window.CATEGORIES || [];
 
   return (
-    <section className="r-section" style={{ background: '#fff' }}>
+    <section className="r-section" style={{ background: 'var(--surface)' }}>
       <div className="container" style={{ padding: '80px 24px' }}>
         <SectionHeader
           eyebrow="LATEST · 最新文章"
@@ -304,7 +304,7 @@ function DoctorsSection() {
         <div className="r-docs-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 18 }}>
           {doctors.map(d => (
             <div key={d.id || d.name} style={{
-              background: '#fff', borderRadius: 18, overflow: 'hidden',
+              background: 'var(--surface)', borderRadius: 18, overflow: 'hidden',
               border: '1px solid var(--border-soft)',
             }}>
               {/* Portrait */}
@@ -368,7 +368,7 @@ function FaqSection() {
   const lineUrl = window.CONFIG?.contact?.lineUrl || '';
 
   return (
-    <section id="faq" className="r-section" style={{ background: '#fff' }}>
+    <section id="faq" className="r-section" style={{ background: 'var(--surface)' }}>
       <div className="container" style={{ padding: '80px 24px' }}>
       <div className="r-faq-grid" style={{
         display: 'grid', gridTemplateColumns: '1fr 1.3fr', gap: 60, alignItems: 'flex-start',
@@ -526,7 +526,7 @@ function InfoSection() {
               </a>
             )}
             <a href="#/contact" style={{
-              padding: '12px 22px', background: '#fff', color: 'var(--fg-heading)', borderRadius: 999,
+              padding: '12px 22px', background: 'var(--surface)', color: 'var(--fg-heading)', borderRadius: 999,
               textDecoration: 'none', fontWeight: 600, fontSize: 14,
               border: '1px solid var(--border-soft)',
             }}>交通指引</a>
@@ -535,15 +535,15 @@ function InfoSection() {
 
         {/* Schedule table (right) */}
         <div style={{
-          background: '#fff', borderRadius: 20, padding: 28,
+          background: 'var(--surface)', borderRadius: 20, padding: 28,
           border: '1px solid var(--border-soft)', boxShadow: 'var(--shadow-soft)',
         }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
             <div style={{ fontSize: 16, fontWeight: 600, color: 'var(--fg-heading)' }}>每週門診時段</div>
             <span style={{
-              fontSize: 11, color: '#b38a1a', border: '1px solid #e5cf7c',
+              fontSize: 11, color: 'var(--warn-fg)', border: '1px solid color-mix(in srgb, var(--warn-fg) 35%, transparent)',
               padding: '3px 10px', borderRadius: 4, letterSpacing: '0.08em', fontWeight: 600,
-              background: '#fdf4d9',
+              background: 'var(--warn-bg)',
             }}>本週</span>
           </div>
           <div style={{
@@ -562,7 +562,7 @@ function InfoSection() {
                   <div style={{ ...cell, color: isMuted(h.am) ? 'var(--muted-3)' : 'var(--muted)' }}>{h.am}</div>
                   <div style={{
                     ...cell,
-                    color: h.pmSpecial ? '#b38a1a' : isMuted(h.pm) ? 'var(--muted-3)' : 'var(--muted)',
+                    color: h.pmSpecial ? 'var(--warn-fg)' : isMuted(h.pm) ? 'var(--muted-3)' : 'var(--muted)',
                     fontWeight: h.pmSpecial ? 600 : undefined,
                   }}>{h.pm}</div>
                   <div style={{ ...cell, color: isMuted(h.ev) ? 'var(--muted-3)' : 'var(--muted)' }}>{h.ev}</div>
@@ -581,8 +581,8 @@ function InfoRow({ icon: I, label, value, sub }) {
     <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
       <div style={{
         width: 44, height: 44, borderRadius: 12, flexShrink: 0,
-        background: '#fff8ec', color: '#b38a1a',
-        display: 'grid', placeItems: 'center', border: '1px solid #f0e5c4',
+        background: 'var(--warn-bg)', color: 'var(--warn-fg)',
+        display: 'grid', placeItems: 'center', border: '1px solid color-mix(in srgb, var(--warn-fg) 25%, transparent)',
       }}>
         <I style={{ width: 20, height: 20 }}/>
       </div>

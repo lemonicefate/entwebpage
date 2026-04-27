@@ -267,7 +267,7 @@ function DoctorsPage() {
         }}>
           {doctors.map(d => (
             <div key={d.id} style={{
-              background: '#fff',
+              background: 'var(--surface)',
               borderRadius: 18,
               overflow: 'hidden',
               border: '1px solid var(--border-soft)',
