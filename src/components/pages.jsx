@@ -127,6 +127,103 @@ function SafeHtml({ html }) {
   return <div ref={ref} className="article-content"/>;
 }
 
+// ArticleQR: render a self-contained QR + copy-link card at the article tail.
+// URL is derived from current location so it travels correctly between
+// localhost / GitHub Pages / future custom domain without config edits.
+function ArticleQR({ category, topic }) {
+  const ref = React.useRef(null);
+  const [copied, setCopied] = React.useState(false);
+  const url = (typeof window !== 'undefined')
+    ? `${window.location.origin}${window.location.pathname}#/${category.id}/${topic.id}`
+    : '';
+
+  React.useEffect(() => {
+    const host = ref.current;
+    if (!host || !window.qrcode) return;
+    try {
+      const qr = window.qrcode(0, 'M');
+      qr.addData(url);
+      qr.make();
+      const svgString = qr.createSvgTag({ cellSize: 5, margin: 2, scalable: true });
+      const clean = window.DOMPurify
+        ? window.DOMPurify.sanitize(svgString, { USE_PROFILES: { svg: true, svgFilters: true } })
+        : '';
+      const fragment = document.createRange().createContextualFragment(clean);
+      host.replaceChildren(fragment);
+      const svg = host.querySelector('svg');
+      if (svg) {
+        svg.setAttribute('width', '160');
+        svg.setAttribute('height', '160');
+        svg.style.display = 'block';
+        svg.style.borderRadius = '8px';
+      }
+    } catch (e) {
+      host.textContent = 'QR 產生失敗';
+    }
+  }, [url]);
+
+  function copyLink() {
+    if (!navigator.clipboard) return;
+    navigator.clipboard.writeText(url).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 1800);
+    });
+  }
+
+  return (
+    <section aria-label="頁面 QR Code" className="r-article-qr" style={{
+      marginTop: 56,
+      padding: '32px 28px',
+      background: 'var(--cream-2)',
+      border: '1px solid var(--border-soft)',
+      borderRadius: 18,
+      display: 'grid',
+      gridTemplateColumns: 'auto 1fr',
+      gap: 28,
+      alignItems: 'center',
+    }}>
+      <div style={{
+        background: '#fff',
+        padding: 12,
+        borderRadius: 12,
+        boxShadow: '0 2px 10px rgba(14,124,123,0.08)',
+        lineHeight: 0,
+      }}>
+        <div ref={ref} style={{ width: 160, height: 160 }}/>
+      </div>
+      <div style={{ minWidth: 0 }}>
+        <div style={{
+          fontSize: 11, fontWeight: 700, letterSpacing: '0.12em',
+          color: 'var(--peach)', textTransform: 'uppercase', marginBottom: 6,
+        }}>SHARE · 分享本頁</div>
+        <div style={{ fontSize: 18, fontWeight: 700, color: 'var(--fg-heading)', marginBottom: 8 }}>
+          隨時查閱 · 分享給家人
+        </div>
+        <p style={{ fontSize: 14, color: 'var(--muted)', lineHeight: 1.7, margin: '0 0 14px' }}>
+          手機相機掃描左側 QR Code，即可在手機上開啟本頁；也可以加入書籤或複製連結分享給家人。
+        </p>
+        <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+          <button onClick={copyLink} style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '8px 16px', borderRadius: 999,
+            border: '1px solid var(--border-soft)',
+            background: copied ? 'rgba(14,124,123,0.12)' : 'var(--surface)',
+            color: copied ? 'var(--teal)' : 'var(--fg)',
+            fontSize: 13, fontWeight: 600, cursor: 'pointer',
+          }}>{copied ? '已複製連結 ✓' : '複製連結'}</button>
+          <a href={url} style={{
+            display: 'inline-flex', alignItems: 'center', gap: 6,
+            padding: '8px 16px', borderRadius: 999,
+            border: '1px solid var(--border-soft)',
+            background: 'var(--surface)', color: 'var(--fg)',
+            fontSize: 13, fontWeight: 600, textDecoration: 'none',
+          }}>本頁網址</a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ArticlePage({ ctx }) {
   const { hashState, favorites, toggleFavorite, addRecent } = ctx;
   const [html,  setHtml]  = React.useState(null);
@@ -157,10 +254,8 @@ function ArticlePage({ ctx }) {
 
   return (
     <main className="r-article-pad" style={{ padding: '64px 24px' }}>
-      <div className="container r-article-grid" style={{
-        display: 'grid', gridTemplateColumns: '1fr 240px', gap: 64, alignItems: 'start',
-      }}>
-        <article className="r-article-body" style={{ maxWidth: 'var(--max-article)' }}>
+      <div className="container r-article-grid">
+        <article className="r-article-body" style={{ maxWidth: 'var(--max-article)', margin: '0 auto' }}>
           <a href={`#/${category.id}`} style={{
             fontSize: 12, fontWeight: 600, letterSpacing: '0.12em',
             textTransform: 'uppercase', color: cvdResolveTone(category), textDecoration: 'none',
@@ -199,16 +294,8 @@ function ArticlePage({ ctx }) {
           {error && <div className="callout callout-danger"><strong>載入錯誤</strong>{error}</div>}
           {!error && html === null && <div style={{ color: 'var(--muted)' }}>載入中…</div>}
           {html !== null && <SafeHtml html={html}/>}
+          {html !== null && <ArticleQR category={category} topic={topic}/>}
         </article>
-
-        <aside className="r-article-toc" style={{
-          position: 'sticky', top: 100, fontSize: 13, color: 'var(--muted)',
-        }}>
-          <div style={{ fontWeight: 600, color: 'var(--fg-heading)', marginBottom: 12 }}>本頁重點</div>
-          <div style={{ color: 'var(--muted-3)', fontStyle: 'italic' }}>
-            (自動目錄功能將於後續加入)
-          </div>
-        </aside>
       </div>
     </main>
   );

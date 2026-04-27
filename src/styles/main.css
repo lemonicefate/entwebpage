@@ -359,9 +359,12 @@ a:focus-visible {
   .r-list-grid    { grid-template-columns: 1fr !important; gap: 28px !important; }
   .r-list-sidebar { position: static !important; }
 
-  /* Article: TOC hides on tablet */
+  /* Article: single-column body */
   .r-article-grid { grid-template-columns: 1fr !important; }
-  .r-article-toc  { display: none !important; }
+
+  /* QR card stacks on tablet */
+  .r-article-qr { grid-template-columns: 1fr !important; justify-items: center; text-align: center; gap: 20px !important; padding: 24px 20px !important; }
+  .r-article-qr p { text-align: left; }
 
   /* Article body */
   .r-article-body { max-width: 100% !important; }

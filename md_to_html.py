@@ -20,16 +20,6 @@ from markdown.extensions import Extension
 from markdown.preprocessors import Preprocessor
 
 
-QR_CODE_HTML = """\n<div class="qrcode-section">
-  <h4>📱 隨時查閱本頁內容</h4>
-  <p>掃描下方 QR Code，即可在手機上隨時查看本頁衛教資訊</p>
-  <div class="qrcode-placeholder">
-    <span>QR Code<br>預留位置</span>
-  </div>
-  <p class="qrcode-hint">💡 小提示：你也可以將此頁加入書籤，方便日後查閱</p>
-</div>"""
-
-
 # Obsidian callout type → (CSS class suffix, icon, default title)
 CALLOUT_MAP = {
     'recommend': ('recommend', '✓', '建議'),
@@ -269,8 +259,6 @@ def convert_file(md_path, output_dir=None, preview=False, dry_run=False,
     # Prepend title block
     title_html = build_title_html(fm)
     html = title_html + '\n\n' + html
-    # Append QR code section
-    html = html + QR_CODE_HTML
 
     if preview:
         print(html)
