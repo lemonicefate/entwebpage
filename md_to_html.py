@@ -29,6 +29,52 @@ CALLOUT_MAP = {
 }
 
 
+_LIST_RE = re.compile(r'^(\s*)([-*+]|\d+\.)(\s+)')
+
+
+def insert_blank_before_lists(lines):
+    """Insert blank line before list items that immediately follow a
+    non-blank paragraph line. Mimics CommonMark/GFM "loose list"
+    behavior — drafts written without the blank line still render."""
+    out = []
+    prev_blank = True
+    prev_list = False
+    for line in lines:
+        is_list = bool(_LIST_RE.match(line))
+        is_blank = not line.strip()
+        if is_list and not prev_blank and not prev_list:
+            out.append('')
+        out.append(line)
+        prev_blank = is_blank
+        prev_list = is_list
+    return out
+
+
+class LooseListPreprocessor(Preprocessor):
+    """Apply loose-list normalization to lines outside Obsidian callouts.
+    Skips lines starting with '>' so the callout block stays intact;
+    callout content gets its own pass inside ObsidianCalloutPreprocessor."""
+
+    def run(self, lines):
+        out = []
+        prev_blank = True
+        prev_list = False
+        for line in lines:
+            if line.lstrip().startswith('>'):
+                out.append(line)
+                prev_blank = False
+                prev_list = False
+                continue
+            is_list = bool(_LIST_RE.match(line))
+            is_blank = not line.strip()
+            if is_list and not prev_blank and not prev_list:
+                out.append('')
+            out.append(line)
+            prev_blank = is_blank
+            prev_list = is_list
+        return out
+
+
 class ObsidianCalloutPreprocessor(Preprocessor):
     """Convert > [!type] title blocks to callout HTML."""
 
@@ -60,6 +106,7 @@ class ObsidianCalloutPreprocessor(Preprocessor):
                     else:
                         break
 
+                content_lines = insert_blank_before_lists(content_lines)
                 content = '\n'.join(content_lines)
                 # markdown="1" + md_in_html extension lets the inner content
                 # be reprocessed as markdown so "- " bullets become real <ul>/<li>.
@@ -124,6 +171,12 @@ class ImagePlaceholderPreprocessor(Preprocessor):
 
 class ClinicExtensions(Extension):
     def extendMarkdown(self, md):
+        # LooseList runs first so list-after-paragraph normalisation reaches
+        # the markdown parser unchanged; it skips '>' lines so callouts pass
+        # through and apply their own internal pass.
+        md.preprocessors.register(
+            LooseListPreprocessor(md), 'loose_list', 31
+        )
         md.preprocessors.register(
             ObsidianCalloutPreprocessor(md), 'obsidian_callout', 30
         )
