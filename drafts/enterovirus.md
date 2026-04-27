@@ -3,7 +3,7 @@ title: "腸病毒感染 (Enterovirus Infection)"
 display_title: "爸媽的噩夢：腸病毒重症預防與居家照護"
 slug: enterovirus
 category: pediatric
-logical_category: gi
+logical_category: infect
 summary: "腸病毒是台灣每年春末夏初的兒童公敵，多數孩子 7-10 天可自行恢復，但少數會演變成腦炎等重症。這篇文章教你辨識重症前兆、做好居家隔離，以及何時該直奔急診。"
 tags: [腸病毒, 手足口病, 疱疹性咽峽炎, 兒童感染, EV71, 重症前兆]
 date_generated: 2026-04-07

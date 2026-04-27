@@ -3,7 +3,7 @@ title: "腺病毒感染 (Adenovirus Infection)"
 display_title: "燒不停的「燒久姬」：腺病毒高燒怎麼辦？"
 slug: adenovirus-fever-children
 category: pediatric
-logical_category: gi
+logical_category: infect
 summary: "腺病毒是兒童高燒最常見的元兇之一，體溫常超過 39°C 且可持續 5–10 天，俗稱「燒久姬」。除了高燒，還常合併眼睛紅、喉嚨痛、腸胃不適等多重症狀。目前無特效藥，了解正確的居家照護與就醫時機，是陪孩子安全度過病程的關鍵。"
 tags: [腺病毒, 兒科, 高燒, 發燒, 結膜炎, 咽喉炎, 病毒感染]
 date_generated: 2026-04-07

@@ -3,6 +3,7 @@ title: "流行性感冒 (Influenza)"
 display_title: "流感還是感冒？掌握抗病毒藥的黃金 48 小時"
 slug: influenza-vs-cold-antiviral
 category: ent
+logical_category: infect
 summary: "流感與感冒症狀相似，但嚴重程度天差地遠。突然高燒、全身痠痛、極度疲倦是流感的警報訊號。抗病毒藥在發病 48 小時內使用效果最佳，超過時限效力大幅下降。學會辨別，掌握黃金治療時機，保護自己與家人。"
 tags: [流感, 感冒, 抗病毒藥, 克流感, 季節性流行病, 呼吸道感染]
 date_generated: 2026-04-25

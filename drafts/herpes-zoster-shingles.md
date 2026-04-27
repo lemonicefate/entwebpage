@@ -3,6 +3,7 @@ title: "帶狀疱疹 (Herpes Zoster / Shingles)"
 display_title: "皮蛇繞一圈會致命？帶狀疱疹完全解析與疫苗保護力"
 slug: herpes-zoster-shingles
 category: ent
+logical_category: infect
 summary: "帶狀疱疹（俗稱「皮蛇」）是水痘病毒潛伏多年後的再活化，以單側皮節性劇痛與水泡為特徵，可能引發長達數年的神經痛，甚至侵犯耳朵與眼睛。及早接種疫苗、48–72 小時內開始抗病毒藥物，是避免後遺症的關鍵。"
 tags: [帶狀疱疹, 皮蛇, 疱疹後神經痛, 疫苗, Ramsay Hunt症候群, 耳鼻喉, 免疫]
 date_generated: 2026-04-23

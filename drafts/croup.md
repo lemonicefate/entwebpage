@@ -3,7 +3,7 @@ title: "哮吼 (Croup / Laryngotracheobronchitis)"
 display_title: "咳嗽咳到像狗吠？哮吼的緊急處置與居家照護"
 slug: croup
 category: pediatric
-logical_category: respir
+logical_category: infect
 summary: "哮吼是好發於嬰幼兒的病毒性上呼吸道感染，最典型的症狀是像海豹叫聲的犬吠咳嗽。大多數孩子屬輕症，可在家照護；但出現安靜時喘鳴或呼吸費力，就需要立即就醫。"
 tags: [哮吼, Croup, 犬吠咳, 兒科, 喉炎, 喉氣管炎, 嬰幼兒, 呼吸道感染]
 date_generated: 2026-04-07

@@ -3,6 +3,7 @@ title: "登革熱 (Dengue Fever)"
 display_title: "登革熱大流行：環境防蚊與警示症狀"
 slug: dengue-fever-prevention
 category: ent
+logical_category: infect
 summary: "登革熱由埃及斑蚊傳播，台灣每年夏秋季都可能爆發本土疫情。突然高燒、全身痠痛是典型症狀；退燒後 24-48 小時反而是最危險的階段。掌握警示症狀、落實「巡倒清刷」環境防蚊，才是最有效的保護策略。"
 tags: [登革熱, 防蚊, 病媒蚊, 積水容器, 出血熱, 季節性流行病]
 date_generated: 2026-04-26

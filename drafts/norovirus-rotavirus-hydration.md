@@ -3,7 +3,7 @@ title: "諾羅病毒與輪狀病毒腸胃炎 (Norovirus & Rotavirus Gastroenteri
 display_title: "吐不停、拉不停：諾羅病毒與輪狀病毒的補水建議"
 slug: norovirus-rotavirus-hydration
 category: pediatric
-logical_category: gi
+logical_category: infect
 summary: "孩子突然上吐下瀉，是諾羅還是輪狀？兩種病毒都沒有特效藥，關鍵在於「補水」。本文帶你認識兩種病毒的差異、脫水的警示徵兆，以及正確的補水與飲食策略，讓孩子早日恢復。"
 tags: [諾羅病毒, 輪狀病毒, 腸胃炎, 補水, 兒童, 嘔吐, 腹瀉]
 date_generated: 2026-04-11

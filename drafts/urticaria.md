@@ -3,6 +3,7 @@ title: "急性與慢性蕁麻疹 (Urticaria / Hives)"
 display_title: "滿身風疹塊怎麼辦？認識急性與慢性蕁麻疹"
 slug: urticaria
 category: ent
+logical_category: allergy
 summary: "蕁麻疹（風疹塊）是皮膚突然出現的紅色隆起疹子，癢到令人崩潰。急性蕁麻疹多由過敏引起，通常數天內消退；但若反覆發作超過六週，就進入「慢性蕁麻疹」，需要系統性治療策略。本文帶你看懂原因、治療步驟與何時該就醫。"
 tags: [蕁麻疹, 過敏, 皮膚, 風疹塊, 慢性蕁麻疹]
 date_generated: 2026-04-21

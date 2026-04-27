@@ -3,7 +3,7 @@ title: "氣喘 (Bronchial Asthma)"
 display_title: "氣喘發作怎麼辦？吸入劑的使用誤區與居家環境控制"
 slug: asthma-management-inhaler-guide
 category: internal
-logical_category: respir
+logical_category: allergy
 summary: "氣喘是一種慢性呼吸道發炎疾病，台灣約 10% 的成人受其困擾。本文說明急性發作的處置步驟、吸入劑的 5 大常見操作錯誤，以及如何透過居家環境改造減少誘發因子，讓氣喘真正得到控制。"
 tags: [氣喘, 吸入劑, 過敏, 慢性病, 呼吸道]
 date_generated: 2026-04-22

@@ -3,7 +3,7 @@ title: "逆流性咽喉炎 (Laryngopharyngeal Reflux, LPR)"
 display_title: "喉嚨老是有東西卡著？可能是胃酸往上跑了"
 slug: lpr-chronic-pharyngitis
 category: ent
-logical_category: respir
+logical_category: ent
 summary: "喉嚨有異物感、常常需要清喉嚨、聲音沙啞——這些症狀合稱「慢性咽喉炎」，很多時候是胃酸逆流到咽喉（LPR）引起的。了解成因、調整生活習慣，多數人都能有效改善。"
 tags: [LPR, 逆流性咽喉炎, 胃食道逆流, 喉嚨異物感, 聲音沙啞, 慢性咽喉炎]
 date_generated: 2026-04-06

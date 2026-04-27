@@ -3,7 +3,7 @@ title: "玫瑰疹 (Roseola Infantum / Exanthem Subitum)"
 display_title: "高燒後出現皮疹別慌張！玫瑰疹的觀察要點"
 slug: roseola-infantum
 category: pediatric
-logical_category: kids
+logical_category: infect
 summary: "玫瑰疹是嬰幼兒最常見的病毒感染之一，特徵是高燒 3-4 天、退燒後全身出現粉紅色皮疹。了解其病程、熱性痙攣的處理方式，以及何時需要立即就醫，幫助爸媽冷靜應對這個常見但讓人心驚的疾病。"
 tags: [玫瑰疹, 嬰幼兒發燒, 皮疹, HHV-6, 熱性痙攣, 兒科]
 date_generated: 2026-04-09

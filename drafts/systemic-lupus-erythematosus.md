@@ -3,7 +3,7 @@ title: "全身性紅斑性狼瘡 (Systemic Lupus Erythematosus, SLE)"
 display_title: "臉上紅成蝴蝶斑？你可能需要認識紅斑性狼瘡"
 slug: systemic-lupus-erythematosus
 category: internal
-logical_category: chronic
+logical_category: allergy
 summary: "紅斑性狼瘡是一種免疫系統攻擊自身組織的慢性疾病，好發於年輕女性。蝴蝶狀臉部紅斑是最具代表性的症狀，但它同時可能影響腎臟、心臟、神經系統等全身器官。本文說明如何辨識症狀、何時就醫，以及現代治療如何幫助你穩定控制病情。"
 tags: [紅斑性狼瘡, SLE, 自體免疫, 蝴蝶斑, 免疫疾病, 風濕科]
 date_generated: 2026-04-24

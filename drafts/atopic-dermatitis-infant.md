@@ -3,7 +3,7 @@ title: "嬰幼兒異位性皮膚炎 (Atopic Dermatitis / Infantile Eczema)"
 display_title: "紅腫癢抓不停：嬰幼兒異位性皮膚炎完整照護指南"
 slug: atopic-dermatitis-infant
 category: pediatric
-logical_category: kids
+logical_category: allergy
 summary: "異位性皮膚炎是台灣最常見的嬰幼兒慢性皮膚病，影響約一成兒童，60% 在一歲前發病。文章說明症狀辨識、居家照護重點（正確泡澡與保濕技巧）、用藥原則，以及何時需要到診所進一步評估與治療。"
 tags: [異位性皮膚炎, 濕疹, 嬰幼兒, 過敏, 皮膚照護, 兒科]
 date_generated: 2026-04-08

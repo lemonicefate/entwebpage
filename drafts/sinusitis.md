@@ -3,7 +3,7 @@ title: "鼻竇炎 (Sinusitis / Rhinosinusitis)"
 display_title: "鼻水流不停還是膿鼻涕？搞懂鼻竇炎的識別與治療"
 slug: sinusitis
 category: ent
-logical_category: respir
+logical_category: ent
 summary: "鼻塞、頭痛加上黃綠色鼻涕，你可能以為只是感冒，但這些症狀持續超過一週，小心可能是鼻竇炎！本文帶你認識急性與慢性鼻竇炎的差異、正確治療方式，以及什麼時候需要做進一步檢查。"
 tags: [鼻竇炎, 急性鼻竇炎, 慢性鼻竇炎, 鼻塞, 頭痛, 膿鼻涕, 耳鼻喉]
 date_generated: 2026-04-06
