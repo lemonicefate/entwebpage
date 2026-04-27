@@ -248,17 +248,18 @@ function Navbar({ ctx }) {
               }}>
                 {(window.CATEGORIES || []).map(c => {
                   const I = Illo[c.icon];
+                  const tone = cvdResolveTone(c);
                   return (
                     <a key={c.id} href={`#/${c.id}`}
                        onClick={() => setOpenMega(false)}
                        style={megaCell}>
                       <div style={{
                         width: 40, height: 40, borderRadius: 10,
-                        background: `${c.tone}15`, display: 'grid', placeItems: 'center',
+                        background: `${tone}15`, display: 'grid', placeItems: 'center',
                         flexShrink: 0,
                       }}>
                         <div style={{ width: 28, height: 28 }}>
-                          {I ? <I tone={c.tone}/> : null}
+                          {I ? <I tone={tone}/> : null}
                         </div>
                       </div>
                       <div>

@@ -112,7 +112,7 @@ function FeatureCardMedium({ article }) {
   const href = `#/${article.categoryId}/${article.id}`;
   const cat = (window.CATEGORIES || []).find(c => c.id === article.categoryId) || {};
   const I = Illo[cat.icon] || Illo.Shield;
-  const tone = cat.tone || 'var(--teal)';
+  const tone = cvdResolveTone(cat);
   return (
     <a href={href}
       className="feat-med r-feat-med"
@@ -170,7 +170,7 @@ function CategoriesSection() {
       }}>
         {categories.map((c) => {
           const I = Illo[c.icon] || Illo.Shield;
-          const tone = c.tone || 'var(--teal)';
+          const tone = cvdResolveTone(c);
           const count = (c.topics || []).length;
           return (
             <a key={c.id} href={`#/${c.id}`}
@@ -245,7 +245,7 @@ function LatestSection() {
           {latest.map((a, i) => {
             const cat = categories.find(c => c.id === a.categoryId) || categories[0] || {};
             const I = Illo[cat.icon] || Illo.Shield;
-            const tone = cat.tone || a.accent || 'var(--teal)';
+            const tone = cvdResolveTone(cat) || a.accent || 'var(--teal)';
             const col = i % 3, row = Math.floor(i / 3);
             const totalRows = Math.ceil(latest.length / 3);
             return (

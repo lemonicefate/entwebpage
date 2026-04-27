@@ -199,4 +199,12 @@ const Illo = {
   ),
 };
 
-Object.assign(window, { Icon, Illo, ClinicMark });
+// Resolve a category's tone with CVD-safe fallback when CVD mode is on.
+// Reads document attribute synchronously so it stays in sync with the latest render.
+function cvdResolveTone(cat) {
+  if (!cat) return 'var(--teal)';
+  const cvd = typeof document !== 'undefined' && document.documentElement.dataset.cvd === 'on';
+  return cvd && cat.toneCvd ? cat.toneCvd : (cat.tone || 'var(--teal)');
+}
+
+Object.assign(window, { Icon, Illo, ClinicMark, cvdResolveTone });

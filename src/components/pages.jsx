@@ -8,19 +8,19 @@ function ListPage({ ctx }) {
     title = '我的收藏';
     topics = window.CATEGORIES.flatMap(c =>
       (c.topics || []).filter(t => favorites.includes(t.id))
-        .map(t => ({ ...t, categoryId: c.id, categoryName: c.name, tone: c.tone }))
+        .map(t => ({ ...t, categoryId: c.id, categoryName: c.name, tone: cvdResolveTone(c) }))
     );
   } else if (hashState.view === 'recent') {
     title = '最近瀏覽';
     const all = window.CATEGORIES.flatMap(c =>
-      (c.topics || []).map(t => ({ ...t, categoryId: c.id, categoryName: c.name, tone: c.tone }))
+      (c.topics || []).map(t => ({ ...t, categoryId: c.id, categoryName: c.name, tone: cvdResolveTone(c) }))
     );
     topics = recent.map(id => all.find(t => t.id === id)).filter(Boolean);
   } else {
     const cat = window.CATEGORIES.find(c => c.id === hashState.categoryId);
     if (!cat) return <div className="container" style={{ padding: '80px 24px' }}>找不到此分類</div>;
     title = cat.name;
-    topics = (cat.topics || []).map(t => ({ ...t, categoryId: cat.id, categoryName: cat.name, tone: cat.tone }));
+    topics = (cat.topics || []).map(t => ({ ...t, categoryId: cat.id, categoryName: cat.name, tone: cvdResolveTone(cat) }));
   }
 
   return (
@@ -163,7 +163,7 @@ function ArticlePage({ ctx }) {
         <article className="r-article-body" style={{ maxWidth: 'var(--max-article)' }}>
           <a href={`#/${category.id}`} style={{
             fontSize: 12, fontWeight: 600, letterSpacing: '0.12em',
-            textTransform: 'uppercase', color: category.tone, textDecoration: 'none',
+            textTransform: 'uppercase', color: cvdResolveTone(category), textDecoration: 'none',
           }}>← {category.name}</a>
           <h1 className="r-article-h1" style={{
             fontSize: 'clamp(28px,3.2vw,40px)', fontWeight: 700,

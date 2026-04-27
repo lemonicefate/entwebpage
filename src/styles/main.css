@@ -136,18 +136,46 @@
 html.senior { --base-size: 19px; }
 html.senior h1, html.senior h2 { letter-spacing: 0 !important; }
 
-/* ─── 4. CVD mode ────────────────────────────────────────────── */
+/* ─── 4. CVD mode (Okabe–Ito safe palette) ───────────────────── */
+/* Swaps brand + semantic colors to a deuteranopia/protanopia/tritanopia-distinguishable
+   palette. Category tones swap separately via cvdResolveTone() in JS so that c.tone strings
+   drive the right hex at render time. */
 html[data-cvd="on"] {
-  --cvd-red:   #0072B2;
-  --cvd-green: #CC79A7;
-  --cvd-amber: #E69F00;
+  /* Brand — teal becomes Okabe blue, peach becomes Okabe orange, gold becomes Okabe yellow */
+  --teal:         #0072B2;
+  --teal-2:       #56B4E9;
+  --teal-deep:    #00558a;
+  --teal-mist-1:  #c1dbed;
+  --teal-mist-2:  #97c1de;
+  --teal-mist-3:  #6ea7d0;
+
+  --peach:        #E69F00;
+  --peach-dark:   #cc8a00;
+  --peach-light:  #f3b730;
+
+  --gold:         #F0E442;
+
+  /* Semantic — green & red shift to bluish-green & vermillion (Okabe), distinguishable across CVD types */
+  --success-bg:   #d6efe5;
+  --success-fg:   #009E73;
+  --warn-bg:      #fff0cc;
+  --warn-fg:      #b27a00;
+  --danger-bg:    #ffe0d4;
+  --danger-fg:    #D55E00;
+
+  /* Open/closed indicator */
+  --accent-on:    #009E73;
 }
-html[data-cvd="on"] [data-cvd-tone="red"]   { background-color: var(--cvd-red)   !important; color: #fff !important; }
-html[data-cvd="on"] [data-cvd-tone="green"] { background-color: var(--cvd-green) !important; color: #fff !important; }
-html[data-cvd="on"] [data-cvd-text="red"]   { color: var(--cvd-red)   !important; }
-html[data-cvd="on"] [data-cvd-text="green"] { color: var(--cvd-green) !important; }
-html[data-cvd="on"] [data-cvd-bg="red"]     { background-color: #e6f0fb !important; }
-html[data-cvd="on"] [data-cvd-bg="green"]   { background-color: #f7e9f3 !important; }
+
+/* Dark + CVD — keep CVD brand, but use dark-tinted semantic backgrounds so text remains readable */
+html[data-theme="dark"][data-cvd="on"] {
+  --success-bg:   #143a2a;
+  --warn-bg:      #2e2814;
+  --danger-bg:    #3a201d;
+  --warn-fg:      #f0c963;
+  --danger-fg:    #f29c87;
+  --success-fg:   #6dd0a8;
+}
 
 .tl-shape {
   font-family: 'Noto Sans TC', sans-serif;
