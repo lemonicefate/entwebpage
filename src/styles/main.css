@@ -212,19 +212,98 @@ a:focus-visible {
 
 .container { max-width: var(--max-content); margin: 0 auto; }
 
-/* ─── 6. Callout system ──────────────────────────────────────── */
+/* ─── 6. Callout system — Clinic Note cards ──────────────────── */
+/*
+ * Design: warm paper card with a tone-colored top stripe, a small
+ * folded-corner accent in the top-right, an editorial eyebrow label
+ * (English · Chinese, uppercase + letter-spaced), a dashed hairline
+ * between title and body. Replaces the generic tinted-background
+ * left-border style. Per-type tone is wired via CSS custom props so
+ * dark / CVD modes inherit the semantic palette automatically.
+ */
 .callout {
-  padding: 16px 20px;
-  border-radius: 10px;
-  margin: 16px 0;
-  border-left: 4px solid var(--teal);
-  background: rgba(14,124,123,0.06);
+  --callout-tone:      var(--teal);
+  --callout-tone-soft: rgba(14,124,123,0.10);
+  --callout-eyebrow:   'NOTE · 提示';
+  position: relative;
+  margin: 32px 0;
+  padding: 22px 26px 24px;
+  background: var(--surface-warm);
+  border: 1px solid var(--border-soft);
+  border-top: 3px solid var(--callout-tone);
+  border-radius: 4px 4px 14px 14px;
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.02),
+    0 14px 28px -22px color-mix(in srgb, var(--callout-tone) 50%, transparent);
+  overflow: hidden;
 }
-.callout-recommend { border-left-color: var(--teal);       background: rgba(14,124,123,0.08); }
-.callout-caution   { border-left-color: var(--peach-dark); background: rgba(232,150,97,0.10); }
-.callout-danger    { border-left-color: #c44a2e;           background: var(--danger-bg); }
-.callout-info      { border-left-color: var(--teal-2);     background: rgba(74,158,148,0.10); }
-.callout > strong:first-child { display: block; font-weight: 700; margin-bottom: 4px; }
+/* Eyebrow label (RECOMMEND · 建議事項 etc.) */
+.callout::before {
+  content: var(--callout-eyebrow);
+  display: block;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--callout-tone);
+  margin-bottom: 8px;
+}
+/* Folded-corner accent */
+.callout::after {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 28px; height: 28px;
+  background: linear-gradient(225deg, var(--callout-tone-soft) 50%, transparent 50%);
+  pointer-events: none;
+}
+.callout-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--fg-heading);
+  letter-spacing: -0.005em;
+  margin: 0 0 14px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--callout-tone) 38%, transparent);
+}
+.callout-body {
+  font-size: 15px;
+  color: var(--fg);
+  line-height: 1.78;
+}
+.callout-body > *:first-child { margin-top: 0; }
+.callout-body > *:last-child  { margin-bottom: 0; }
+.callout-body p:not(:last-child) { margin-bottom: 12px; }
+.callout-body ul, .callout-body ol { margin: 8px 0 12px; padding-left: 22px; }
+.callout-body li + li { margin-top: 4px; }
+
+.callout-recommend {
+  --callout-tone:      var(--success-fg);
+  --callout-tone-soft: var(--success-bg);
+  --callout-eyebrow:   'RECOMMEND · 建議事項';
+}
+.callout-caution {
+  --callout-tone:      var(--warn-fg);
+  --callout-tone-soft: var(--warn-bg);
+  --callout-eyebrow:   'CAUTION · 注意事項';
+}
+.callout-danger {
+  --callout-tone:      var(--danger-fg);
+  --callout-tone-soft: var(--danger-bg);
+  --callout-eyebrow:   'WARNING · 重要警告';
+}
+.callout-info {
+  --callout-tone:      var(--teal-2);
+  --callout-tone-soft: rgba(74,158,148,0.12);
+  --callout-eyebrow:   'INSIGHT · 小知識';
+}
+
+@media (max-width: 639px) {
+  .callout         { padding: 18px 18px 20px; margin: 24px 0; }
+  .callout-title   { font-size: 16px; }
+  .callout-body    { font-size: 14.5px; line-height: 1.75; }
+  .callout::before { font-size: 9.5px; letter-spacing: 0.16em; }
+}
 
 /* ─── 6b. Mermaid diagram ─────────────────────────────────────── */
 .mermaid {
