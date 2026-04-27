@@ -305,17 +305,142 @@ a:focus-visible {
   .callout::before { font-size: 9.5px; letter-spacing: 0.16em; }
 }
 
-/* ─── 6b. Mermaid diagram ─────────────────────────────────────── */
+/* ─── 6b. Mermaid diagram — themed via CSS variables ─────────── */
+/*
+ * Mermaid bakes its theme into SVG inline attributes at render time.
+ * We override with CSS using !important so light/dark/CVD modes can swap
+ * without re-rendering. Class names target mermaid 10's SVG output.
+ */
+:root {
+  --mm-canvas:      #fffaf2;
+  --mm-node-bg:     #fff8ec;
+  --mm-node-border: #0e7c7b;
+  --mm-node-text:   #1f3a37;
+  --mm-decision-bg: #fde2c8;
+  --mm-decision-border: #e89661;
+  --mm-edge:        #5a8a82;
+  --mm-edge-label:  #fffaf0;
+  --mm-cluster-bg:  #f0f7f4;
+  --mm-cluster-border: #0e7c7b;
+  --mm-shadow:      0 1px 2px rgba(14,124,123,0.14);
+}
+[data-theme="dark"] {
+  --mm-canvas:      #1a2823;
+  --mm-node-bg:     #243330;
+  --mm-node-border: #6dd0b4;
+  --mm-node-text:   #d8e6e0;
+  --mm-decision-bg: #3a2f24;
+  --mm-decision-border: #f0c075;
+  --mm-edge:        #6dd0b4;
+  --mm-edge-label:  #1f2d28;
+  --mm-cluster-bg:  #1f2d28;
+  --mm-cluster-border: #6dd0b4;
+  --mm-shadow:      0 1px 2px rgba(0,0,0,0.4);
+}
+html[data-cvd="on"] {
+  --mm-node-border: #0072B2;
+  --mm-decision-border: #E69F00;
+  --mm-edge:        #0072B2;
+}
+html[data-theme="dark"][data-cvd="on"] {
+  --mm-node-border: #56B4E9;
+  --mm-decision-border: #f0b048;
+  --mm-edge:        #56B4E9;
+}
+
 .mermaid {
-  margin: 24px 0;
+  margin: 28px 0;
   text-align: center;
-  background: #fff;
+  background: var(--mm-canvas);
   border: 1px solid var(--border-soft);
-  border-radius: 10px;
-  padding: 20px 16px;
+  border-radius: 14px;
+  padding: 24px 20px;
   overflow-x: auto;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.02), 0 18px 32px -28px rgba(14,124,123,0.20);
 }
 .mermaid svg { max-width: 100%; height: auto; }
+
+/* Nodes — fill, border, drop-shadow */
+.mermaid svg .node rect,
+.mermaid svg .node circle,
+.mermaid svg .node ellipse,
+.mermaid svg .node polygon,
+.mermaid svg .node path {
+  fill: var(--mm-node-bg) !important;
+  stroke: var(--mm-node-border) !important;
+  stroke-width: 1.5px !important;
+  filter: drop-shadow(var(--mm-shadow));
+}
+/* Decision diamonds (rhombus) — auto-distinguish via tag */
+.mermaid svg .node polygon {
+  fill: var(--mm-decision-bg) !important;
+  stroke: var(--mm-decision-border) !important;
+  stroke-width: 1.75px !important;
+}
+/* Node labels */
+.mermaid svg .nodeLabel,
+.mermaid svg .node text,
+.mermaid svg .node .label {
+  fill: var(--mm-node-text) !important;
+  color: var(--mm-node-text) !important;
+  font-family: 'Noto Sans TC', system-ui, sans-serif !important;
+  font-weight: 500 !important;
+}
+/* Edges — thinner, tone color */
+.mermaid svg .edgePath path,
+.mermaid svg .flowchart-link {
+  stroke: var(--mm-edge) !important;
+  stroke-width: 1.5px !important;
+  fill: none !important;
+}
+/* Arrowheads */
+.mermaid svg .arrowMarkerPath,
+.mermaid svg .arrowheadPath,
+.mermaid svg defs marker path,
+.mermaid svg defs marker polygon {
+  fill: var(--mm-edge) !important;
+  stroke: var(--mm-edge) !important;
+}
+/* Edge labels (text on arrows) */
+.mermaid svg .edgeLabel {
+  background-color: transparent !important;
+  color: var(--mm-node-text) !important;
+}
+.mermaid svg .edgeLabel rect,
+.mermaid svg .edgeLabel .label rect,
+.mermaid svg .label foreignObject {
+  fill: var(--mm-edge-label) !important;
+  background-color: var(--mm-edge-label) !important;
+}
+.mermaid svg .edgeLabel text,
+.mermaid svg .edgeLabel .label text {
+  fill: var(--mm-node-text) !important;
+  font-family: 'Noto Sans TC', system-ui, sans-serif !important;
+  font-size: 12.5px !important;
+}
+/* Subgraph clusters */
+.mermaid svg .cluster rect {
+  fill: var(--mm-cluster-bg) !important;
+  stroke: var(--mm-cluster-border) !important;
+  stroke-width: 1px !important;
+  stroke-dasharray: 5 4 !important;
+  rx: 10 !important;
+  ry: 10 !important;
+}
+.mermaid svg .cluster .nodeLabel,
+.mermaid svg .cluster text {
+  fill: var(--mm-node-border) !important;
+  font-weight: 700 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.04em !important;
+}
+
+@media (max-width: 639px) {
+  .mermaid { padding: 16px 12px; margin: 24px 0; border-radius: 12px; }
+  .mermaid svg .nodeLabel,
+  .mermaid svg .node text,
+  .mermaid svg .node .label { font-size: 12.5px !important; }
+}
 
 /* ─── 7. A11y FAB ────────────────────────────────────────────── */
 .a11y-fab {

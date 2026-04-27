@@ -22,7 +22,43 @@
   <script crossorigin src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
   <script crossorigin src="https://unpkg.com/dompurify@3.1.6/dist/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  <script>window.mermaid && window.mermaid.initialize({ startOnLoad: false, theme: 'default', securityLevel: 'strict', flowchart: { htmlLabels: false, useMaxWidth: true } });</script>
+  <script>
+    window.mermaid && window.mermaid.initialize({
+      startOnLoad: false,
+      securityLevel: 'strict',
+      theme: 'base',
+      fontFamily: '"Noto Sans TC", system-ui, sans-serif',
+      flowchart: {
+        htmlLabels: false,
+        useMaxWidth: true,
+        curve: 'linear',
+        diagramPadding: 12,
+        nodeSpacing: 56,
+        rankSpacing: 64,
+      },
+      themeVariables: {
+        fontFamily: '"Noto Sans TC", system-ui, sans-serif',
+        fontSize: '14px',
+        primaryColor: '#fff8ec',
+        primaryTextColor: '#1f3a37',
+        primaryBorderColor: '#0e7c7b',
+        secondaryColor: '#fde2c8',
+        secondaryBorderColor: '#e89661',
+        secondaryTextColor: '#5a3a1f',
+        tertiaryColor: '#f0f7f4',
+        tertiaryBorderColor: '#0e7c7b',
+        tertiaryTextColor: '#1f3a37',
+        lineColor: '#5a8a82',
+        mainBkg: '#fff8ec',
+        nodeBkg: '#fff8ec',
+        nodeBorder: '#0e7c7b',
+        clusterBkg: '#f0f7f4',
+        clusterBorder: '#0e7c7b',
+        edgeLabelBackground: '#fffaf0',
+        defaultLinkColor: '#5a8a82',
+      },
+    });
+  </script>
   <script src="https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.min.js"></script>
   <script src="./dist/app.js"></script>
 </body>
