@@ -41,10 +41,13 @@ const CATEGORIES_BASE = [
     tone: '#e89661',
     toneCvd: '#E69F00',
     topics: [
+      { id: 'chronic-ckd-early-signs', title: '慢性腎臟病 (Chronic Kidney Disease, CKD)', summary: '慢性腎臟病早期幾乎沒有症狀，等到感覺不對勁，腎功能往往已損失大半。「泡、水、高、貧、倦」五字訣是最重要的自我觀察警訊，尤其泡泡尿（蛋白尿）是腎臟最先發出的求救訊號，透過簡單的血尿檢查即可早期發現、早期介入。', lastUpdated: '2026-04-20', contentPath: 'content/internal/internal-ckd-early-signs.html' },
       { id: 'chronic-gout-diet-medication-principles', title: '痛風 (Gout)', summary: '痛風是尿酸結晶沉積在關節引起的劇烈發炎反應，常在夜間突然發作，以大腳趾根部最為典型。本文說明痛風的成因、飲食原則、急性發作處置，以及長期降尿酸藥物的使用時機。', lastUpdated: '2026-04-18', contentPath: 'content/internal/internal-gout-diet-medication-principles.html' },
       { id: 'chronic-hypertension-dash-diet', title: '高血壓 (Hypertension) 與得舒飲食 (DASH Diet)', summary: '高血壓常年無症狀，卻是心臟病、腦中風、腎臟病的頭號推手。了解血壓分級、認識得舒飲食 (DASH Diet) 的核心原則，搭配生活型態調整，讓血壓重回正常範圍。', lastUpdated: '2026-04-13', contentPath: 'content/internal/internal-hypertension-dash-diet.html' },
       { id: 'chronic-insulin-resistance-type2-diabetes-prevention', title: '胰島素阻抗與第2型糖尿病預防 (Insulin Resistance & Type 2 Diabetes Prevention)', summary: '台灣每4位成人就有1位是糖尿病前期，但多數人毫無感覺。了解胰島素阻抗如何悄悄演變成糖尿病，以及如何在「黃金期」採取行動逆轉風險，是每個成年人都應該知道的健康知識。', lastUpdated: '2026-04-15', contentPath: 'content/internal/internal-insulin-resistance-type2-diabetes-prevention.html' },
       { id: 'chronic-lipid-panel-interpretation', title: '脂質異常血症 (Dyslipidemia)', summary: '健檢報告上的膽固醇、LDL、HDL、三酸甘油酯，你真的看懂了嗎？很多人總膽固醇「剛剛好」，卻忽略更危險的組合：高三酸甘油酯 + 低好膽固醇。本文帶你一次看懂血脂報告的隱藏細節，以及什麼時候該進一步評估。', lastUpdated: '2026-04-16', contentPath: 'content/internal/internal-lipid-panel-interpretation.html' },
+      { id: 'chronic-nafld-reversal-guide', title: '非酒精性脂肪肝 / 代謝功能障礙相關脂肪肝 (MASLD / NAFLD)', summary: '台灣超過一半的成人有不同程度的脂肪肝，多數人完全沒有症狀。脂肪肝不治療會一步步走向發炎、纖維化、肝硬化，甚至肝癌。好消息是：只要及早介入，大多數脂肪肝都可以逆轉。', lastUpdated: '2026-04-19', contentPath: 'content/internal/internal-nafld-reversal-guide.html' },
+      { id: 'chronic-systemic-lupus-erythematosus', title: '全身性紅斑性狼瘡 (Systemic Lupus Erythematosus, SLE)', summary: '紅斑性狼瘡是一種免疫系統攻擊自身組織的慢性疾病，好發於年輕女性。蝴蝶狀臉部紅斑是最具代表性的症狀，但它同時可能影響腎臟、心臟、神經系統等全身器官。本文說明如何辨識症狀、何時就醫，以及現代治療如何幫助你穩定控制病情。', lastUpdated: '2026-04-24', contentPath: 'content/internal/internal-systemic-lupus-erythematosus.html' },
     ],
   },
   {
@@ -56,6 +59,7 @@ const CATEGORIES_BASE = [
     toneCvd: '#009E73',
     topics: [
       { id: 'respir-allergic-rhinitis', title: '過敏性鼻炎 (Allergic Rhinitis)', summary: '過敏性鼻炎是鼻黏膜接觸過敏原後產生的免疫反應，主要症狀為打噴嚏、流鼻水、鼻塞及鼻癢。', lastUpdated: '2026-04-05', contentPath: 'content/ent/ent-allergic-rhinitis.html' },
+      { id: 'respir-asthma-management-inhaler-guide', title: '氣喘 (Bronchial Asthma)', summary: '氣喘是一種慢性呼吸道發炎疾病，台灣約 10% 的成人受其困擾。本文說明急性發作的處置步驟、吸入劑的 5 大常見操作錯誤，以及如何透過居家環境改造減少誘發因子，讓氣喘真正得到控制。', lastUpdated: '2026-04-22', contentPath: 'content/internal/internal-asthma-management-inhaler-guide.html' },
       { id: 'respir-croup', title: '哮吼 (Croup / Laryngotracheobronchitis)', summary: '哮吼是好發於嬰幼兒的病毒性上呼吸道感染，最典型的症狀是像海豹叫聲的犬吠咳嗽。大多數孩子屬輕症，可在家照護；但出現安靜時喘鳴或呼吸費力，就需要立即就醫。', lastUpdated: '2026-04-07', contentPath: 'content/pediatric/pediatric-croup.html' },
       { id: 'respir-lpr-chronic-pharyngitis', title: '逆流性咽喉炎 (Laryngopharyngeal Reflux, LPR)', summary: '喉嚨有異物感、常常需要清喉嚨、聲音沙啞——這些症狀合稱「慢性咽喉炎」，很多時候是胃酸逆流到咽喉（LPR）引起的。了解成因、調整生活習慣，多數人都能有效改善。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-lpr-chronic-pharyngitis.html' },
       { id: 'respir-sinusitis', title: '鼻竇炎 (Sinusitis / Rhinosinusitis)', summary: '鼻塞、頭痛加上黃綠色鼻涕，你可能以為只是感冒，但這些症狀持續超過一週，小心可能是鼻竇炎！本文帶你認識急性與慢性鼻竇炎的差異、正確治療方式，以及什麼時候需要做進一步檢查。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-sinusitis.html' },
@@ -133,10 +137,14 @@ const CATEGORIES_BASE = [
     tone: '#0e7c7b',
     toneCvd: '#0e7c7b',
     topics: [
+      { id: 'ent-dengue-fever-prevention', title: '登革熱 (Dengue Fever)', summary: '登革熱由埃及斑蚊傳播，台灣每年夏秋季都可能爆發本土疫情。突然高燒、全身痠痛是典型症狀；退燒後 24-48 小時反而是最危險的階段。掌握警示症狀、落實「巡倒清刷」環境防蚊，才是最有效的保護策略。', lastUpdated: '2026-04-26', contentPath: 'content/ent/ent-dengue-fever-prevention.html' },
+      { id: 'ent-herpes-zoster-shingles', title: '帶狀疱疹 (Herpes Zoster / Shingles)', summary: '帶狀疱疹（俗稱「皮蛇」）是水痘病毒潛伏多年後的再活化，以單側皮節性劇痛與水泡為特徵，可能引發長達數年的神經痛，甚至侵犯耳朵與眼睛。及早接種疫苗、48–72 小時內開始抗病毒藥物，是避免後遺症的關鍵。', lastUpdated: '2026-04-23', contentPath: 'content/ent/ent-herpes-zoster-shingles.html' },
+      { id: 'ent-influenza-vs-cold-antiviral', title: '流行性感冒 (Influenza)', summary: '流感與感冒症狀相似，但嚴重程度天差地遠。突然高燒、全身痠痛、極度疲倦是流感的警報訊號。抗病毒藥在發病 48 小時內使用效果最佳，超過時限效力大幅下降。學會辨別，掌握黃金治療時機，保護自己與家人。', lastUpdated: '2026-04-25', contentPath: 'content/ent/ent-influenza-vs-cold-antiviral.html' },
       { id: 'ent-menieres-disease', title: '梅尼爾氏症 (Meniere\'s Disease)', summary: '梅尼爾氏症是一種內耳疾病，以反覆發作的劇烈眩暈、耳鳴、耳悶脹感與聽力起伏為四大核心症狀。發作無法預測，嚴重影響日常生活。本文說明成因、診斷方式、分階段治療選項，以及日常生活如何降低發作頻率。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-menieres-disease.html' },
       { id: 'ent-obstructive-sleep-apnea', title: '阻塞性睡眠呼吸中止症 (Obstructive Sleep Apnea)', summary: '打呼不是睡得好的象徵，可能是上呼吸道在夜間反覆塌陷的警訊。阻塞性睡眠呼吸中止症悄悄剝奪你的睡眠品質，增加高血壓、心臟病、腦中風風險。台灣估計有 230 萬人患病，但確診率僅一成——看完這篇，帶著清單去評估自己的風險。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-obstructive-sleep-apnea.html' },
       { id: 'ent-otitis-media', title: '急性中耳炎 (Acute Otitis Media, AOM)', summary: '急性中耳炎是兒童最常見的細菌感染之一，好發於 2 歲以下嬰幼兒。孩子因無法表達耳痛，常以半夜哭鬧、拒食、發燒等行為表現，讓父母不知所措。了解症狀辨識、就醫時機與照護原則，有助於減少不必要的抗生素使用，讓孩子更快康復。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-otitis-media.html' },
       { id: 'ent-tinnitus', title: '耳鳴 (Tinnitus)', summary: '耳鳴是在沒有外部聲源的情況下聽到嗡嗡聲、蟬鳴或鈴聲的症狀，盛行率高達 10–25%。本文說明常見原因、診斷方式、聲音療法與認知行為療法等治療選項，以及何時需要立即就醫。', lastUpdated: '2026-04-06', contentPath: 'content/ent/ent-tinnitus.html' },
+      { id: 'ent-urticaria', title: '急性與慢性蕁麻疹 (Urticaria / Hives)', summary: '蕁麻疹（風疹塊）是皮膚突然出現的紅色隆起疹子，癢到令人崩潰。急性蕁麻疹多由過敏引起，通常數天內消退；但若反覆發作超過六週，就進入「慢性蕁麻疹」，需要系統性治療策略。本文帶你看懂原因、治療步驟與何時該就醫。', lastUpdated: '2026-04-21', contentPath: 'content/ent/ent-urticaria.html' },
     ],
   },
 ];
