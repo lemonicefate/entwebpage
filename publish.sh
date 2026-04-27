@@ -43,11 +43,7 @@ ensure_esbuild() {
 compile_jsx() {
   ensure_esbuild
   echo "🔨 Compiling JSX → dist/app.js"
-  ./tools/esbuild \
-    src/components/shared.jsx src/components/data.jsx \
-    src/components/navbar.jsx src/components/heroes.jsx \
-    src/components/sections.jsx src/components/pages.jsx \
-    src/components/app.jsx \
+  ./tools/esbuild src/components/app.jsx \
     --bundle --outfile=dist/app.js \
     --loader:.jsx=jsx --format=iife --target=es2020 --minify \
     --external:react --external:react-dom --external:dompurify \

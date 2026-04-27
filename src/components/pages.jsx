@@ -114,6 +114,15 @@ function SafeHtml({ html }) {
       : '';
     const fragment = document.createRange().createContextualFragment(clean);
     el.replaceChildren(fragment);
+
+    if (window.mermaid) {
+      const nodes = el.querySelectorAll('.mermaid');
+      if (nodes.length) {
+        nodes.forEach(n => { n.removeAttribute('data-processed'); });
+        Promise.resolve().then(() => window.mermaid.run({ nodes: Array.from(nodes) }))
+          .catch(err => console.warn('[mermaid] render failed:', err));
+      }
+    }
   }, [html]);
   return <div ref={ref} className="article-content"/>;
 }
