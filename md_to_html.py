@@ -61,10 +61,12 @@ class ObsidianCalloutPreprocessor(Preprocessor):
                         break
 
                 content = '\n'.join(content_lines)
+                # markdown="1" + md_in_html extension lets the inner content
+                # be reprocessed as markdown so "- " bullets become real <ul>/<li>.
                 html = (
-                    f'\n<div class="callout callout-{suffix}">'
+                    f'\n<div class="callout callout-{suffix}" markdown="1">'
                     f'<div class="callout-title">{icon} {title}</div>'
-                    f'<div class="callout-body">\n\n{content}\n\n</div></div>\n'
+                    f'<div class="callout-body" markdown="1">\n\n{content}\n\n</div></div>\n'
                 )
                 new_lines.append(html)
             else:
@@ -252,6 +254,7 @@ def convert_file(md_path, output_dir=None, preview=False, dry_run=False,
         ClinicExtensions(),
         'tables',
         'fenced_code',
+        'md_in_html',
     ])
     html = md_converter.convert(body)
     html = demote_headings(html)
