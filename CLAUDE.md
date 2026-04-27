@@ -66,7 +66,7 @@ CSS 變數定義於 `src/styles/main.css` 的 `:root`、`[data-theme="dark"]`、
 
 每次路由切換時，透過 `updateMeta()` 和 `updateJsonLd()` 動態更新 meta 標籤與 JSON-LD。JSON-LD 產生器會解析主題內容中的 `<h4>`/`<p>` 配對，建構 FAQPage schema。
 
-`robots.txt` 和 `sitemap.xml` 目前使用佔位網域 `your-domain.github.io/enrtwebpage` — 部署前須更新。
+`robots.txt` 和 `sitemap.xml` 部署於 `https://lemonicefate.github.io/entwebpage/`（GitHub Pages）。`sitemap.xml` 涵蓋首頁、`#/doctors`、`#/contact`、9 大分類入口（`chronic` / `respir` / `ortho` / `gi` / `kids` / `senior` / `preventiv` / `nutri` / `ent`）以及所有 topic 文章頁（`#/{categoryId}/{topicId}`）。新增/移除文章時須同步更新 `sitemap.xml` 的 `<loc>` 與 `<lastmod>`（與 `js/content.js` 中對應 topic 的 `lastUpdated` 一致）；hash routing 對 SEO 效果有限，但仍能避免索引舊路徑造成 404。
 
 ## 內容管線工作流程
 

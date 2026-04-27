@@ -3,42 +3,251 @@
   <!-- 首頁 -->
   <url>
     <loc>https://lemonicefate.github.io/entwebpage/</loc>
+    <lastmod>2026-04-27</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- 耳鼻喉科 -->
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-sinusitis</loc><priority>0.8</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-otitis</loc><priority>0.8</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-tonsillitis</loc><priority>0.8</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-allergic-rhinitis</loc><priority>0.8</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-hearing</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-vertigo</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-snoring</loc><priority>0.8</priority></url>
-
-  <!-- 內科 -->
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/internal/internal-hypertension</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/internal/internal-diabetes</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/internal/internal-cold</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/internal/internal-flu</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/internal/internal-asthma</loc><priority>0.7</priority></url>
-
-  <!-- 手術 -->
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/surgery/surgery-tonsil</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/surgery/surgery-septum</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/surgery/surgery-preop</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/surgery/surgery-postop</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/surgery/surgery-turbinate-rfa</loc><priority>0.8</priority></url>
-
-  <!-- 用藥衛教 -->
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/medication/med-antibiotics</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/medication/med-nasal-spray</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/medication/med-ear-drops</loc><priority>0.7</priority></url>
-  <url><loc>https://lemonicefate.github.io/entwebpage/#/medication/med-steroid-nasal-spray</loc><priority>0.8</priority></url>
-
-  <!-- 聯絡我們 -->
+  <!-- 固定頁：醫師團隊、聯絡我們 -->
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/doctors</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
   <url>
     <loc>https://lemonicefate.github.io/entwebpage/#/contact</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 9 大分類入口 -->
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/chronic</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/respir</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ortho</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/gi</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/kids</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/senior</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/preventiv</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/nutri</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent</loc>
+    <lastmod>2026-04-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- 慢性病照護 (chronic) -->
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/chronic/chronic-ckd-early-signs</loc>
+    <lastmod>2026-04-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/chronic/chronic-gout-diet-medication-principles</loc>
+    <lastmod>2026-04-18</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/chronic/chronic-hypertension-dash-diet</loc>
+    <lastmod>2026-04-13</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/chronic/chronic-insulin-resistance-type2-diabetes-prevention</loc>
+    <lastmod>2026-04-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/chronic/chronic-lipid-panel-interpretation</loc>
+    <lastmod>2026-04-16</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/chronic/chronic-nafld-reversal-guide</loc>
+    <lastmod>2026-04-19</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/chronic/chronic-systemic-lupus-erythematosus</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 感冒與呼吸道 (respir) -->
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/respir/respir-allergic-rhinitis</loc>
+    <lastmod>2026-04-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/respir/respir-asthma-management-inhaler-guide</loc>
+    <lastmod>2026-04-22</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/respir/respir-croup</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/respir/respir-lpr-chronic-pharyngitis</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/respir/respir-sinusitis</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 腸胃保健 (gi) -->
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/gi/gi-adenovirus-fever-children</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/gi/gi-enterovirus</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/gi/gi-norovirus-rotavirus-hydration</loc>
+    <lastmod>2026-04-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 兒童健康 (kids) -->
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/kids/kids-atopic-dermatitis-infant</loc>
+    <lastmod>2026-04-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/kids/kids-growth-chart-guide</loc>
+    <lastmod>2026-04-12</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/kids/kids-roseola-infantum</loc>
+    <lastmod>2026-04-09</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 預防保健 (preventiv) -->
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/preventiv/preventiv-metabolic-syndrome</loc>
+    <lastmod>2026-04-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- 耳鼻喉專科 (ent) -->
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-dengue-fever-prevention</loc>
+    <lastmod>2026-04-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-herpes-zoster-shingles</loc>
+    <lastmod>2026-04-23</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-influenza-vs-cold-antiviral</loc>
+    <lastmod>2026-04-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-menieres-disease</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-obstructive-sleep-apnea</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-otitis-media</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-tinnitus</loc>
+    <lastmod>2026-04-06</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://lemonicefate.github.io/entwebpage/#/ent/ent-urticaria</loc>
+    <lastmod>2026-04-21</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
