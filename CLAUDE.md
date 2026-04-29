@@ -66,7 +66,7 @@ CSS 變數定義於 `src/styles/main.css` 的 `:root`、`[data-theme="dark"]`、
 
 每次路由切換時，透過 `updateMeta()` 和 `updateJsonLd()` 動態更新 meta 標籤與 JSON-LD。JSON-LD 產生器會解析主題內容中的 `<h4>`/`<p>` 配對，建構 FAQPage schema。
 
-`robots.txt` 和 `sitemap.xml` 目前使用佔位網域 `your-domain.github.io/enrtwebpage` — 部署前須更新。
+`robots.txt` 和 `sitemap.xml` 已使用正式網域 `lemonicefate.github.io/entwebpage`。新增 / 移除文章後請手動同步 `sitemap.xml`（目前無自動產生器）。
 
 ## 內容管線工作流程
 
@@ -82,18 +82,19 @@ CSS 變數定義於 `src/styles/main.css` 的 `:root`、`[data-theme="dark"]`、
 ./publish.sh --all            # 批次轉換所有草稿
 ./publish.sh --build          # 只編譯 JSX → dist/app.js
 ./publish.sh --status         # 查看哪些草稿尚未轉換
-./publish.sh --serve          # 啟動 http://localhost:8000
+./publish.sh --serve          # 啟動 http://localhost:9000（可加 PORT 參數）
+./publish.sh --dev            # esbuild watch + live-reload server（開發用）
 ```
 
 **draft frontmatter 必填**：
 - `category`（實體資料夾名稱，決定 `content/{category}/` 檔案位置）
-- `logical_category`（9 大新分類 id：`chronic/respir/ortho/gi/kids/senior/preventiv/nutri/ent`，決定網站上的分類歸屬）
+- `logical_category`（10 大邏輯分類 id：`chronic/allergy/infect/ortho/gi/kids/senior/preventiv/nutri/ent`，決定網站上的分類歸屬）
 - `slug`、`title`、`summary`、`last_updated`
 
 **Stage 3：審閱**
 
 ```bash
-./publish.sh --serve  # 啟動 http://localhost:8000 本地預覽
+./publish.sh --serve  # 啟動 http://localhost:9000 本地預覽
 ```
 
 **Stage 4：發布**

@@ -1,8 +1,8 @@
 # entwebpage Roadmap
 
 **Status**: 🟡 Maintenance
-**Last updated**: 2026-04-27
-**Current state**: 37 篇衛教文章上線於 GitHub Pages（8 大科別）
+**Last updated**: 2026-04-30
+**Current state**: 27 篇衛教文章上線於 GitHub Pages（10 大邏輯分類；多數分類仍待補內容）
 
 ---
 
@@ -16,8 +16,8 @@
 
 ## 📅 Up next
 
-- [ ] **sitemap.xml 重建**：目前仍使用舊的 4 類分類路徑（`internal/`、`surgery/`、`medication/`、`ent/`），未對應到新 9 大邏輯分類（`chronic/respir/ortho/gi/kids/senior/preventiv/nutri/ent`）— 需依 `js/content.js` 重新生成
-- [ ] **CLAUDE.md 修正**：文中「`robots.txt` / `sitemap.xml` 使用佔位網域 `your-domain.github.io/enrtwebpage`」描述已過時，實際檔案已是 `lemonicefate.github.io/entwebpage`
+- [ ] **空分類補內容**：`ortho` / `gi` / `senior` / `nutri` 目前沒有任何文章，導致這四個分類點進去是空頁；優先補 1–2 篇代表作
+- [ ] **sitemap 自動產生器**：`sitemap.xml` 仍需手動同步；`publish.sh` 加一個 `--sitemap` 步驟掃描 `js/content.js` 自動寫回
 - [ ] **列印功能**（高優）：衛教頁加「列印此頁」按鈕，方便診間印給病患
 - [ ] **頂部搜尋框**（高優）：全文搜尋衛教標題 / 摘要
 - [ ] **YouTube 影片嵌入**（高優）：手術說明、衛教短片
@@ -54,6 +54,10 @@
 
 ## ✅ Recently done
 
+- [x] 分類體系重組（2026-04-29）：新增「過敏免疫」(`allergy`)、原「呼吸道」(`respir`) 改名「感染症」(`infect`)；總分類由 9 → 10
+- [x] Senior mode 字級切換修復（2026-04-28）：`html.senior` toggle 失效問題
+- [x] markdown → html 轉換修補（2026-04-27）：「段落直接接列表」正確渲染為 `<ul><li>`
+- [x] 收藏 / 最近瀏覽功能：`#/favorites`、`#/recent` 路由 + `gx_favorites` / `gx_recent` localStorage（FIFO 10 筆）
 - [x] 新增 8 篇衛教文章：氣喘吸入器、CKD 早期警訊、登革熱預防、皮蛇（herpes zoster）、流感 vs 一般感冒、NAFLD 脂肪肝逆轉、SLE 紅斑性狼瘡、蕁麻疹（2026-04）
 - [x] Logo 設計系統遷移：Warm Teal × Peach（暖青綠 × 桃橘），主色 `--teal #0e7c7b`、強調 `--peach #e89661`、Logo 十字 `--gold #f2c94c`
 - [x] 首頁重新設計：topstrip + InfoSection + 即時掛號時間 + scroll nav
@@ -68,10 +72,10 @@
 
 ## ⚠️ Known concerns
 
-- **sitemap.xml 結構過時**：仍使用舊 4 類路徑，與線上 9 大分類不一致 — 影響 SEO 索引正確性
-- **CLAUDE.md 部署備註過時**：placeholder 說明與實際檔案不符
+- **sitemap.xml 手動維護**：每次新增文章都要記得手動加 URL；忘記加會影響 Google 索引（追蹤項目見 Up next 自動產生器）
+- **空分類點進去是空頁**：`ortho` / `gi` / `senior` / `nutri` 目前無內容
 - **無前端效能監測**：無 Lighthouse / Web Vitals 自動化基線
-- **39+ 文章手動分類**：純手動維護 `js/content.js`，無 CMS / 無分類自動化
+- **文章純手動維護**：`js/content.js` 無 CMS、無分類自動化
 - **Formspree 50 封/月上限**：若聯絡量增加需升級或自架
 - **`dist/app.js` 必須 commit**：忘記 `./publish.sh --build` 推上去會導致線上版不一致（無 CI 把關）
 - **`tools/esbuild` 10MB 二進位**：首次使用自動下載，內網環境可能受限

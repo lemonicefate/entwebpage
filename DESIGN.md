@@ -1,7 +1,10 @@
 # 工學誠心診所 · 衛教專區 — 設計規格書
 
-> 這份文件記錄 `工學誠心診所衛教網.html` 的完整設計系統、決策脈絡與修改指南。
-> 後續任何調整都應先閱讀此文,以確保視覺一致性。
+> 這份文件記錄此衛教 SPA 的設計系統、決策脈絡與修改指南。
+> 任何視覺 / UI 調整都應先閱讀此文以確保一致性。
+>
+> **架構備註**：本檔早期版本是寫給「單檔 Babel」原型；目前已遷移為 `index.html` + esbuild 編譯
+> （見 §1 檔案結構），下方 §2 色票 / §3 字體 / §4 間距 / §7 a11y / §11 響應式仍是單一事實來源。
 
 ---
 
@@ -17,21 +20,28 @@
 ## 1. 檔案結構
 
 ```
-工學誠心診所衛教網.html        ← 入口、全域 <style>、App 容器、Tweaks 面板
-components/
-  shared.jsx                  ← <ClinicMark> logo、Icon.* SVG 集合、Illo.* 插畫
-  data.jsx                    ← CATEGORIES / FEATURED / LATEST / DOCTORS / FAQS / HOURS
-  navbar.jsx                  ← 頂部條、主導覽、Mega Menu
-  heroes.jsx                  ← HeroBig / HeroSearch / HeroCategories 三種版型
-  sections.jsx                ← FeaturedSection / CategoriesSection / LatestSection /
-                                DoctorsSection / FaqSection / InfoSection / Footer
-  pages.jsx                   ← ListPage(文章列表)、ArticlePage(單篇文章)
-assets/                       ← 圖片佔位
+index.html                    ← 入口、CDN 載入 React/DOMPurify、引用 dist/app.js
+src/styles/main.css           ← CSS 變數系統（:root / [data-theme] / .senior / [data-cvd]）
+src/components/
+  shared.jsx                  ← Icon.* SVG、ClinicMark、共用小元件
+  data.jsx                    ← 從 window.CATEGORIES / DOCTORS / FAQS 等讀取資料的 helper
+  navbar.jsx                  ← TopStrip、Navbar、Mega Menu、漢堡選單
+  heroes.jsx                  ← HeroBig / HeroSearch / HeroCategories
+  sections.jsx                ← SectionHeader / FeaturedSection / CategoriesSection /
+                                LatestSection / DoctorsSection / FaqSection /
+                                InfoSection / Footer / HomePage
+  pages.jsx                   ← ListPage、ArticlePage、Contact、SafeHtml（DOMPurify 清洗）
+  app.jsx                     ← 根元件，hash router、theme/fontScale/cvdMode/favorites/recent state
+js/content.js                 ← 資料層：CONFIG / CATEGORIES / DOCTORS / FAQS / HOURS（純資料）
+content/{categoryId}/         ← 衛教文章 HTML 片段，按分類資料夾存放
+dist/app.js                   ← esbuild 編譯輸出（commit 進 git，GitHub Pages 直接服務）
+tools/esbuild                 ← 編譯工具（首次執行 publish.sh 自動下載，.gitignore 排除）
+publish.sh                    ← 內容管線入口：草稿轉換、JSX 編譯、本地預覽
 DESIGN.md                     ← (本檔)
 ```
 
-載入順序(寫在 HTML 底部):`shared → data → navbar → heroes → sections → pages → App`。
-**scope 獨立**:每個 `<script type="text/babel">` 各自編譯,元件要靠檔案末的 `Object.assign(window, {...})` 掛全域。
+**載入順序**（`index.html` 內）：`js/content.js`（定義 window 全域資料）→ React UMD（CDN）→ DOMPurify UMD（CDN）→ `dist/app.js`。
+**元件分享**：每個 JSX 檔末尾用 `Object.assign(window, {...})` 掛全域，`app.jsx` render 時從 window 解構取用。
 
 ---
 
@@ -57,20 +67,24 @@ DESIGN.md                     ← (本檔)
 | 桃橘 | `#f2b088` / `#e5966a` | Hero 前景卡、FeatureCardLarge 背景 |
 | 奶油底 | `#f5faf8` / `#f0f7f4` / `#e4ede9` | 段落淺色分區、Card 內部淺底 |
 
-### 2.3 八大分類色票(CATEGORIES.tone)
+### 2.3 十大分類色票(CATEGORIES.tone)
 
-這組顏色是「類別識別」,不得任意修改。每個分類在 `components/data.jsx` 有兩組色:
+這組顏色是「類別識別」,不得任意修改。色票定義於 `js/content.js` 的 `CATEGORIES` 陣列，每個分類有 `tone` 與 `toneCvd` 兩組色，CVD 模式下自動切換到右欄：
 
 | id | 分類名 | 預設 tone | CVD safe `toneCvd` |
 |---|---|---|---|
-| `chronic` | 慢性病照護 | `#e89661` 橘 | `#E69F00` amber |
-| `respir` | 感冒與呼吸道 | `#1f8e84` 深青 | `#009E73` 翠綠 |
+| `chronic` | 慢性病管理 | `#e89661` 橘 | `#E69F00` amber |
+| `allergy` | 過敏免疫 | （見 `js/content.js`） | （見 `js/content.js`） |
+| `infect` | 感染症 | `#1f8e84` 深青 | `#009E73` 翠綠 |
 | `ortho` | 骨骼關節 | `#d4a82e` 金黃 | `#B8860B` 深金 |
 | `gi` | 腸胃保健 | `#d96757` 磚紅 | `#D55E00` 朱紅橘 |
 | `kids` | 兒童健康 | `#4a9e94` 青綠 | `#56B4E9` 天空藍 |
 | `senior` | 長者照護 | `#7aa83b` 草綠 | `#CC79A7` 桃紫 |
 | `preventiv` | 預防保健 | `#0e7c7b` 品牌綠 | `#0072B2` 深藍 |
 | `nutri` | 營養飲食 | `#7aa83b` 草綠 | `#8E7CC3` 薰衣草 |
+| `ent` | 耳鼻喉 | （見 `js/content.js`） | （見 `js/content.js`） |
+
+> 新增分類時：在 `js/content.js` 的 `CATEGORIES` 加 `tone` 與 `toneCvd`，並回填本表。
 
 **通用使用規則**:
 - 色票只用在該分類的識別元素:圖示襯底(`${tone}12` = 7% alpha)、分類標籤文字、分類 badge 背景
@@ -109,7 +123,7 @@ DESIGN.md                     ← (本檔)
 | 最小字 | 11px | 600 | 小標頂框專用 |
 
 ### 3.3 長輩友善模式
-`html.senior` → `--base-size: 19px`(整體放大 + 關閉 letter-spacing);由 Tweaks 的「字體大小」切換。
+`html.senior` → `--base-size: 19px`(整體放大 + 關閉 letter-spacing);由 navbar 字體切換按鈕觸發,狀態存於 localStorage `fontScale`。
 
 ### 3.4 行高
 - 正文:`1.65`–`1.7`
@@ -152,7 +166,7 @@ DESIGN.md                     ← (本檔)
 4. **FeaturedSection**:1 大 + 2 小卡;大卡為桃橘漸層(FeatureCardLarge)、兩張小卡為白底配圖
 5. **CategoriesSection**:八宮格主題卡片(用 CATEGORIES tone 作 icon 淺底)
 6. **LatestSection**:最新文章列表(左側 filter、右側卡片 row)
-7. **DoctorsSection**:醫師團隊(可由 Tweaks 隱藏)
+7. **DoctorsSection**:醫師團隊
 8. **FaqSection**:六題常見問答,手風琴展開
 9. **InfoSection**:門診時間表 + 聯絡資訊(淺綠底 + 白卡)
 10. **Footer**:極淺綠漸層
@@ -182,7 +196,7 @@ DESIGN.md                     ← (本檔)
 ### 6.4 圖示(Icon.*)
 - 全數來自 `shared.jsx`,stroke-based(非 filled),`stroke-width: 1.5–2`
 - 使用 `currentColor`,靠 parent 設色
-- **禁止使用 emoji 代替圖示**(除非 Tweaks 可切換 / 已做形狀冗餘)
+- **禁止使用 emoji 代替圖示**(除非已做形狀冗餘且有明確語意)
 
 ---
 
@@ -190,8 +204,7 @@ DESIGN.md                     ← (本檔)
 
 ### 7.1 色弱友善模式(CVD Mode)
 **觸發方式**:
-- 左下角固定浮動按鈕「色弱友善模式」(隨時可見)
-- Tweaks 面板內也有開關(同一 state `tweaks.cvdMode`)
+- 左下角固定浮動 FAB「色弱友善模式」(隨時可見);狀態存於 localStorage `cvdMode`,寫入 `<html data-cvd="on">`
 
 **運作機制**:
 1. `<html>` 加上 `data-cvd="on"` 屬性
@@ -209,38 +222,36 @@ DESIGN.md                     ← (本檔)
 
 ---
 
-## 8. Tweaks(在地編輯)
+## 8. ~~Tweaks(在地編輯)~~（已移除）
 
-Tweaks 面板右下角,toolbar 切換顯示。五個控制項:
-
-| Key | 選項 | 預設 |
-|---|---|---|
-| `heroVariant` | `big` / `search` / `categories` | `big` |
-| `fontScale` | `normal` / `senior` | `normal` |
-| `showDoctors` | `true` / `false` | `true` |
-| `showSeasonal` | `true` / `false` | `true` |
-| `cvdMode` | `true` / `false` | `false` |
-
-值寫在 `<script>` 內 `/*EDITMODE-BEGIN*/…/*EDITMODE-END*/` 區塊,由 host 序列化回檔案。
+> 早期單檔原型有右下「Tweaks」面板可切換 hero 版型 / showDoctors / showSeasonal，
+> 遷移到 SPA 後已拿掉。目前可由使用者切換的設定僅剩三個無障礙模式（`theme` / `fontScale` / `cvdMode`），
+> 都存於 localStorage（見 §9）。Hero 版型 / showDoctors 等已固定在原始碼，不再執行期可調。
 
 ---
 
 ## 9. 導覽與資料結構
 
-### 9.1 Route(App state,存 localStorage `gx_route`)
-- `home` — 首頁
-- `list` — 文章列表
-- `article` — 單篇文章
+### 9.1 Route（hash-based，由 `app.jsx` 的 `parseHash()` 解析 `window.location.hash`）
 
-任何預約 / 搜尋 / 醫師按鈕先 fallback 回 `home`,待日後實作。
+| Hash | 頁面 |
+|---|---|
+| `#/` 或空 | 首頁 |
+| `#/{categoryId}` | 該分類文章列表 |
+| `#/{categoryId}/{topicId}` | 單篇文章 |
+| `#/doctors` | 醫師介紹 |
+| `#/favorites` | 我的收藏（讀 `gx_favorites` localStorage） |
+| `#/recent` | 最近瀏覽（讀 `gx_recent` localStorage，FIFO 最多 10 筆） |
+| `#/contact` | 聯絡我們（Formspree 表單） |
 
-### 9.2 內容資料(components/data.jsx)
-- `CATEGORIES` — 八大類,已是 Proxy,讀取 `.tone` 自動套 CVD
-- `FEATURED` — 三篇精選(1 大 + 2 小 排版在 FeaturedSection)
-- `LATEST` — 六篇最新文章
-- `DOCTORS` — 四位醫師
-- `FAQS` — 六題 QA
-- `HOURS` — 七天診次
+`hashchange` 監聽器收到變化時 `setHashState(parseHash()) + scrollTo(0,0)`。SEO 端透過 `updateMeta()` / `updateJsonLd()` 在每次切換時更新 `<title>` / `<meta description>` / FAQPage JSON-LD。
+
+### 9.2 內容資料（`js/content.js`）
+- `CONFIG` — 診所基本資料、聯絡資訊、Formspree endpoint；空字串 = 待填 TODO
+- `CATEGORIES` — 十大邏輯分類，每個 `{id, name, icon, tone, toneCvd, topics[]}`，`topics` 只含 metadata（`{id, title, summary, lastUpdated, contentPath}`），HTML 內容由 `pages.jsx` `fetch()` 按需載入
+- `DOCTORS` — 醫師列表（`#/doctors` 頁渲染）
+- `FAQS` — 首頁 FAQ section
+- `HOURS` — 門診時間表（首頁 InfoSection）
 
 ---
 
@@ -253,8 +264,7 @@ Tweaks 面板右下角,toolbar 切換顯示。五個控制項:
 - [ ] 寫死紅綠色 hex 時,有沒有加 `data-cvd-tone` 屬性 + 形狀冗餘?
 - [ ] 有沒有新增 emoji?原則上不允許,除非有形狀冗餘 + 明確語意
 - [ ] 如果加入新 section,是否更新 §5 版面總覽?
-- [ ] Tweaks 新增 key 時,有沒有在 `TWEAK_DEFAULTS` 同步?
-- [ ] 有沒有破壞 `<script>` scope(style 物件沒改成 `somethingStyles`)?
+- [ ] 是否在 `src/styles/main.css` 而非 inline style 加入新樣式?
 - [ ] 新加的 grid / flex 容器,有沒有掛對應的 `r-*` className,並在 HTML `<style>` 補媒體查詢?(§11)
 - [ ] 新 section 需要加 `r-section`,新卡片容器需要加對應 `r-*-grid` 以便手機降階
 
@@ -262,8 +272,8 @@ Tweaks 面板右下角,toolbar 切換顯示。五個控制項:
 
 ## 11. 響應式設計(Responsive)
 
-網站採「Desktop First + 兩段降階」的斷點策略,所有響應式規則都集中寫在
-`工學誠心診所衛教網.html` 的 `<style>` 區,JSX 元件只負責掛 className,不寫 inline 的 media query。
+網站採「Desktop First + 兩段降階」的斷點策略,所有響應式規則集中於
+`src/styles/main.css`,JSX 元件只負責掛 className,不寫 inline 的 media query。
 
 ### 11.1 斷點
 
@@ -271,7 +281,7 @@ Tweaks 面板右下角,toolbar 切換顯示。五個控制項:
 |---|---|---|
 | Desktop | `≥ 1024px` | 原始多欄佈局;插畫、TOC、Mega Menu 完整顯示 |
 | Tablet | `≤ 1023px` | 主導覽收為漢堡選單;Hero 插畫隱藏;Grid 從 3–4 欄降為 2 欄 |
-| Mobile | `≤ 639px` | 幾乎全部降為單欄;字級微縮;Tweaks 面板改為底部橫幅 |
+| Mobile | `≤ 639px` | 幾乎全部降為單欄;字級微縮;A11y FAB 字級縮小 |
 
 ### 11.2 響應式 className 一覽
 
@@ -298,7 +308,7 @@ Tweaks 面板右下角,toolbar 切換顯示。五個控制項:
 | `.r-list-grid` / `.r-list-sidebar` / `.r-list-card` | 文章列表頁 | `pages.jsx` ListPage |
 | `.r-article-grid` / `.r-article-toc` / `.r-article-body` / `.r-article-pad` / `.r-article-h1` / `.r-article-hero-grid` | 文章頁 | ArticlePage |
 | `.r-section-head-title` | SectionHeader 大標字級 | `sections.jsx` SectionHeader |
-| `.tweaks-panel` / `.a11y-fab` | Tweaks 面板、左下 A11y FAB | HTML root |
+| `.a11y-fab` | 左下 A11y FAB（CVD 切換） | `app.jsx` 根層 |
 
 ### 11.3 降階行為
 
@@ -318,8 +328,7 @@ Tweaks 面板右下角,toolbar 切換顯示。五個控制項:
 - 所有主要 grid 改為單欄(精選、最新、醫師、Footer)
 - 分類卡內的敘述與箭頭箭頭隱藏,只保留 icon + 名稱 + 計數
 - Footer 欄位 2 → 1 欄
-- Tweaks 面板改用 `left:12px; right:12px; bottom:12px` 的底部橫幅,取代浮動卡
-- A11y FAB 字級縮小
+- A11y FAB 字級縮小,維持左下浮動
 - HeroSearch 搜尋框:輸入框獨佔一行,按鈕與搜尋 icon 併排下方
 - 文章頁 H1 降為 26px,hero 圖文網格單欄
 

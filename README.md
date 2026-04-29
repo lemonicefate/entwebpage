@@ -31,7 +31,7 @@
 │       ├── data.jsx        # 前端資料轉換
 │       ├── navbar.jsx      # 頂部列、主導覽、Mega Menu
 │       ├── heroes.jsx      # HeroBig / HeroSearch / HeroCategories
-│       ├── sections.jsx    # FeaturedSection / DoctorsSection / FaqSection / Footer
+│       ├── sections.jsx    # SectionHeader / FeaturedSection / CategoriesSection / LatestSection / DoctorsSection / FaqSection / InfoSection / Footer / HomePage
 │       ├── pages.jsx       # ListPage（文章列表）、ArticlePage（單篇）、Contact
 │       └── app.jsx         # 根元件：hash router、theme/fontScale/cvdMode 狀態
 ├── dist/
@@ -151,7 +151,8 @@ GitHub Pages 推送後約 1–2 分鐘自動上線。
 | ID | 名稱 |
 |----|------|
 | `ent` | 耳鼻喉 |
-| `respir` | 呼吸道 |
+| `allergy` | 過敏免疫 |
+| `infect` | 感染症 |
 | `ortho` | 骨科／復健 |
 | `gi` | 腸胃消化 |
 | `kids` | 兒童健康 |
